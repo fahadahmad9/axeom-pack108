@@ -1,0 +1,46 @@
+{
+  "jev_model": "jev-latest",
+  "jobs": [
+    {
+      "name": "Spam lead detection",
+      "primitive": "Noul",
+      "description": "Binary classification: is each lead spam/junk or real?",
+      "inputs": 101,
+      "ground_truth": {
+        "spam_count": 4,
+        "spam_ids": [
+          "L046",
+          "L066",
+          "L078",
+          "L084"
+        ]
+      },
+      "has_api_results": false
+    },
+    {
+      "name": "Lead quality scoring",
+      "primitive": "Score",
+      "description": "Rate each lead's quality on a 0-2 scale (low/medium/high) based on business fit, contact info, and engagement.",
+      "inputs": 97,
+      "ground_truth": {
+        "won": 32,
+        "lost": 42,
+        "new": 27
+      },
+      "has_api_results": false
+    },
+    {
+      "name": "Message urgency triage",
+      "primitives": [
+        "Score",
+        "Noul"
+      ],
+      "description": "Score each inbound message's urgency (0-2) and detect churn signals and missed-request follow-ups.",
+      "inputs": 181,
+      "ground_truth": {
+        "known_urgency_patterns": 8
+      },
+      "has_api_results": false
+    }
+  ]
+}

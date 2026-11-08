@@ -1,0 +1,156 @@
+invoice_no,bill_to,email,issued,due,amount,status,memo
+INV-1001,Keystone Church,media@keystonedfw.org,2026-04-03,2026-04-17,300.00,paid,Podcast Studio 2hr 4/2
+INV-1002,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-04-07,2026-04-21,300.00,paid,Podcast Studio 2hr 4/6
+INV-1003,Park Dental PLLC,renee@parkdental.com,2026-04-08,2026-04-22,1500.00,paid,B003 Content Day
+INV-1004,Oak Lane Builders LLC,greg@oaklane.build,2026-04-13,2026-04-27,1500.00,paid,Content Day 4/10
+INV-1005,Keystone Media Team,media@keystonedfw.org,2026-04-13,2026-04-27,300.00,paid,
+INV-1006,Jared Ibarra,jared@metroplexmakers.fm,2026-04-14,2026-04-28,550.00,paid,Podcast Studio 4hr 4/13
+INV-1007,Andres Roofing,andre@andresroofingtx.com,2026-04-14,2026-04-28,900.00,paid,B007 Reels Pack
+INV-1008,Keystone Church,media@keystonedfw.org,2026-04-18,2026-05-02,300.00,paid,
+INV-1009,Elevate Med Spa - Plano,sofia@elevatemedspa.com,2026-04-20,2026-05-04,1500.00,paid,Content Day 4/20
+INV-1010,Mind & Money,yasmin@mindandmoney.fm,2026-04-20,2026-05-04,300.00,paid,
+INV-1011,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-04-26,2026-05-10,300.00,paid,
+INV-1012,Willow Bridal,grace@willowbridal.com,2026-04-27,2026-05-11,900.00,paid,B012 Reels Pack
+INV-1013,Jared Ibarra,jared@metroplexmakers.fm,2026-04-28,2026-05-12,550.00,paid,
+INV-1014,Keystone Church,media@keystonedfw.org,2026-04-28,2026-05-12,300.00,paid,B013 Podcast Studio 2hr
+INV-1015,Shah Ins,darnell@shahinsures.com,2026-05-01,2026-05-15,2500.00,paid,Monthly retainer May
+INV-1016,Lakeside PT Dallas,bbecker@lakesideptdallas.com,2026-05-01,2026-05-15,2500.00,paid,Monthly retainer May
+INV-1017,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-05-01,2026-05-15,2500.00,paid,Monthly retainer May
+INV-1018,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-05-04,2026-05-18,300.00,paid,Podcast Studio 2hr 5/4
+INV-1019,Keystone Church,media@keystonedfw.org,2026-05-06,2026-05-20,270.00,paid,
+INV-1020,Angela Delgado,angela@lunafit.co,2026-05-08,2026-05-22,900.00,paid,Reels Pack 5/8
+INV-1021,M&M Podcast,yasmin@mindandmoney.fm,2026-05-13,2026-05-27,300.00,paid,
+INV-1022,Keystone Media Team,media@keystonedfw.org,2026-05-13,2026-05-27,270.00,paid,B023 Podcast Studio 2hr
+INV-1023,Dr Park,renee@parkdental.com,2026-05-14,2026-05-28,1500.00,paid,Content Day 5/14
+INV-1024,Metroplex Makers Podcast,jared@metroplexmakers.fm,2026-05-14,2026-05-28,550.00,paid,Podcast Studio 4hr 5/11
+INV-1025,Oak Lane & Co Builders,greg@oaklane.build,2026-05-18,2026-06-01,1500.00,paid,Content Day 5/18
+INV-1026,Andres Roofing,andre@andresroofingtx.com,2026-05-18,2026-06-01,900.00,paid,B027 Reels Pack
+INV-1027,Canyon,leah@canyonmedspa.com,2026-05-19,2026-06-02,900.00,paid,B028 Reels Pack
+INV-1028,Willow Bridal,grace@willowbridal.com,2026-05-20,2026-06-03,900.00,paid,
+INV-1029,Keystone Church,media@keystonedfw.org,2026-05-21,2026-06-04,270.00,paid,Podcast Studio 2hr 5/19
+INV-1030,Juniper Barbershop,mike@juniperbarbers.com,2026-05-22,2026-06-05,900.00,paid,
+INV-1031,Mind and Money,yasmin@mindandmoney.fm,2026-05-26,2026-06-09,300.00,paid,Podcast Studio 2hr 5/25
+INV-1032,Jared Ibarra,jared@metroplexmakers.fm,2026-05-26,2026-06-09,550.00,paid,B033 Podcast Studio 4hr
+INV-1033,Lone Star Realty,lena@lonestarrealty.com,2026-05-28,2026-06-11,1500.00,paid,B034 Content Day
+INV-1034,Keystone Media Team,media@keystonedfw.org,2026-05-29,2026-06-12,270.00,paid,
+INV-1035,Fischer Law Firm,info@fischerlaw.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1036,Shah Insurance Group,darnell@shahinsures.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1037,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1038,Lakeside PT,bbecker@lakesideptdallas.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1039,Maria Kim DDS,hello@kimdental.com,2026-06-03,2026-06-17,1500.00,paid,B037 Content Day
+INV-1040,Keystone Church,media@keystonedfw.org,2026-06-06,2026-06-20,270.00,paid,Podcast Studio 2hr 6/5
+INV-1041,M&M Podcast,yasmin@mindandmoney.fm,2026-06-08,2026-06-22,300.00,paid,B039 Podcast Studio 2hr
+INV-1042,Jared Ibarra,jared@metroplexmakers.fm,2026-06-08,2026-06-22,550.00,paid,Podcast Studio 4hr 6/8
+INV-1043,Park Family Law,mpark@parkfamilylaw.com,2026-06-09,2026-06-23,900.00,paid,B044 Reels Pack
+INV-1044,Elevate Med Spa - Frisco,sofia@elevatemedspa.com,2026-06-09,2026-06-23,1500.00,paid,
+INV-1045,Tallgrass Digital,tanya@tallgrassmktg.com,2026-06-11,2026-06-25,900.00,paid,
+INV-1046,Keystone DFW,media@keystonedfw.org,2026-06-12,2026-06-26,270.00,paid,Podcast Studio 2hr 6/11
+INV-1047,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-06-15,2026-06-29,300.00,paid,B048 Podcast Studio 2hr
+INV-1048,Canyon Med Spa - Frisco,leah@canyonmedspa.com,2026-06-15,2026-06-29,900.00,paid,B047 Reels Pack
+INV-1049,Luna Fit,angela@lunafit.co,2026-06-16,2026-06-30,900.00,paid,B051 Reels Pack
+INV-1050,Willow Bridal,grace@willowbridal.com,2026-06-17,2026-07-01,900.00,paid,Reels Pack 6/17
+INV-1051,Jared Ibarra,jared@metroplexmakers.fm,2026-06-23,2026-07-07,550.00,paid,Podcast Studio 4hr 6/22
+INV-1052,Sagelab Coffee,carmen@thesagelab.coffee,2026-06-23,2026-07-07,900.00,paid,Reels Pack 6/22
+INV-1053,Keystone Church,media@keystonedfw.org,2026-06-23,2026-07-07,270.00,paid,B053 Podcast Studio 2hr
+INV-1054,Mind & Money,yasmin@mindandmoney.fm,2026-06-24,2026-07-08,300.00,paid,B054 Podcast Studio 2hr
+INV-1055,Park Dental PLLC,renee@parkdental.com,2026-06-25,2026-07-09,1500.00,paid,
+INV-1056,Magnolia,paula@magnolia.build,2026-06-25,2026-07-09,1500.00,paid,B058 Content Day
+INV-1057,Andre's Roofing,andre@andresroofingtx.com,2026-06-26,2026-07-10,900.00,paid,Reels Pack 6/25
+INV-1058,Juniper Barbershop,mike@juniperbarbers.com,2026-06-27,2026-07-11,900.00,paid,Reels Pack 6/26
+INV-1059,Fischer Law Firm,info@fischerlaw.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1060,Lakeside PT Dallas,bbecker@lakesideptdallas.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1061,Shah Insurance,darnell@shahinsures.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1062,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1063,Keystone DFW,media@keystonedfw.org,2026-07-01,2026-07-15,270.00,paid,Podcast Studio 2hr 7/1
+INV-1064,Tallgrass Digital,tanya@tallgrassmktg.com,2026-07-02,2026-07-16,900.00,paid,Reels Pack 7/1
+INV-1065,M&M Podcast,yasmin@mindandmoney.fm,2026-07-03,2026-07-17,300.00,unpaid,
+INV-1066,Lena Kim,lena@lonestarrealty.com,2026-07-04,2026-07-18,1500.00,paid,
+INV-1067,Highland,omar@highlandgym.co,2026-07-07,2026-07-21,900.00,paid,
+INV-1068,Oak Lane Builders LLC,greg@oaklane.build,2026-07-08,2026-07-22,1500.00,paid,B069 Content Day
+INV-1069,Park Family Law,mpark@parkfamilylaw.com,2026-07-08,2026-07-22,900.00,paid,B067 Reels Pack
+INV-1070,Yasmin Bennett,yasmin@mindandmoney.fm,2026-07-09,2026-07-23,300.00,unpaid,B068 Podcast Studio 2hr
+INV-1071,Keystone DFW,media@keystonedfw.org,2026-07-11,2026-07-25,270.00,paid,Podcast Studio 2hr 7/10
+INV-1072,Jared Ibarra,jared@metroplexmakers.fm,2026-07-12,2026-07-26,550.00,paid,B070 Podcast Studio 4hr
+INV-1073,Crown Family Therapy,kkim@crownfamilytherapy.com,2026-07-16,2026-07-30,1500.00,paid,B076 Content Day
+INV-1074,Willow Bridal,grace@willowbridal.com,2026-07-16,2026-07-30,900.00,paid,
+INV-1075,Canyon Med Spa,leah@canyonmedspa.com,2026-07-18,2026-08-01,900.00,paid,Reels Pack 7/15
+INV-1076,The Ridgeway Lab,tanya@theridgewaylab.coffee,2026-07-18,2026-08-01,900.00,paid,Reels Pack 7/17
+INV-1077,Tallgrass Digital,tanya@tallgrassmktg.com,2026-07-18,2026-08-01,900.00,paid,
+INV-1078,Maria Kim DDS,hello@kimdental.com,2026-07-18,2026-08-01,1500.00,paid,B078 Content Day
+INV-1079,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-07-20,2026-08-03,300.00,unpaid,
+INV-1080,Keystone Church,media@keystonedfw.org,2026-07-21,2026-08-04,270.00,paid,Podcast Studio 2hr 7/20
+INV-1081,Metroplex Makers,jared@metroplexmakers.fm,2026-07-22,2026-08-05,550.00,paid,
+INV-1082,Parks Auto,jared@parksautospa.com,2026-07-22,2026-08-05,900.00,paid,
+INV-1083,Keystone Church,media@keystonedfw.org,2026-07-29,2026-08-12,270.00,paid,Podcast Studio 2hr 7/29
+INV-1084,Mind & Money,yasmin@mindandmoney.fm,2026-07-29,2026-08-12,300.00,unpaid,Podcast Studio 2hr 7/27
+INV-1085,Angela Delgado,angela@lunafit.co,2026-07-29,2026-08-12,900.00,paid,Reels Pack 7/27
+INV-1086,The Sage Lab,carmen@thesagelab.coffee,2026-07-31,2026-08-14,900.00,paid,Reels Pack 7/29
+INV-1087,Elevate Med Spa,sofia@elevatemedspa.com,2026-07-31,2026-08-14,1500.00,paid,Content Day 7/29
+INV-1088,Fischer Law,info@fischerlaw.com,2026-08-01,2026-08-15,2250.00,paid,Monthly retainer August
+INV-1089,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-08-01,2026-08-15,2500.00,paid,Monthly retainer August
+INV-1090,Andre's Roofing,andre@andresroofingtx.com,2026-08-01,2026-08-15,900.00,unpaid,
+INV-1091,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2026-08-01,2026-08-15,2500.00,paid,Monthly retainer August
+INV-1092,Metroplex Makers,jared@metroplexmakers.fm,2026-08-03,2026-08-17,550.00,paid,Podcast Studio 4hr 8/3
+INV-1093,Yasmin Bennett,yasmin@mindandmoney.fm,2026-08-04,2026-08-18,300.00,paid,B091 Podcast Studio 2hr
+INV-1094,Magnolia Builders LLC,paula@magnolia.build,2026-08-05,2026-08-19,1500.00,paid,
+INV-1095,Tallgrass Digital,tanya@tallgrassmktg.com,2026-08-05,2026-08-19,900.00,paid,
+INV-1096,Trinity Roofing Co,quinn@trinityroofingco.com,2026-08-05,2026-08-19,900.00,paid,
+INV-1097,Juniper Barbershop,mike@juniperbarbers.com,2026-08-06,2026-08-20,900.00,paid,
+INV-1098,Park Family Law,mpark@parkfamilylaw.com,2026-08-06,2026-08-20,900.00,unpaid,Reels Pack 8/4
+INV-1099,Keystone Media Team,media@keystonedfw.org,2026-08-06,2026-08-20,270.00,paid,B096 Podcast Studio 2hr
+INV-1100,Yasmin Bennett,yasmin@mindandmoney.fm,2026-08-11,2026-08-25,300.00,paid,
+INV-1101,Lonestar RG,quinn@lonestarrg.com,2026-08-12,2026-08-26,1500.00,unpaid,Content Day 8/12
+INV-1102,Lena Kim,lena@lonestarrealty.com,2026-08-12,2026-08-26,1500.00,paid,B103 Content Day
+INV-1103,Willow Bridal,grace@willowbridal.com,2026-08-13,2026-08-27,900.00,paid,B106 Reels Pack
+INV-1104,Park's Auto,jared@parksautospa.com,2026-08-18,2026-09-01,900.00,paid,B110 Reels Pack
+INV-1105,Tallgrass Digital,tanya@tallgrassmktg.com,2026-08-18,2026-09-01,900.00,paid,B109 Reels Pack
+INV-1106,Ridgewaylab Coffee,tanya@theridgewaylab.coffee,2026-08-18,2026-09-01,900.00,unpaid,Reels Pack 8/17
+INV-1107,Keystone DFW,media@keystonedfw.org,2026-08-19,2026-09-02,270.00,paid,Podcast Studio 2hr 8/17
+INV-1108,Metroplex Makers,jared@metroplexmakers.fm,2026-08-20,2026-09-03,550.00,unpaid,Podcast Studio 4hr 8/19
+INV-1109,Canyon Med Spa - Frisco,leah@canyonmedspa.com,2026-08-23,2026-09-06,900.00,paid,
+INV-1110,Mind & Money,yasmin@mindandmoney.fm,2026-08-24,2026-09-07,300.00,paid,B116 Podcast Studio 2hr
+INV-1111,Andre's Roofing,andre@andresroofingtx.com,2026-08-24,2026-09-07,900.00,paid,B117 Reels Pack
+INV-1112,Renee Park DDS,renee@parkdental.com,2026-08-24,2026-09-07,1500.00,paid,Content Day 8/24
+INV-1113,Crown Therapy,kkim@crownfamilytherapy.com,2026-08-24,2026-09-07,1500.00,paid,Content Day 8/21
+INV-1114,Luna,angela@lunafit.co,2026-08-25,2026-09-08,900.00,paid,B118 Reels Pack
+INV-1115,Hale Auto,carlos.hale.detail@gmail.com,2026-08-31,2026-09-14,1500.00,paid,
+INV-1116,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2026-09-01,2026-09-15,2500.00,unpaid,Monthly retainer September
+INV-1117,Fischer,info@fischerlaw.com,2026-09-01,2026-09-15,2500.00,paid,Monthly retainer September
+INV-1118,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-09-01,2026-09-15,2500.00,paid,Monthly retainer September
+INV-1119,The Sage Lab,carmen@thesagelab.coffee,2026-09-01,2026-09-15,900.00,paid,Reels Pack 8/31
+INV-1120,Keystone DFW,media@keystonedfw.org,2026-09-01,2026-09-15,270.00,paid,B122 Podcast Studio 2hr
+INV-1121,TLC Home Care,sofia@tlchomecare.com,2026-09-02,2026-09-16,1500.00,unpaid,B123 Content Day
+INV-1122,M&M Podcast,yasmin@mindandmoney.fm,2026-09-04,2026-09-18,300.00,paid,Podcast Studio 2hr 9/4
+INV-1123,Kim Dental,hello@kimdental.com,2026-09-05,2026-09-19,1500.00,paid,B124 Content Day
+INV-1124,Juniper Barbers,mike@juniperbarbers.com,2026-09-05,2026-09-19,900.00,paid,Reels Pack 9/4
+INV-1125,Highland Athletics,omar@highlandathletics.com,2026-09-10,2026-09-24,900.00,paid,B132 Reels Pack
+INV-1126,Maria Park,mpark@parkfamilylaw.com,2026-09-10,2026-09-24,900.00,paid,B127 Reels Pack
+INV-1127,Elevate Medspa,sofia@elevatemedspa.com,2026-09-10,2026-09-24,1500.00,paid,B129 Content Day
+INV-1128,Metroplex Makers Podcast,jared@metroplexmakers.fm,2026-09-10,2026-09-24,550.00,paid,
+INV-1129,Keystone Media Team,media@keystonedfw.org,2026-09-12,2026-09-26,270.00,paid,B133 Podcast Studio 2hr
+INV-1130,M&M Podcast,yasmin@mindandmoney.fm,2026-09-13,2026-09-27,300.00,paid,
+INV-1131,Quinn Haddad,quinn@trinityroofingco.com,2026-09-14,2026-09-28,900.00,partial,
+INV-1132,Tallgrass Digital,tanya@tallgrassmktg.com,2026-09-14,2026-09-28,900.00,paid,B136 Reels Pack
+INV-1133,Willow Bridal,grace@willowbridal.com,2026-09-17,2026-10-01,900.00,paid,
+INV-1134,Lena Kim,lena@lonestarrealty.com,2026-09-18,2026-10-02,1500.00,paid,B147 Content Day
+INV-1135,Angela Delgado,angela@lunafit.co,2026-09-20,2026-10-04,900.00,paid,
+INV-1136,Keystone Media Team,media@keystonedfw.org,2026-09-21,2026-10-05,270.00,paid,B142 Podcast Studio 2hr
+INV-1137,Ridgeway Lab,tanya@theridgewaylab.coffee,2026-09-22,2026-10-06,900.00,unpaid,Reels Pack 9/21
+INV-1138,Metroplex Makers,jared@metroplexmakers.fm,2026-09-23,2026-10-07,550.00,paid,Podcast Studio 4hr 9/22
+INV-1139,Yasmin Bennett,yasmin@mindandmoney.fm,2026-09-24,2026-10-08,300.00,paid,B148 Podcast Studio 2hr
+INV-1140,Lone Star Realty LLC,lena@lonestarrealty.com,2026-09-24,2026-10-08,1500.00,unpaid,B141 Content Day
+INV-1141,Park's Auto,jared@parksautospa.com,2026-09-24,2026-10-08,900.00,unpaid,Reels Pack 9/21
+INV-1142,Tallgrass Digital,tanya@tallgrassmktg.com,2026-09-25,2026-10-09,900.00,unpaid,
+INV-1143,Quinn Hassan,quinn@lonestarrg.com,2026-09-26,2026-10-10,1500.00,unpaid,
+INV-1144,Lone Star Realty,lena@lonestarrealty.com,2026-09-29,2026-10-13,1500.00,unpaid,
+INV-1145,Canyon Med Spa - Frisco,leah@canyonmedspa.com,2026-09-29,2026-10-13,900.00,unpaid,Reels Pack 9/28
+INV-1146,Andre's Roofing LLC,andre@andresroofingtx.com,2026-09-30,2026-10-14,900.00,unpaid,
+INV-1147,Oak Lane Builders LLC,greg@oaklane.build,2026-09-30,2026-10-14,1500.00,unpaid,B151 Content Day
+INV-1148,Magnolia Builders LLC,paula@magnolia.build,2026-09-30,2026-10-14,1500.00,unpaid,Content Day 9/30
+INV-1149,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2026-10-01,2026-10-15,2500.00,unpaid,Monthly retainer October
+INV-1150,Sagelab Coffee,carmen@thesagelab.coffee,2026-10-01,2026-10-15,900.00,unpaid,
+INV-1151,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,2026-10-01,2026-10-15,2500.00,unpaid,Monthly retainer October
+INV-1152,Fischer Law Firm PLLC,info@fischerlaw.com,2026-10-01,2026-10-15,2500.00,unpaid,Monthly retainer October
+INV-1153,Keystone DFW,media@keystonedfw.org,2026-10-02,2026-10-16,270.00,unpaid,
+INV-1154,Metroplex Makers,jared@metroplexmakers.fm,2026-10-06,2026-10-20,550.00,unpaid,B156 Podcast Studio 4hr
+INV-1155,Park Dental PLLC,renee@parkdental.com,2026-06-25,2026-07-09,1500.00,void,

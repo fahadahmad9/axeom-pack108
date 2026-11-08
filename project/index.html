@@ -1,0 +1,1837 @@
+<title>Axeom Operations Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F6F5F1;--bg-card:#FFFFFF;--bg-hover:#EEEDE8;
+  --text:#1E1D1B;--text2:#6E6C67;--text3:#A09E99;
+  --border:#E0DED8;--border-subtle:#ECEAE4;
+  --accent:#CB5A2E;--accent-light:#FDF0EB;--accent-text:#B14A22;
+  --danger:#C23B28;--danger-bg:#FEF0EE;
+  --warning:#BE8B18;--warning-bg:#FFF8EA;
+  --success:#2D8856;--success-bg:#EEFBF3;
+  --info:#2B6FA6;--info-bg:#EDF5FD;
+  --shadow:0 1px 2px rgba(30,29,27,.06),0 1px 3px rgba(30,29,27,.1);
+  --shadow-lg:0 4px 12px rgba(30,29,27,.08);
+  --radius:8px;
+  --font-display:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+  --font-body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#14171F;--bg-card:#1C2029;--bg-hover:#252A35;
+  --text:#E2E1DD;--text2:#9B9A96;--text3:#6A6965;
+  --border:#2C3040;--border-subtle:#232735;
+  --accent:#E8845A;--accent-light:#2A2025;--accent-text:#F0A07C;
+  --danger:#F07060;--danger-bg:#281C1C;
+  --warning:#E8B644;--warning-bg:#272118;
+  --success:#5CC47E;--success-bg:#1A261E;
+  --info:#62A1DA;--info-bg:#1A2230;
+  --shadow:0 1px 2px rgba(0,0,0,.2),0 1px 3px rgba(0,0,0,.25);
+  --shadow-lg:0 4px 12px rgba(0,0,0,.3);
+}}
+:root[data-theme="dark"]{
+  --bg:#14171F;--bg-card:#1C2029;--bg-hover:#252A35;
+  --text:#E2E1DD;--text2:#9B9A96;--text3:#6A6965;
+  --border:#2C3040;--border-subtle:#232735;
+  --accent:#E8845A;--accent-light:#2A2025;--accent-text:#F0A07C;
+  --danger:#F07060;--danger-bg:#281C1C;
+  --warning:#E8B644;--warning-bg:#272118;
+  --success:#5CC47E;--success-bg:#1A261E;
+  --info:#62A1DA;--info-bg:#1A2230;
+  --shadow:0 1px 2px rgba(0,0,0,.2),0 1px 3px rgba(0,0,0,.25);
+  --shadow-lg:0 4px 12px rgba(0,0,0,.3);
+}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);line-height:1.55;font-size:14.5px;-webkit-font-smoothing:antialiased;}
+#app{max-width:840px;margin:0 auto;padding:16px 14px 40px;}
+
+.header{padding:20px 0 8px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
+.header h1{font-family:var(--font-display);font-size:1.35rem;font-weight:700;letter-spacing:-.03em;color:var(--text);}
+.subtitle{font-size:.78rem;color:var(--text3);letter-spacing:.01em;}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0;}
+.stat{background:var(--bg-card);border-radius:var(--radius);padding:14px 12px;text-align:center;border:1px solid var(--border-subtle);box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:var(--border);}
+.stat-num{display:block;font-family:var(--font-display);font-size:1.25rem;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2;}
+.stat-label{display:block;font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;font-weight:500;}
+.stat.danger::before{background:var(--danger);}
+.stat.danger .stat-num{color:var(--danger);}
+.stat.warning::before{background:var(--warning);}
+.stat.warning .stat-num{color:var(--warning);}
+.stat.info::before{background:var(--info);}
+.stat.info .stat-num{color:var(--info);}
+
+.tabs{display:flex;gap:3px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:6px 0;margin:6px 0 10px;scrollbar-width:none;}
+.tabs::-webkit-scrollbar{display:none;}
+.tab-btn{padding:7px 16px;border:none;background:transparent;color:var(--text2);border-radius:20px;font-size:.82rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .12s ease;font-family:var(--font-body);}
+.tab-btn:hover{background:var(--bg-hover);color:var(--text);}
+.tab-btn.active{background:var(--accent);color:#fff;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+
+.card{background:var(--bg-card);border-radius:var(--radius);padding:16px 18px;margin:10px 0;border:1px solid var(--border-subtle);box-shadow:var(--shadow);border-left:3px solid var(--border);}
+.card h3{font-family:var(--font-display);font-size:.92rem;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;}
+.card p{font-size:.86rem;color:var(--text2);}
+.card ul{padding-left:16px;margin:6px 0;}
+.card li{margin:3px 0;font-size:.84rem;color:var(--text2);line-height:1.5;}
+.card-badge{display:inline-block;font-family:var(--font-display);font-size:.64rem;font-weight:700;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-bottom:7px;letter-spacing:.06em;}
+.card-urgent{border-left-color:var(--danger);background:var(--danger-bg);}
+.card-urgent .card-badge{background:var(--danger);color:#fff;}
+.card-danger{border-left-color:var(--danger);}
+.card-danger .card-badge{background:var(--danger);color:#fff;}
+.card-warning{border-left-color:var(--warning);}
+.card-warning .card-badge{background:var(--warning);color:#fff;}
+.card-info{border-left-color:var(--info);}
+.card-info .card-badge{background:var(--info);color:#fff;}
+.card-success{border-left-color:var(--success);background:var(--success-bg);}
+
+.suggest{background:var(--accent-light);padding:8px 12px;border-radius:6px;margin-top:10px;font-size:.82rem;color:var(--accent-text);line-height:1.45;}
+.suggest::before{content:"Suggest: ";font-weight:600;}
+.suggest-inline{color:var(--accent);font-size:.78rem;cursor:default;font-weight:500;}
+.evidence{list-style:none;padding-left:0!important;}
+.evidence li{font-size:.82rem;color:var(--text2);padding:4px 0;border-bottom:1px solid var(--border-subtle);}
+.evidence li:last-child{border-bottom:none;}
+
+.search{width:100%;padding:9px 14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card);color:var(--text);font-size:.88rem;margin-bottom:10px;font-family:var(--font-body);transition:border-color .12s;}
+.search:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-light);}
+
+.client-card{background:var(--bg-card);border-radius:var(--radius);padding:11px 16px;margin:5px 0;border:1px solid var(--border-subtle);cursor:pointer;transition:border-color .12s,box-shadow .12s;}
+.client-card:hover{border-color:var(--accent);box-shadow:var(--shadow);}
+.client-header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.client-header strong{font-family:var(--font-display);font-size:.88rem;font-weight:600;}
+.client-rev{margin-left:auto;font-family:var(--font-display);font-weight:600;color:var(--success);font-size:.84rem;font-variant-numeric:tabular-nums;}
+.client-detail{margin-top:12px;border-top:1px solid var(--border-subtle);padding-top:12px;}
+.client-detail h4{font-family:var(--font-display);font-size:.74rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);margin:14px 0 5px;}
+.meta{font-size:.82rem;color:var(--text2);margin:2px 0;}
+.badge-warn{display:inline-block;background:var(--danger);color:#fff;font-size:.65rem;padding:1px 6px;border-radius:3px;font-weight:600;letter-spacing:.02em;}
+.badge-gray{display:inline-block;background:var(--text3);color:#fff;font-size:.65rem;padding:1px 6px;border-radius:3px;font-weight:600;}
+
+.table-wrap{overflow-x:auto;margin:8px 0;border:1px solid var(--border-subtle);border-radius:var(--radius);}
+table{width:100%;border-collapse:collapse;font-size:.82rem;font-variant-numeric:tabular-nums;}
+th{text-align:left;padding:9px 10px;border-bottom:2px solid var(--border);font-family:var(--font-display);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);white-space:nowrap;background:var(--bg-card);}
+td{padding:8px 10px;border-bottom:1px solid var(--border-subtle);}
+tr:hover td{background:var(--bg-hover);}
+.row-warn{background:var(--danger-bg);}
+.stage{padding:2px 8px;border-radius:4px;font-size:.72rem;font-weight:600;display:inline-block;}
+.stage-in-edit{background:var(--info-bg);color:var(--info);}
+.stage-in-review{background:var(--warning-bg);color:var(--warning);}
+.stage-in-revision{background:var(--danger-bg);color:var(--danger);}
+
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:32px;text-align:center;cursor:pointer;transition:all .15s;margin:12px 0;}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--accent);background:var(--accent-light);}
+.upload-icon{font-size:1.6rem;color:var(--text3);margin-bottom:6px;}
+.upload-hint{font-size:.76rem;color:var(--text3);margin-top:4px;}
+.btn-reset{margin-top:14px;padding:7px 16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg-card);color:var(--text2);cursor:pointer;font-size:.82rem;font-family:var(--font-body);transition:all .12s;}
+.btn-reset:hover{border-color:var(--danger);color:var(--danger);}
+.error{color:var(--danger);font-size:.82rem;}
+.msg-list{list-style:none;padding:0;}
+.msg-list li{padding:4px 0;font-size:.82rem;border-bottom:1px solid var(--border-subtle);line-height:1.45;}
+.msg-list li:last-child{border-bottom:none;}
+.msg-alert{color:var(--danger);font-weight:500;}
+
+h2{font-family:var(--font-display);font-size:1.1rem;font-weight:700;margin:16px 0 8px;letter-spacing:-.02em;}
+h3{font-family:var(--font-display);font-size:.95rem;font-weight:600;margin:12px 0 6px;letter-spacing:-.01em;}
+
+@media(max-width:600px){
+  #app{padding:10px 10px 32px;}
+  .header{padding:14px 0 4px;}
+  .header h1{font-size:1.15rem;}
+  .stats-row{grid-template-columns:repeat(2,1fr);gap:6px;}
+  .stat{padding:10px 8px;}
+  .stat-num{font-size:1.1rem;}
+  .tab-btn{padding:6px 12px;font-size:.78rem;}
+  .card{padding:12px 14px;margin:8px 0;}
+  table{font-size:.78rem;}
+  th,td{padding:6px 7px;}
+}
+@media(max-width:380px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .stat-num{font-size:1rem;}
+}
+
+</style>
+<script id="raw-leads" type="text/csv">
+lead_id,created,name,business,email,phone,source,first_reply,status
+L001,2026-03-22 19:19,Darnell Jackson,Keystone Media Team,media@keystonedfw.org,214-555-0110,Meta ad,2026-03-22,Won
+L002,2026-03-28 08:34,Kevin Malik,,kevinmalik48@gmail.com,817-555-0185,Meta ad,2026-04-02,Lost
+L003,2026-03-28 09:38,Erin Zamora,Zamora Chiropractic,erin@zamorachiropractic.com,469-555-0103,LinkedIn,,New
+L004,2026-03-28 10:36,Renee Park,Park Dental,renee@parkdental.com,214-555-0183,Website form,2026-03-28,Won
+L005,2026-03-30 13:09,Jared Ibarra,Metroplex Makers Podcast,jared@metroplexmakers.fm,817-555-0101,Referral,2026-03-30,Won
+L006,2026-04-02 08:30,Yasmin Bennett,Yasmin Bennett,yasmin@mindandmoney.fm,469-555-0169,Referral,2026-04-03,Won
+L007,2026-04-02 17:53,Paul Jackson,Jackson Yoga Studio,paul@jacksonyogastudio.com,214-555-0117,Instagram,2026-04-04,Lost
+L008,2026-04-03 08:35,Greg Green,Oak Lane,greg@oaklane.build,817-555-0146,Website form,2026-04-03,Won
+L009,2026-04-03 12:27,Brooke Bennett,Bennett Bakery,brooke@bennettbakery.com,214-555-0142,Website form,,New
+L010,2026-04-04 10:37,Kim Carter,Carter Family Dentistry,kim@carterfamilydentistry.com,972-555-0167,Website form,,New
+L011,2026-04-08 12:16,Andre Ochoa,Andre's Roofing,andre@andresroofingtx.com,817-555-0153,Meta ad,2026-04-08,Won
+L012,2026-04-09 16:06,Paul Brooks,Brooks Law Office,paul@brookslawoffice.com,469-555-0111,Instagram,2026-04-10,Lost
+L013,2026-04-10 19:58,Renee Cho,Cho Realty,renee@chorealty.com,972-555-0123,Instagram,2026-04-18,Lost
+L014,2026-04-13 08:28,Maria Brooks,Brooks Pet Grooming,maria@brookspetgrooming.com,972-555-0171,Meta ad,,New
+L015,2026-04-13 21:55,Sofia Cole,Elevate Med Spa,sofia@elevatemedspa.com,972-555-0150,Instagram,2026-04-14,Won
+L016,2026-04-15 11:21,Jordan Green,Green Auto Group,jordan@greenautogroup.com,972-555-0144,LinkedIn,2026-04-17,Lost
+L017,2026-04-15 18:59,Quinn Lopez,Lopez Pediatrics,quinn@lopezpediatrics.com,817-555-0115,LinkedIn,,New
+L018,2026-04-16 14:37,Grace Nguyen,Grace Nguyen,grace@willowbridal.com,214-555-0162,Website form,2026-04-16,Won
+L019,2026-04-17 13:41,Brooke Cho,Cho Auto Group,brooke@choautogroup.com,972-555-0147,LinkedIn,2026-04-18,Lost
+L020,2026-04-22 11:46,Kevin Zamora,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,469-555-0166,LinkedIn,2026-04-23,Won
+L021,2026-04-26 10:48,Omar Fischer,Fischer Law Office,omar@fischerlawoffice.com,469-555-0186,Meta ad,2026-04-28,Lost
+L022,2026-04-27 14:56,Andre Fischer,Fischer Law Firm,info@fischerlaw.com,817-555-0159,Website form,2026-04-27,Won
+L023,2026-04-28 21:50,Darnell Ramirez,Ramirez Family Dentistry,darnell@ramirezfamilydentistry.com,469-555-0122,Instagram,2026-04-29,Lost
+L024,2026-05-02 17:11,Angela Delgado,Luna Fit,angela@lunafit.co,469-555-0104,Instagram,2026-05-02,Won
+L025,2026-05-03 14:58,Brooke Becker,Lakeside PT,bbecker@lakesideptdallas.com,817-555-0118,Referral,2026-05-04,Won
+L026,2026-05-06 20:24,Renee Ortiz,Ortiz Yoga Studio,renee@ortizyogastudio.com,469-555-0160,Instagram,2026-05-07,Lost
+L027,2026-05-08 08:27,Imran Castillo,Castillo Family Dentistry,imran@castillofamilydentistry.com,972-555-0131,Instagram,,New
+L028,2026-05-08 19:09,Leah Hassan,Canyon Med Spa,leah@canyonmedspa.com,469-555-0170,Meta ad,2026-05-10,Won
+L029,2026-05-12 10:38,Victor Khan,Khan Tax Services,victor@khantaxservices.com,972-555-0145,Instagram,2026-05-15,Lost
+L030,2026-05-14 20:19,Victor Reed,,victorreed29@gmail.com,817-555-0104,LinkedIn,2026-05-17,Lost
+L031,2026-05-16 11:42,Jen Delgado,,jendelgado89@gmail.com,972-555-0193,Website form,,New
+L032,2026-05-18 15:52,Mike Bennett,Juniper Barbers,mike@juniperbarbers.com,972-555-0176,Meta ad,2026-05-19,Won
+L033,2026-05-19 18:23,Yasmin Delgado,Delgado Pediatrics,yasmin@delgadopediatrics.com,972-555-0138,Website form,2026-05-24,Lost
+L034,2026-05-23 11:01,Nolan Russo,Russo Insurance,nolan@russoinsurance.com,469-555-0163,Referral,2026-05-28,Lost
+L035,2026-05-23 14:15,Darnell Shah,Shah Insurance Group,darnell@shahinsures.com,469-555-0178,Instagram,2026-05-24,Won
+L036,2026-05-24 16:19,Lena Kim,Lone Star Realty,lena@lonestarrealty.com,972-555-0136,Referral,2026-05-25,Won
+L037,2026-05-24 21:22,Quinn Ortiz,Ortiz HVAC,quinn@ortizhvac.com,214-555-0125,Referral,2026-06-01,Lost
+L038,2026-05-26 15:18,Maria Zamora,Zamora Salon,maria@zamorasalon.com,817-555-0143,Website form,,New
+L039,2026-05-29 15:23,Kim Russo,Glow Pediatrics,krusso@glowpeds.com,817-555-0130,Referral,2026-05-29,Won
+L040,2026-05-30 19:49,Tanya Bennett,Tallgrass Digital,tanya@tallgrassmktg.com,972-555-0101,Referral,2026-06-02,Won
+L041,2026-05-31 18:52,Kim Russo,Russo Law Office,kim@russolawoffice.com,214-555-0163,Website form,2026-06-02,Lost
+L042,2026-06-01 08:16,Maria Kim,Dr. Maria Kim,hello@kimdental.com,817-555-0160,Referral,2026-06-02,Won
+L043,2026-06-01 14:47,Maria Park,Park Family Law PLLC,mpark@parkfamilylaw.com,214-555-0124,Google,2026-06-02,Won
+L044,2026-06-03 19:06,Sam Hale,Hale Chiropractic,sam@halechiropractic.com,214-555-0159,Instagram,,New
+L045,2026-06-04 16:19,Imran Kim,Kim Yoga Studio,imran@kimyogastudio.com,214-555-0197,Google,2026-06-04,Lost
+L046,2026-06-04 21:50,test test,,test@test.com,,Website form,,New
+L047,2026-06-06 15:45,Andre Shah,,andreshah92@gmail.com,469-555-0129,Meta ad,2026-06-07,Lost
+L048,2026-06-10 12:39,Renee Park,Park Dental,renee@parkdental.com,214-555-0183,Website form,2026-06-10,Won
+L049,2026-06-11 09:12,Hector Haddad,Haddad Insurance,hector@haddadinsurance.com,214-555-0107,Website form,2026-06-11,Lost
+L050,2026-06-12 13:19,Carmen Park,The Sage Lab,carmen@thesagelab.coffee,972-555-0166,LinkedIn,2026-06-12,Won
+L051,2026-06-15 19:04,Hector Patel,Patel Chiropractic,hector@patelchiropractic.com,469-555-0158,Referral,2026-06-20,Lost
+L052,2026-06-20 20:11,Leah Ibarra,Ibarra Coffee,leah@ibarracoffee.com,214-555-0187,Website form,2026-06-28,Lost
+L053,2026-06-22 16:19,Paula Fischer,Magnolia Builders LLC,paula@magnolia.build,972-555-0183,Instagram,2026-06-24,Won
+L054,2026-06-26 08:35,Alana Tran,Meridian Chiropractic,drtran@meridianchiro.com,469-555-0187,Referral,2026-06-28,Won
+L055,2026-06-28 17:12,Omar Patel,Highland Gym,omar@highlandgym.co,214-555-0102,Meta ad,2026-06-29,Won
+L056,2026-07-01 18:08,Carlos Shah,Shah Coffee,carlos@shahcoffee.com,972-555-0184,LinkedIn,2026-07-06,Lost
+L057,2026-07-03 19:49,Simone Carter,Carter Plumbing,simone@carterplumbing.com,469-555-0179,Website form,2026-07-04,Lost
+L058,2026-07-07 20:38,Tanya Russo,The Ridgeway Lab,tanya@theridgewaylab.coffee,469-555-0124,Referral,2026-07-07,Won
+L059,2026-07-09 15:40,Kim Kim,Dr. Kim Kim,kkim@crownfamilytherapy.com,469-555-0133,Google,2026-07-11,Won
+L060,2026-07-10 13:41,Leah Price,Price Tax Services,leah@pricetaxservices.com,214-555-0182,Meta ad,2026-07-18,Lost
+L061,2026-07-12 15:52,Rosa Delgado,Delgado Realty,rosa@delgadorealty.com,817-555-0112,Meta ad,,New
+L062,2026-07-13 17:43,Angela Park,Park Roofing,angela@parkroofing.com,972-555-0160,LinkedIn,2026-07-13,Lost
+L063,2026-07-15 14:57,Paul Park,Park Bakery,paul@parkbakery.com,214-555-0179,Instagram,2026-07-15,Lost
+L064,2026-07-19 10:53,Jared Park,Park's Auto Spa,jared@parksautospa.com,214-555-0160,Website form,2026-07-20,Won
+L065,2026-07-20 18:55,Omar Chen,Chen HVAC,omar@chenhvac.com,817-555-0144,LinkedIn,2026-07-21,Lost
+L066,2026-07-22 08:05,SEO Services,,seo@rank1seo.biz,,Website form,,New
+L067,2026-07-25 21:03,Carmen Morales,Morales Coffee,carmen@moralescoffee.com,469-555-0172,Instagram,,New
+L068,2026-07-27 09:11,Sofia Cole,Elevate Med Spa - Frisco,frisco@elevatemedspa.com,972-555-0150,Website form,2026-07-28,New
+L069,2026-07-28 17:08,Quinn Haddad,Trinity Roofing Co,quinn@trinityroofingco.com,214-555-0198,Instagram,2026-07-28,Won
+L070,2026-07-30 11:20,Tony Hassan,,tonyhassan80@gmail.com,972-555-0111,Meta ad,2026-07-30,Lost
+L071,2026-07-30 19:59,Erin Ortiz,,erinortiz15@gmail.com,972-555-0127,Google,2026-07-31,Lost
+L072,2026-08-02 09:06,Omar Patel,Highland Athletics,omar@highlandathletics.com,214-555-0102,Website form,,New
+L073,2026-08-02 14:25,Joy Shah,Shah Auto Group,joy@shahautogroup.com,214-555-0145,Meta ad,2026-08-02,Lost
+L074,2026-08-02 20:36,Gloria Ramirez,,gloriaramirez70@gmail.com,817-555-0100,Google,2026-08-03,Lost
+L075,2026-08-03 18:37,Quinn Hassan,Lonestar Realty Group,quinn@lonestarrg.com,469-555-0149,LinkedIn,2026-08-03,Won
+L076,2026-08-04 15:12,Angela Russo,Russo Salon,angela@russosalon.com,469-555-0141,Website form,,New
+L077,2026-08-05 17:05,Carlos Wallace,Wallace Family Dentistry,carlos@wallacefamilydentistry.com,469-555-0109,Instagram,,New
+L078,2026-08-07 20:04,asdf,,a@a.co,,Website form,,New
+L079,2026-08-08 21:25,Megan Foster,Foster Med Spa,megan@fostermedspa.com,214-555-0114,Website form,,New
+L080,2026-08-11 18:08,Joy Adeyemi,Adeyemi Chiropractic,joy@adeyemichiropractic.com,469-555-0157,Meta ad,2026-08-16,Lost
+L081,2026-08-12 16:56,Derek Torres,Torres Chiropractic,derek@torreschiropractic.com,972-555-0156,LinkedIn,2026-08-20,Lost
+L082,2026-08-13 14:55,Grace Moore,Moore Bakery,grace@moorebakery.com,817-555-0120,Google,,New
+L083,2026-08-14 17:53,Erin Carter,Carter Fitness,erin@carterfitness.com,972-555-0159,Meta ad,2026-08-17,Lost
+L084,2026-08-18 14:53,Free followers,,promo@fastfollowers.io,,Website form,,New
+L085,2026-08-19 19:24,Carlos Hale,Hale Detailing,carlos.hale.detail@gmail.com,972-555-0148,Instagram,2026-08-19,Won
+L086,2026-08-19 20:18,Leah Carter,Carter Fitness,leah@carterfitness.com,214-555-0173,Meta ad,,New
+L087,2026-08-20 10:17,Erin Mendez,Mendez Chiropractic,erin@mendezchiropractic.com,972-555-0103,Website form,,New
+L088,2026-08-23 14:36,Quinn Brooks,Brooks HVAC,quinn@brookshvac.com,972-555-0129,Website form,2026-08-23,Lost
+L089,2026-08-27 14:39,Lena Fischer,Fischer Insurance,lena@fischerinsurance.com,972-555-0194,LinkedIn,2026-08-30,Lost
+L090,2026-08-28 12:06,Sofia Daniels,TLC Home Care,sofia@tlchomecare.com,972-555-0133,Referral,2026-08-30,Won
+L091,2026-09-02 10:14,Derek Jackson,Jackson Roofing,derek@jacksonroofing.com,972-555-0152,LinkedIn,,New
+L092,2026-09-03 13:01,Nolan Chen,,nolanchen37@gmail.com,214-555-0146,Instagram,2026-09-05,Lost
+L093,2026-09-06 22:24,Yasmin Bennett,,yasmin.bennett.mail@gmail.com,469-555-0169,Website form,,New
+L094,2026-09-09 13:41,Rosa Lee,,rosalee44@gmail.com,817-555-0110,Meta ad,,New
+L095,2026-09-14 12:21,Lena Daniels,Daniels Auto Group,lena@danielsautogroup.com,817-555-0191,Meta ad,2026-09-15,Lost
+L096,2026-09-16 11:01,Rosa Brooks,Brooks Coffee,rosa@brookscoffee.com,214-555-0196,Website form,2026-09-18,Lost
+L097,2026-09-22 18:41,Sarah Fischer,Fischer HVAC,sarah@fischerhvac.com,214-555-0140,Referral,2026-09-24,Lost
+L098,2026-09-22 21:30,Ivy Russo,Russo Coffee,ivy@russocoffee.com,817-555-0151,Website form,2026-09-23,Lost
+L099,2026-09-24 20:40,Mike Okafor,Okafor Family Dentistry,mike@okaforfamilydentistry.com,817-555-0134,Website form,2026-09-25,Lost
+L100,2026-09-27 10:50,Ivy Malik,,ivymalik68@gmail.com,817-555-0163,LinkedIn,2026-10-08,Lost
+L101,2026-09-29 08:32,Brooke Becker,Lakeside Physical Therapy,brooke@lakesideptdallas.com,469-555-0176,Website form,,New
+</script>
+<script id="raw-bookings" type="text/csv">
+booking_id,date,client_name,email,service,status,price
+B001,04/02/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B002,04/06/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B003,04/07/2026,Park Dental PLLC,renee@parkdental.com,Content Day,completed,"$1,500"
+B004,04/10/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B005,04/10/2026,Oak Lane,greg@oaklane.build,Content Day,completed,1500
+B006,04/13/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B007,04/14/2026,Andre Ochoa,andre@andresroofingtx.com,Reels Pack,completed,$900
+B008,04/17/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B009,04/17/2026,Mind and Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B010,04/20/2026,Elevate Medspa,sofia@elevatemedspa.com,Content Day,completed,1500
+B011,04/23/2026,Mind and Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B012,04/24/2026,Willow Bridal Boutique,grace@willowbridal.com,Reels Pack,completed,$900
+B013,04/27/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B014,04/27/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B015,04/27/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,completed,0
+B016,05/04/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B017,05/04/2026,Mind and Money,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,$300
+B018,05/07/2026,Fischer Law,info@fischerlaw.com,Retainer Shoot,completed,$0
+B019,05/08/2026,Luna Fit,angela@lunafit.co,Reels Pack,completed,$900
+B020,05/11/2026,Yasmin Bennett,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,300
+B021,05/11/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B022,05/11/2026,Lakeside PT,bbecker@lakesideptdallas.com,Retainer Shoot,completed,$0
+B023,05/12/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B024,05/14/2026,Park Dental,renee@parkdental.con,Content Day,completed,1500
+B025,05/14/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,completed,$0
+B026,05/18/2026,Oak Lane & Co Builders,greg@oaklane.build,Content Day,completed,1500
+B027,05/18/2026,Andre Ochoa,andre@andresroofingtx.com,Reels Pack,completed,900
+B028,05/18/2026,Canyon Medspa,leah@canyonmedspa.com,Reels Pack,completed,900
+B029,05/19/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B030,05/19/2026,Willow Bridal,grace@willowbridal.com,Reels Pack,completed,$900
+B031,05/20/2026,Juniper Barbers,mike@juniperbarbers.com,Reels Pack,completed,900
+B032,05/25/2026,Yasmin Bennett,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,$300
+B033,05/26/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B034,05/28/2026,Lone Star Realty LLC,lena@lonestarrealty.com,Content Day,completed,"$1,500"
+B035,05/29/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B036,05/29/2026,Shah Insurance,darnell@shahinsures.com,Retainer Shoot,completed,$0
+B037,06/03/2026,Kim Dental,hello@kimdental.com,Content Day,completed,"$1,500"
+B038,06/05/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B039,06/08/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B040,06/08/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B041,06/08/2026,Elevate Med Spa - Plano,sofia@elevatemedspa.com,Content Day,completed,1500
+B042,06/08/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,completed,0
+B043,06/08/2026,Shah Insurance Group,darnell@shahinsures.com,Retainer Shoot,completed,$0
+B044,06/09/2026,Park Family Law,mpark@parkfamilylaw.com,Reels Pack,completed,$900
+B045,06/09/2026,Glow Peds,tanya@tallgrassmktg.com,Reels Pack,completed,900
+B046,06/11/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B047,06/12/2026,Canyon Med Spa - Frisco,leah@canyonmedspa.com,Reels Pack,completed,900
+B048,06/15/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B049,06/15/2026,Fischer Law,info@fischerlaw.com,Retainer Shoot,completed,0
+B050,06/15/2026,Bluebonnet WP,kzamora@bluebonnetwp.com,Retainer Shoot,completed,0
+B051,06/15/2026,Luna Fitness,angela@lunafit.co,Reels Pack,completed,900
+B052,06/17/2026,Grace Nguyen,grace@willowbridal.com,Reels Pack,completed,$900
+B053,06/22/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B054,06/22/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B055,06/22/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B056,06/22/2026,Sagelab Coffee,carmen@thesagelab.coffee,Reels Pack,completed,900
+B057,06/24/2026,Renee Park DDS,renee@parkdental.com,Content Day,completed,"$1,500"
+B058,06/24/2026,Magnolia Builders LLC,paula@magnolia.build,Content Day,completed,1500
+B059,06/25/2026,Andre Ochoa,andre@andresroofingtx.com,Reels Pack,completed,$900
+B060,06/26/2026,Mike Bennett,mike@juniperbarbers.com,Reels Pack,completed,$900
+B061,07/01/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B062,07/01/2026,Meridian Chiro,drtran@meridianchiro.com,Reels Pack,completed,900
+B063,07/02/2026,Mind and Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B064,07/03/2026,Lena Kim,lena@lonestarrealty.com,Content Day,completed,"$1,500"
+B065,07/06/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,completed,0
+B066,07/06/2026,Highland Gym,omar@highlandgym.co,Reels Pack,completed,$900
+B067,07/07/2026,Maria Park,mpark@parkfamilylaw.com,Reels Pack,completed,900
+B068,07/08/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B069,07/08/2026,Oak Lane Builders,greg@oaklane.build,Content Day,completed,1500
+B070,07/09/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B071,07/09/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,completed,$0
+B072,07/10/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B073,07/10/2026,Shah Insurance,darnell@shahinsures.com,Retainer Shoot,completed,$0
+B074,07/13/2026,Fischer Law Firm PLLC,info@fischerlaw.com,Retainer Shoot,completed,0
+B075,07/13/2026,Grace Nguyen,grace@willowbridal.com,Reels Pack,completed,$900
+B076,07/14/2026,Crown Family Therapy,kkim@crownfamilytherapy.com,Content Day,completed,"$1,500"
+B077,07/15/2026,Canyon,leah@canyonmedspa.com,Reels Pack,completed,900
+B078,07/16/2026,Dr. Maria Kim,hello@kimdental.com,Content Day,completed,1500
+B079,07/16/2026,Glow Pediatrics,krusso@glowpeds.com,Reels Pack,completed,900
+B080,07/17/2026,The Ridgeway Lab,tanya@theridgewaylab.coffee,Reels Pack,completed,900
+B081,07/20/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B082,07/20/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B083,07/22/2026,Parks Auto,jared@parksautospa.com,Reels Pack,completed,$900
+B084,07/22/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B085,07/27/2026,Mind & Money Podcast,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,300
+B086,07/27/2026,Luna Fit,angela@lunafit.co,Reels Pack,completed,900
+B087,07/29/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B088,07/29/2026,Elevate Med Spa - Frisco,sofia@elevatemedspa.com,Content Day,completed,"$1,500"
+B089,07/29/2026,Sage Lab,carmen@thesagelab.coffee,Reels Pack,completed,900
+B090,07/30/2026,Andres Roofing,andre@andresroofingtx.com,Reels Pack,completed,900
+B091,08/03/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B092,08/03/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B093,08/03/2026,Juniper Barbers,mike@juniperbarbers.com,Reels Pack,completed,900
+B094,08/03/2026,Meridian Chiropractic,drtran@meridianchiro.com,Reels Pack,completed,900
+B095,08/04/2026,Park Family Law,mpark@parkfamilylaw.com,Reels Pack,completed,900
+B096,08/05/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B097,08/05/2026,Highland,omar@highlandathletics.com,Reels Pack,completed,900
+B098,08/05/2026,Trinity Roofing Co,quinn@trinityroofingco.com,Reels Pack,completed,900
+B099,08/05/2026,Magnolia,paula@magnolia.build,Content Day,completed,1500
+B100,08/06/2026,Fischer Law,info@fischerlaw.com,Retainer Shoot,completed,0
+B101,08/10/2026,Mind & Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B102,08/10/2026,Lakeside PT,bbecker@lakesideptdallas.com,Retainer Shoot,completed,$0
+B103,08/11/2026,Lena Kim,lena@lonestarrealty.com,Content Day,completed,1500
+B104,08/11/2026,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,Retainer Shoot,completed,0
+B105,08/12/2026,Lonestar Realty Group,quinn@lonestarrg.com,Content Day,completed,"$1,500"
+B106,08/12/2026,Willow Bridal,grace@willowbridal.com,Reels Pack,completed,$900
+B107,08/17/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B108,08/17/2026,Ridgeway Lab,tanya@theridgewaylab.coffee,Reels Pack,completed,$900
+B109,08/17/2026,Glow Pediatrics,tanya@tallgrassmktg.com,Reels Pack,completed,$900
+B110,08/18/2026,Parks Auto,jared@parksautospa.com,Reels Pack,completed,900
+B111,08/19/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B112,08/20/2026,Canyon Med Spa - Frisco,leah@canyonmedspa.com,Reels Pack,completed,900
+B113,08/21/2026,Oak Lane Builders,greg@oaklane.build,Content Day,completed,1500
+B114,08/21/2026,Crown Therapy,kkim@crownfamilytherapy.com,Content Day,completed,1500
+B115,08/24/2026,Dr. Renee Park,renee@parkdental.com,Content Day,completed,"$1,500"
+B116,08/24/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B117,08/24/2026,Andre's Roofing LLC,andre@andresroofingtx.com,Reels Pack,completed,$900
+B118,08/24/2026,Luna Fitness,angela@lunafit.co,Reels Pack,completed,900
+B119,08/25/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B120,08/31/2026,Sage Lab,carmen@thesagelab.coffee,Reels Pack,completed,$900
+B121,08/31/2026,Hale Detailing,carlos.hale.detail@gmail.com,Content Day,completed,1500
+B122,09/01/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B123,09/01/2026,TLC Homecare,sofia@tlchomecare.com,Content Day,completed,1500
+B124,09/02/2026,Dr. Maria Kim,hello@kimdental.com,Content Day,completed,"$1,500"
+B125,09/04/2026,Mind and Money,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,300
+B126,09/04/2026,Mike Bennett,mike@juniperbarbers.com,Reels Pack,completed,900
+B127,09/07/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,Reels Pack,completed,$900
+B128,09/07/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B129,09/07/2026,Elevate Medspa,sofia@elevatemedspa.com,Content Day,completed,"$1,500"
+B130,09/07/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,completed,$0
+B131,09/10/2026,Bluebonnet WP,kzamora@bluebonnetwp.com,Retainer Shoot,completed,$0
+B132,09/10/2026,Highland Athletics,omar@highlandathletics.com,Reels Pack,completed,900
+B133,09/11/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B134,09/11/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B135,09/11/2026,Fischer Law Firm PLLC,info@fischerlaw.com,Retainer Shoot,completed,$0
+B136,09/11/2026,Meridian Chiro,tanya@tallgrassmktg.com,Reels Pack,completed,$900
+B137,09/14/2026,Trinity Roofing Co,quinn@trinityroofingco.com,Reels Pack,completed,$900
+B138,09/17/2026,Willow Bridal Boutique,grace@willowbridal.com,Reels Pack,completed,$900
+B139,09/18/2026,Luna,angela@lunafit.co,Reels Pack,completed,$900
+B140,09/21/2026,Park's Auto,jared@parksautospa.com,Reels Pack,completed,900
+B141,09/21/2026,Lena Kim,lena@lonestarrealty.com,Content Day,completed,1500
+B142,09/21/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B143,09/21/2026,Ridgeway Lab,tanya@theridgewaylab.coffee,Reels Pack,completed,900
+B144,09/22/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B145,09/22/2026,Glow Pediatrics,tanya@tallgrassmktg.com,Reels Pack,completed,900
+B146,09/23/2026,Lonestar RG,quinn@lonestarrg.com,Content Day,completed,1500
+B147,09/23/2026,Lena Kim,lena@lonestarrealty.com,Content Day,cancelled,1500
+B148,09/24/2026,Mind & Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B149,09/28/2026,Andre's Roofing,andre@andresroofingtx.com,Reels Pack,completed,$900
+B150,09/28/2026,Canyon Med Spa,leah@canyonmedspa.com,Reels Pack,completed,$900
+B151,09/29/2026,Oak Lane,greg@oaklane.build,Content Day,completed,1500
+B152,09/29/2026,Sage Lab,carmen@thesagelab.coffee,Reels Pack,completed,900
+B153,09/30/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B154,09/30/2026,Magnolia Builders LLC,paula@magnolia.build,Content Day,completed,"$1,500"
+B155,10/01/2026,Lone Star Realty,lena@lonestarrealty.com,Content Day,completed,1500
+B156,10/05/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B157,10/06/2026,Yasmin Bennett,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,upcoming,300
+B158,10/07/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,upcoming,0
+B159,10/08/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,upcoming,$0
+B160,10/09/2026,Renee Park DDS,renee@parkdental.com,Content Day,upcoming,"$1,500"
+B161,10/12/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,Reels Pack,upcoming,$900
+B162,10/12/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,upcoming,270
+B163,10/12/2026,Mike Bennett,mike@juniperbarbers.com,Reels Pack,upcoming,900
+B164,10/12/2026,Hale Detailing,carlos.hale.detail@gmail.com,Content Day,upcoming,1500
+B165,10/12/2026,Dr. Tran,tanya@tallgrassmktg.com,Reels Pack,upcoming,900
+B166,10/13/2026,Elevate Med Spa,sofia@elevatemedspa.com,Content Day,upcoming,1500
+B167,10/14/2026,Fischer,info@fischerlaw.com,Retainer Shoot,upcoming,$0
+B168,10/15/2026,Highland,omar@highlandathletics.com,Reels Pack,upcoming,$900
+B169,10/16/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,upcoming,$300
+B170,10/16/2026,Angela Delgado,angela@lunafit.co,Reels Pack,upcoming,$900
+B171,10/16/2026,Ridgewaylab Coffee,tanya@theridgewaylab.coffee,Reels Pack,upcoming,900
+B172,10/19/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,upcoming,$550
+B173,10/19/2026,Willow Bridal,grace@willowbridal.com,Reels Pack,upcoming,900
+B174,10/19/2026,Dr. Kim Kim,kkim@crownfamilytherapy.com,Content Day,upcoming,1500
+B175,10/19/2026,Trinity Roofing,quinn@trinityroofingco.com,Reels Pack,upcoming,$900
+</script>
+<script id="raw-invoices" type="text/csv">
+invoice_no,bill_to,email,issued,due,amount,status,memo
+INV-1001,Keystone Church,media@keystonedfw.org,2026-04-03,2026-04-17,300.00,paid,Podcast Studio 2hr 4/2
+INV-1002,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-04-07,2026-04-21,300.00,paid,Podcast Studio 2hr 4/6
+INV-1003,Park Dental PLLC,renee@parkdental.com,2026-04-08,2026-04-22,1500.00,paid,B003 Content Day
+INV-1004,Oak Lane Builders LLC,greg@oaklane.build,2026-04-13,2026-04-27,1500.00,paid,Content Day 4/10
+INV-1005,Keystone Media Team,media@keystonedfw.org,2026-04-13,2026-04-27,300.00,paid,
+INV-1006,Jared Ibarra,jared@metroplexmakers.fm,2026-04-14,2026-04-28,550.00,paid,Podcast Studio 4hr 4/13
+INV-1007,Andres Roofing,andre@andresroofingtx.com,2026-04-14,2026-04-28,900.00,paid,B007 Reels Pack
+INV-1008,Keystone Church,media@keystonedfw.org,2026-04-18,2026-05-02,300.00,paid,
+INV-1009,Elevate Med Spa - Plano,sofia@elevatemedspa.com,2026-04-20,2026-05-04,1500.00,paid,Content Day 4/20
+INV-1010,Mind & Money,yasmin@mindandmoney.fm,2026-04-20,2026-05-04,300.00,paid,
+INV-1011,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-04-26,2026-05-10,300.00,paid,
+INV-1012,Willow Bridal,grace@willowbridal.com,2026-04-27,2026-05-11,900.00,paid,B012 Reels Pack
+INV-1013,Jared Ibarra,jared@metroplexmakers.fm,2026-04-28,2026-05-12,550.00,paid,
+INV-1014,Keystone Church,media@keystonedfw.org,2026-04-28,2026-05-12,300.00,paid,B013 Podcast Studio 2hr
+INV-1015,Shah Ins,darnell@shahinsures.com,2026-05-01,2026-05-15,2500.00,paid,Monthly retainer May
+INV-1016,Lakeside PT Dallas,bbecker@lakesideptdallas.com,2026-05-01,2026-05-15,2500.00,paid,Monthly retainer May
+INV-1017,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-05-01,2026-05-15,2500.00,paid,Monthly retainer May
+INV-1018,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-05-04,2026-05-18,300.00,paid,Podcast Studio 2hr 5/4
+INV-1019,Keystone Church,media@keystonedfw.org,2026-05-06,2026-05-20,270.00,paid,
+INV-1020,Angela Delgado,angela@lunafit.co,2026-05-08,2026-05-22,900.00,paid,Reels Pack 5/8
+INV-1021,M&M Podcast,yasmin@mindandmoney.fm,2026-05-13,2026-05-27,300.00,paid,
+INV-1022,Keystone Media Team,media@keystonedfw.org,2026-05-13,2026-05-27,270.00,paid,B023 Podcast Studio 2hr
+INV-1023,Dr Park,renee@parkdental.com,2026-05-14,2026-05-28,1500.00,paid,Content Day 5/14
+INV-1024,Metroplex Makers Podcast,jared@metroplexmakers.fm,2026-05-14,2026-05-28,550.00,paid,Podcast Studio 4hr 5/11
+INV-1025,Oak Lane & Co Builders,greg@oaklane.build,2026-05-18,2026-06-01,1500.00,paid,Content Day 5/18
+INV-1026,Andres Roofing,andre@andresroofingtx.com,2026-05-18,2026-06-01,900.00,paid,B027 Reels Pack
+INV-1027,Canyon,leah@canyonmedspa.com,2026-05-19,2026-06-02,900.00,paid,B028 Reels Pack
+INV-1028,Willow Bridal,grace@willowbridal.com,2026-05-20,2026-06-03,900.00,paid,
+INV-1029,Keystone Church,media@keystonedfw.org,2026-05-21,2026-06-04,270.00,paid,Podcast Studio 2hr 5/19
+INV-1030,Juniper Barbershop,mike@juniperbarbers.com,2026-05-22,2026-06-05,900.00,paid,
+INV-1031,Mind and Money,yasmin@mindandmoney.fm,2026-05-26,2026-06-09,300.00,paid,Podcast Studio 2hr 5/25
+INV-1032,Jared Ibarra,jared@metroplexmakers.fm,2026-05-26,2026-06-09,550.00,paid,B033 Podcast Studio 4hr
+INV-1033,Lone Star Realty,lena@lonestarrealty.com,2026-05-28,2026-06-11,1500.00,paid,B034 Content Day
+INV-1034,Keystone Media Team,media@keystonedfw.org,2026-05-29,2026-06-12,270.00,paid,
+INV-1035,Fischer Law Firm,info@fischerlaw.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1036,Shah Insurance Group,darnell@shahinsures.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1037,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1038,Lakeside PT,bbecker@lakesideptdallas.com,2026-06-01,2026-06-15,2500.00,paid,Monthly retainer June
+INV-1039,Maria Kim DDS,hello@kimdental.com,2026-06-03,2026-06-17,1500.00,paid,B037 Content Day
+INV-1040,Keystone Church,media@keystonedfw.org,2026-06-06,2026-06-20,270.00,paid,Podcast Studio 2hr 6/5
+INV-1041,M&M Podcast,yasmin@mindandmoney.fm,2026-06-08,2026-06-22,300.00,paid,B039 Podcast Studio 2hr
+INV-1042,Jared Ibarra,jared@metroplexmakers.fm,2026-06-08,2026-06-22,550.00,paid,Podcast Studio 4hr 6/8
+INV-1043,Park Family Law,mpark@parkfamilylaw.com,2026-06-09,2026-06-23,900.00,paid,B044 Reels Pack
+INV-1044,Elevate Med Spa - Frisco,sofia@elevatemedspa.com,2026-06-09,2026-06-23,1500.00,paid,
+INV-1045,Tallgrass Digital,tanya@tallgrassmktg.com,2026-06-11,2026-06-25,900.00,paid,
+INV-1046,Keystone DFW,media@keystonedfw.org,2026-06-12,2026-06-26,270.00,paid,Podcast Studio 2hr 6/11
+INV-1047,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-06-15,2026-06-29,300.00,paid,B048 Podcast Studio 2hr
+INV-1048,Canyon Med Spa - Frisco,leah@canyonmedspa.com,2026-06-15,2026-06-29,900.00,paid,B047 Reels Pack
+INV-1049,Luna Fit,angela@lunafit.co,2026-06-16,2026-06-30,900.00,paid,B051 Reels Pack
+INV-1050,Willow Bridal,grace@willowbridal.com,2026-06-17,2026-07-01,900.00,paid,Reels Pack 6/17
+INV-1051,Jared Ibarra,jared@metroplexmakers.fm,2026-06-23,2026-07-07,550.00,paid,Podcast Studio 4hr 6/22
+INV-1052,Sagelab Coffee,carmen@thesagelab.coffee,2026-06-23,2026-07-07,900.00,paid,Reels Pack 6/22
+INV-1053,Keystone Church,media@keystonedfw.org,2026-06-23,2026-07-07,270.00,paid,B053 Podcast Studio 2hr
+INV-1054,Mind & Money,yasmin@mindandmoney.fm,2026-06-24,2026-07-08,300.00,paid,B054 Podcast Studio 2hr
+INV-1055,Park Dental PLLC,renee@parkdental.com,2026-06-25,2026-07-09,1500.00,paid,
+INV-1056,Magnolia,paula@magnolia.build,2026-06-25,2026-07-09,1500.00,paid,B058 Content Day
+INV-1057,Andre's Roofing,andre@andresroofingtx.com,2026-06-26,2026-07-10,900.00,paid,Reels Pack 6/25
+INV-1058,Juniper Barbershop,mike@juniperbarbers.com,2026-06-27,2026-07-11,900.00,paid,Reels Pack 6/26
+INV-1059,Fischer Law Firm,info@fischerlaw.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1060,Lakeside PT Dallas,bbecker@lakesideptdallas.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1061,Shah Insurance,darnell@shahinsures.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1062,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-07-01,2026-07-15,2500.00,paid,Monthly retainer July
+INV-1063,Keystone DFW,media@keystonedfw.org,2026-07-01,2026-07-15,270.00,paid,Podcast Studio 2hr 7/1
+INV-1064,Tallgrass Digital,tanya@tallgrassmktg.com,2026-07-02,2026-07-16,900.00,paid,Reels Pack 7/1
+INV-1065,M&M Podcast,yasmin@mindandmoney.fm,2026-07-03,2026-07-17,300.00,unpaid,
+INV-1066,Lena Kim,lena@lonestarrealty.com,2026-07-04,2026-07-18,1500.00,paid,
+INV-1067,Highland,omar@highlandgym.co,2026-07-07,2026-07-21,900.00,paid,
+INV-1068,Oak Lane Builders LLC,greg@oaklane.build,2026-07-08,2026-07-22,1500.00,paid,B069 Content Day
+INV-1069,Park Family Law,mpark@parkfamilylaw.com,2026-07-08,2026-07-22,900.00,paid,B067 Reels Pack
+INV-1070,Yasmin Bennett,yasmin@mindandmoney.fm,2026-07-09,2026-07-23,300.00,unpaid,B068 Podcast Studio 2hr
+INV-1071,Keystone DFW,media@keystonedfw.org,2026-07-11,2026-07-25,270.00,paid,Podcast Studio 2hr 7/10
+INV-1072,Jared Ibarra,jared@metroplexmakers.fm,2026-07-12,2026-07-26,550.00,paid,B070 Podcast Studio 4hr
+INV-1073,Crown Family Therapy,kkim@crownfamilytherapy.com,2026-07-16,2026-07-30,1500.00,paid,B076 Content Day
+INV-1074,Willow Bridal,grace@willowbridal.com,2026-07-16,2026-07-30,900.00,paid,
+INV-1075,Canyon Med Spa,leah@canyonmedspa.com,2026-07-18,2026-08-01,900.00,paid,Reels Pack 7/15
+INV-1076,The Ridgeway Lab,tanya@theridgewaylab.coffee,2026-07-18,2026-08-01,900.00,paid,Reels Pack 7/17
+INV-1077,Tallgrass Digital,tanya@tallgrassmktg.com,2026-07-18,2026-08-01,900.00,paid,
+INV-1078,Maria Kim DDS,hello@kimdental.com,2026-07-18,2026-08-01,1500.00,paid,B078 Content Day
+INV-1079,Mind & Money Podcast,yasmin@mindandmoney.fm,2026-07-20,2026-08-03,300.00,unpaid,
+INV-1080,Keystone Church,media@keystonedfw.org,2026-07-21,2026-08-04,270.00,paid,Podcast Studio 2hr 7/20
+INV-1081,Metroplex Makers,jared@metroplexmakers.fm,2026-07-22,2026-08-05,550.00,paid,
+INV-1082,Parks Auto,jared@parksautospa.com,2026-07-22,2026-08-05,900.00,paid,
+INV-1083,Keystone Church,media@keystonedfw.org,2026-07-29,2026-08-12,270.00,paid,Podcast Studio 2hr 7/29
+INV-1084,Mind & Money,yasmin@mindandmoney.fm,2026-07-29,2026-08-12,300.00,unpaid,Podcast Studio 2hr 7/27
+INV-1085,Angela Delgado,angela@lunafit.co,2026-07-29,2026-08-12,900.00,paid,Reels Pack 7/27
+INV-1086,The Sage Lab,carmen@thesagelab.coffee,2026-07-31,2026-08-14,900.00,paid,Reels Pack 7/29
+INV-1087,Elevate Med Spa,sofia@elevatemedspa.com,2026-07-31,2026-08-14,1500.00,paid,Content Day 7/29
+INV-1088,Fischer Law,info@fischerlaw.com,2026-08-01,2026-08-15,2250.00,paid,Monthly retainer August
+INV-1089,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-08-01,2026-08-15,2500.00,paid,Monthly retainer August
+INV-1090,Andre's Roofing,andre@andresroofingtx.com,2026-08-01,2026-08-15,900.00,unpaid,
+INV-1091,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2026-08-01,2026-08-15,2500.00,paid,Monthly retainer August
+INV-1092,Metroplex Makers,jared@metroplexmakers.fm,2026-08-03,2026-08-17,550.00,paid,Podcast Studio 4hr 8/3
+INV-1093,Yasmin Bennett,yasmin@mindandmoney.fm,2026-08-04,2026-08-18,300.00,paid,B091 Podcast Studio 2hr
+INV-1094,Magnolia Builders LLC,paula@magnolia.build,2026-08-05,2026-08-19,1500.00,paid,
+INV-1095,Tallgrass Digital,tanya@tallgrassmktg.com,2026-08-05,2026-08-19,900.00,paid,
+INV-1096,Trinity Roofing Co,quinn@trinityroofingco.com,2026-08-05,2026-08-19,900.00,paid,
+INV-1097,Juniper Barbershop,mike@juniperbarbers.com,2026-08-06,2026-08-20,900.00,paid,
+INV-1098,Park Family Law,mpark@parkfamilylaw.com,2026-08-06,2026-08-20,900.00,unpaid,Reels Pack 8/4
+INV-1099,Keystone Media Team,media@keystonedfw.org,2026-08-06,2026-08-20,270.00,paid,B096 Podcast Studio 2hr
+INV-1100,Yasmin Bennett,yasmin@mindandmoney.fm,2026-08-11,2026-08-25,300.00,paid,
+INV-1101,Lonestar RG,quinn@lonestarrg.com,2026-08-12,2026-08-26,1500.00,unpaid,Content Day 8/12
+INV-1102,Lena Kim,lena@lonestarrealty.com,2026-08-12,2026-08-26,1500.00,paid,B103 Content Day
+INV-1103,Willow Bridal,grace@willowbridal.com,2026-08-13,2026-08-27,900.00,paid,B106 Reels Pack
+INV-1104,Park's Auto,jared@parksautospa.com,2026-08-18,2026-09-01,900.00,paid,B110 Reels Pack
+INV-1105,Tallgrass Digital,tanya@tallgrassmktg.com,2026-08-18,2026-09-01,900.00,paid,B109 Reels Pack
+INV-1106,Ridgewaylab Coffee,tanya@theridgewaylab.coffee,2026-08-18,2026-09-01,900.00,unpaid,Reels Pack 8/17
+INV-1107,Keystone DFW,media@keystonedfw.org,2026-08-19,2026-09-02,270.00,paid,Podcast Studio 2hr 8/17
+INV-1108,Metroplex Makers,jared@metroplexmakers.fm,2026-08-20,2026-09-03,550.00,unpaid,Podcast Studio 4hr 8/19
+INV-1109,Canyon Med Spa - Frisco,leah@canyonmedspa.com,2026-08-23,2026-09-06,900.00,paid,
+INV-1110,Mind & Money,yasmin@mindandmoney.fm,2026-08-24,2026-09-07,300.00,paid,B116 Podcast Studio 2hr
+INV-1111,Andre's Roofing,andre@andresroofingtx.com,2026-08-24,2026-09-07,900.00,paid,B117 Reels Pack
+INV-1112,Renee Park DDS,renee@parkdental.com,2026-08-24,2026-09-07,1500.00,paid,Content Day 8/24
+INV-1113,Crown Therapy,kkim@crownfamilytherapy.com,2026-08-24,2026-09-07,1500.00,paid,Content Day 8/21
+INV-1114,Luna,angela@lunafit.co,2026-08-25,2026-09-08,900.00,paid,B118 Reels Pack
+INV-1115,Hale Auto,carlos.hale.detail@gmail.com,2026-08-31,2026-09-14,1500.00,paid,
+INV-1116,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2026-09-01,2026-09-15,2500.00,unpaid,Monthly retainer September
+INV-1117,Fischer,info@fischerlaw.com,2026-09-01,2026-09-15,2500.00,paid,Monthly retainer September
+INV-1118,Bluebonnet Wealth,kzamora@bluebonnetwp.com,2026-09-01,2026-09-15,2500.00,paid,Monthly retainer September
+INV-1119,The Sage Lab,carmen@thesagelab.coffee,2026-09-01,2026-09-15,900.00,paid,Reels Pack 8/31
+INV-1120,Keystone DFW,media@keystonedfw.org,2026-09-01,2026-09-15,270.00,paid,B122 Podcast Studio 2hr
+INV-1121,TLC Home Care,sofia@tlchomecare.com,2026-09-02,2026-09-16,1500.00,unpaid,B123 Content Day
+INV-1122,M&M Podcast,yasmin@mindandmoney.fm,2026-09-04,2026-09-18,300.00,paid,Podcast Studio 2hr 9/4
+INV-1123,Kim Dental,hello@kimdental.com,2026-09-05,2026-09-19,1500.00,paid,B124 Content Day
+INV-1124,Juniper Barbers,mike@juniperbarbers.com,2026-09-05,2026-09-19,900.00,paid,Reels Pack 9/4
+INV-1125,Highland Athletics,omar@highlandathletics.com,2026-09-10,2026-09-24,900.00,paid,B132 Reels Pack
+INV-1126,Maria Park,mpark@parkfamilylaw.com,2026-09-10,2026-09-24,900.00,paid,B127 Reels Pack
+INV-1127,Elevate Medspa,sofia@elevatemedspa.com,2026-09-10,2026-09-24,1500.00,paid,B129 Content Day
+INV-1128,Metroplex Makers Podcast,jared@metroplexmakers.fm,2026-09-10,2026-09-24,550.00,paid,
+INV-1129,Keystone Media Team,media@keystonedfw.org,2026-09-12,2026-09-26,270.00,paid,B133 Podcast Studio 2hr
+INV-1130,M&M Podcast,yasmin@mindandmoney.fm,2026-09-13,2026-09-27,300.00,paid,
+INV-1131,Quinn Haddad,quinn@trinityroofingco.com,2026-09-14,2026-09-28,900.00,partial,
+INV-1132,Tallgrass Digital,tanya@tallgrassmktg.com,2026-09-14,2026-09-28,900.00,paid,B136 Reels Pack
+INV-1133,Willow Bridal,grace@willowbridal.com,2026-09-17,2026-10-01,900.00,paid,
+INV-1134,Lena Kim,lena@lonestarrealty.com,2026-09-18,2026-10-02,1500.00,paid,B147 Content Day
+INV-1135,Angela Delgado,angela@lunafit.co,2026-09-20,2026-10-04,900.00,paid,
+INV-1136,Keystone Media Team,media@keystonedfw.org,2026-09-21,2026-10-05,270.00,paid,B142 Podcast Studio 2hr
+INV-1137,Ridgeway Lab,tanya@theridgewaylab.coffee,2026-09-22,2026-10-06,900.00,unpaid,Reels Pack 9/21
+INV-1138,Metroplex Makers,jared@metroplexmakers.fm,2026-09-23,2026-10-07,550.00,paid,Podcast Studio 4hr 9/22
+INV-1139,Yasmin Bennett,yasmin@mindandmoney.fm,2026-09-24,2026-10-08,300.00,paid,B148 Podcast Studio 2hr
+INV-1140,Lone Star Realty LLC,lena@lonestarrealty.com,2026-09-24,2026-10-08,1500.00,unpaid,B141 Content Day
+INV-1141,Park's Auto,jared@parksautospa.com,2026-09-24,2026-10-08,900.00,unpaid,Reels Pack 9/21
+INV-1142,Tallgrass Digital,tanya@tallgrassmktg.com,2026-09-25,2026-10-09,900.00,unpaid,
+INV-1143,Quinn Hassan,quinn@lonestarrg.com,2026-09-26,2026-10-10,1500.00,unpaid,
+INV-1144,Lone Star Realty,lena@lonestarrealty.com,2026-09-29,2026-10-13,1500.00,unpaid,
+INV-1145,Canyon Med Spa - Frisco,leah@canyonmedspa.com,2026-09-29,2026-10-13,900.00,unpaid,Reels Pack 9/28
+INV-1146,Andre's Roofing LLC,andre@andresroofingtx.com,2026-09-30,2026-10-14,900.00,unpaid,
+INV-1147,Oak Lane Builders LLC,greg@oaklane.build,2026-09-30,2026-10-14,1500.00,unpaid,B151 Content Day
+INV-1148,Magnolia Builders LLC,paula@magnolia.build,2026-09-30,2026-10-14,1500.00,unpaid,Content Day 9/30
+INV-1149,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2026-10-01,2026-10-15,2500.00,unpaid,Monthly retainer October
+INV-1150,Sagelab Coffee,carmen@thesagelab.coffee,2026-10-01,2026-10-15,900.00,unpaid,
+INV-1151,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,2026-10-01,2026-10-15,2500.00,unpaid,Monthly retainer October
+INV-1152,Fischer Law Firm PLLC,info@fischerlaw.com,2026-10-01,2026-10-15,2500.00,unpaid,Monthly retainer October
+INV-1153,Keystone DFW,media@keystonedfw.org,2026-10-02,2026-10-16,270.00,unpaid,
+INV-1154,Metroplex Makers,jared@metroplexmakers.fm,2026-10-06,2026-10-20,550.00,unpaid,B156 Podcast Studio 4hr
+INV-1155,Park Dental PLLC,renee@parkdental.com,2026-06-25,2026-07-09,1500.00,void,
+</script>
+<script id="raw-payments" type="text/csv">
+payment_id,date,payer,payer_email,amount,method,reference
+P5001,10/04/2026,Keystone Media Team,media@keystonedfw.org,300.00,Zelle,
+P5002,15/04/2026,Park Dental PLLC,renee@parkdental.com,1500.00,ACH,
+P5003,16/04/2026,Oak Lane Builders,greg@oaklane.build,1500.00,ACH,INV-1004
+P5004,17/04/2026,METROPLEX MAKERS,jared@metroplexmakers.fm,550.00,card,INV-1006
+P5005,19/04/2026,Keystone DFW,media@keystonedfw.org,300.00,card,INV-1008
+P5006,21/04/2026,ANDRES ROOFING,andre@andresroofingtx.com,900.00,card,
+P5007,23/04/2026,Mind and Money,yasmin@mindandmoney.fm,300.00,card,INV-1010
+P5008,25/04/2026,PASTOR DARNELL JACKSON,media@keystonedfw.org,300.00,Zelle,
+P5009,29/04/2026,YASMIN BENNETT,yasmin@mindandmoney.fm,300.00,card,INV-1002
+P5010,03/05/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,2500.00,card,INV-1016
+P5011,03/05/2026,Shah Insurance,darnell@shahinsures.com,2500.00,card,INV-1015
+P5012,05/05/2026,Elevate,sofia@elevatemedspa.com,1500.00,card,INV-1009
+P5013,05/05/2026,Mind and Money,yasmin@mindandmoney.fm,300.00,Zelle,INV-1018
+P5014,08/05/2026,Keystone DFW,media@keystonedfw.org,270.00,card,
+P5015,10/05/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,ACH,
+P5016,10/05/2026,Keystone Church,media@keystonedfw.org,300.00,Zelle,
+P5017,11/05/2026,Luna Fit,angela@lunafit.co,900.00,ACH,INV-1020
+P5018,14/05/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,card,INV-1021
+P5019,15/05/2026,WILLOW BRIDAL,grace@willowbridal.com,900.00,card,INV-1012
+P5020,18/05/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,ACH,
+P5021,21/05/2026,Canyon,leah@canyonmedspa.com,900.00,card,INV-1027
+P5022,23/05/2026,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,2500.00,card,INV-1017
+P5023,25/05/2026,Keystone Church,media@keystonedfw.org,270.00,Zelle,INV-1022
+P5024,27/05/2026,Oak Lane,greg@oaklane.build,1500.00,Zelle,INV-1025
+P5025,28/05/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,ACH,INV-1031
+P5026,31/05/2026,Mike Bennett,mike@juniperbarbers.com,900.00,ACH,
+P5027,31/05/2026,Lena Kim,lena@lonestarrealty.com,1500.00,Zelle,INV-1033
+P5028,01/06/2026,Park Dental PLLC,renee@parkdental.com,1500.00,ACH,INV-1023
+P5029,04/06/2026,Grace Nguyen,grace@willowbridal.com,900.00,card,INV-1028
+P5030,05/06/2026,Jared Ibarra,jared@metroplexmakers.fm,550.00,ACH,
+P5031,05/06/2026,Keystone Media Team,media@keystonedfw.org,270.00,Zelle,INV-1029
+P5032,06/06/2026,Shah Ins,darnell@shahinsures.com,2500.00,Zelle,
+P5033,07/06/2026,Metroplex Makers,jared@metroplexmakers.fm,550.00,card,
+P5034,09/06/2026,Andre Ochoa,andre@andresroofingtx.com,900.00,Zelle,INV-1026
+P5035,10/06/2026,Kim Dental PLLC,hello@kimdental.com,1500.00,card,INV-1039
+P5036,10/06/2026,Fischer Law Firm PLLC,info@fischerlaw.com,2500.00,card,
+P5037,10/06/2026,Elevate Medspa,sofia@elevatemedspa.com,1500.00,card,INV-1044
+P5038,10/06/2026,Keystone Church,media@keystonedfw.org,270.00,ACH,INV-1034
+P5039,11/06/2026,YASMIN BENNETT,yasmin@mindandmoney.fm,300.00,card,INV-1041
+P5040,13/06/2026,PASTOR DARNELL JACKSON,media@keystonedfw.org,270.00,card,INV-1040
+P5041,16/06/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,900.00,ACH,INV-1043
+P5042,16/06/2026,Lakeside PT,bbecker@lakesideptdallas.com,2500.00,card,INV-1038
+P5043,17/06/2026,CANYON MED SPA,leah@canyonmedspa.com,900.00,card,INV-1048
+P5044,17/06/2026,Keystone Media Team,media@keystonedfw.org,270.00,ACH,INV-1046
+P5045,19/06/2026,Angela Delgado,angela@lunafit.co,900.00,card,
+P5046,19/06/2026,BLUEBONNET WEALTH PARTNERS,kzamora@bluebonnetwp.com,2500.00,card,
+P5047,20/06/2026,JARED IBARRA,jared@metroplexmakers.fm,550.00,card,
+P5048,22/06/2026,M&M Podcast,yasmin@mindandmoney.fm,300.00,card,INV-1047
+P5049,25/06/2026,THE SAGE LAB,carmen@thesagelab.coffee,900.00,ACH,INV-1052
+P5050,26/06/2026,PARK DENTAL,renee@parkdental.com,1500.00,ACH,
+P5051,26/06/2026,Willow Bridal Boutique,grace@willowbridal.com,900.00,Zelle,
+P5052,29/06/2026,JUNIPER BARBERS,mike@juniperbarbers.com,900.00,card,
+P5053,05/07/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,card,INV-1051
+P5054,05/07/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,900.00,ACH,Tallgrass Jun invoices
+P5055,06/07/2026,Keystone Media Team,media@keystonedfw.org,270.00,ACH,
+P5056,08/07/2026,KEVIN ZAMORA,kzamora@bluebonnetwp.com,2500.00,Zelle,INV-1062
+P5057,09/07/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,900.00,card,INV-1069
+P5058,11/07/2026,Lone Star Realty,lena@lonestarrealty.com,1500.00,card,INV-1066
+P5059,11/07/2026,OAK LANE BUILDERS,greg@oaklane.build,1500.00,card,INV-1068
+P5060,13/07/2026,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2500.00,ACH,INV-1060
+P5061,14/07/2026,Andre's Roofing LLC,andre@andresroofingtx.com,900.00,ACH,INV-1057
+P5062,15/07/2026,Keystone DFW,media@keystonedfw.org,270.00,Zelle,INV-1053
+P5063,16/07/2026,Mind & Money Podcast,yasmin@mindandmoney.fm,300.00,card,INV-1054
+P5064,16/07/2026,Shah Insurance,darnell@shahinsures.com,2500.00,Zelle,
+P5065,16/07/2026,HIGHLAND GYM,omar@highlandgym.co,900.00,card,
+P5066,17/07/2026,Magnolia Builders,paula@magnolia.build,1500.00,ACH,INV-1056
+P5067,19/07/2026,Fischer,info@fischerlaw.com,2500.00,ACH,
+P5068,20/07/2026,MARIA KIM,hello@kimdental.com,1500.00,card,INV-1078
+P5069,21/07/2026,Canyon,leah@canyonmedspa.com,900.00,Zelle,INV-1075
+P5070,23/07/2026,Keystone DFW,media@keystonedfw.org,270.00,card,
+P5071,23/07/2026,JARED IBARRA,jared@metroplexmakers.fm,550.00,Zelle,INV-1081
+P5072,24/07/2026,KEYSTONE CHURCH,media@keystonedfw.org,270.00,card,INV-1080
+P5073,30/07/2026,The Ridgeway Lab,tanya@theridgewaylab.coffee,900.00,ACH,INV-1076
+P5074,30/07/2026,Metroplex Makers,jared@metroplexmakers.fm,550.00,card,INV-1072
+P5075,31/07/2026,GRACE NGUYEN,grace@willowbridal.com,900.00,card,INV-1074
+P5076,31/07/2026,Crown Family Therapy,kkim@crownfamilytherapy.com,1500.00,card,INV-1073
+P5077,01/08/2026,THE SAGE LAB,carmen@thesagelab.coffee,900.00,card,
+P5078,02/08/2026,Elevate Medspa,sofia@elevatemedspa.com,1500.00,ACH,INV-1087
+P5079,02/08/2026,Andre's Roofing,andre@andresroofingtx.com,900.00,Zelle,INV-1090
+P5080,03/08/2026,Keystone DFW,media@keystonedfw.org,270.00,ACH,INV-1083
+P5081,03/08/2026,YASMIN BENNETT,,1200.00,Zelle,july sessions
+P5082,04/08/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,1800.00,ACH,Tallgrass Jul invoices
+P5083,04/08/2026,KEVIN ZAMORA,kzamora@bluebonnetwp.com,2500.00,Zelle,INV-1089
+P5084,05/08/2026,SAGE LAB,carmen@thesagelab.coffee,900.00,card,INV-1086
+P5086,12/08/2026,TRINITY ROOFING CO,quinn@trinityroofingco.com,900.00,card,INV-1096
+P5087,13/08/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,900.00,card,INV-1098
+P5088,13/08/2026,DARNELL JACKSON,media@keystonedfw.org,270.00,Zelle,INV-1099
+P5089,13/08/2026,PARKS AUTO,jared@parksautospa.com,900.00,Zelle,INV-1082
+P5090,13/08/2026,ANDRE FISCHER,info@fischerlaw.com,2250.00,Zelle,INV-1088
+P5091,15/08/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,card,
+P5092,16/08/2026,Willow Bridal Boutique,grace@willowbridal.com,900.00,card,INV-1103
+P5093,16/08/2026,ANGELA DELGADO,angela@lunafit.co,900.00,Zelle,INV-1085
+P5094,17/08/2026,Magnolia & Co Builders,paula@magnolia.build,1500.00,card,INV-1094
+P5095,19/08/2026,MIND & MONEY PODCAST,yasmin@mindandmoney.fm,300.00,ACH,
+P5096,19/08/2026,BROOKE BECKER,bbecker@lakesideptdallas.com,2500.00,card,INV-1091
+P5097,20/08/2026,Keystone Media Team,media@keystonedfw.org,270.00,Zelle,INV-1107
+P5098,21/08/2026,LENA KIM,lena@lonestarrealty.com,1500.00,Zelle,INV-1102
+P5099,23/08/2026,YASMIN BENNETT,yasmin@mindandmoney.fm,300.00,ACH,INV-1100
+P5100,25/08/2026,Mind & Money Podcast,yasmin@mindandmoney.fm,300.00,card,INV-1110
+P5101,25/08/2026,Andre Ochoa,andre@andresroofingtx.com,900.00,card,INV-1111
+P5102,26/08/2026,Dr Park,renee@parkdental.com,1500.00,card,INV-1112
+P5103,26/08/2026,LEAH HASSAN,leah@canyonmedspa.com,900.00,ACH,
+P5104,31/08/2026,Crown Therapy,kkim@crownfamilytherapy.com,1500.00,card,INV-1113
+P5105,02/09/2026,Park's Auto,jared@parksautospa.com,900.00,card,
+P5106,04/09/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,1800.00,ACH,Tallgrass Aug invoices
+P5107,04/09/2026,KEYSTONE CHURCH,media@keystonedfw.org,270.00,card,INV-1120
+P5108,08/09/2026,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,2500.00,card,INV-1118
+P5109,10/09/2026,JUNIPER BARBERS,mike@juniperbarbers.com,900.00,card,INV-1124
+P5110,12/09/2026,Dr Kim,hello@kimdental.com,1500.00,ACH,
+P5111,13/09/2026,PARK FAMILY LAW,mpark@parkfamilylaw.com,900.00,ACH,
+P5112,16/09/2026,Angela Delgado,angela@lunafit.co,900.00,card,
+P5113,16/09/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,ACH,INV-1122
+P5114,18/09/2026,CARLOS HALE,carlos.hale.detail@gmail.com,1500.00,Zelle,INV-1115
+P5115,19/09/2026,FISCHER LAW FIRM,info@fischerlaw.com,2500.00,ACH,
+P5116,19/09/2026,WILLOW BRIDAL BOUTIQUE,grace@willowbridal.com,900.00,card,INV-1133
+P5117,19/09/2026,Elevate Med Spa,sofia@elevatemedspa.com,1500.00,ACH,INV-1127
+P5118,19/09/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,card,INV-1128
+P5119,19/09/2026,HIGHLAND,omar@highlandathletics.com,900.00,ACH,INV-1125
+P5120,23/09/2026,CARMEN PARK,carmen@thesagelab.coffee,900.00,card,INV-1119
+P5121,24/09/2026,Metroplex Makers,jared@metroplexmakers.fm,550.00,card,
+P5122,25/09/2026,QUINN HADDAD,,450.00,Zelle,half now half later
+P5123,26/09/2026,Yasmin Bennett,yasmin@mindandmoney.fm,300.00,ACH,INV-1139
+P5124,27/09/2026,Lena Kim,lena@lonestarrealty.com,1500.00,Zelle,INV-1134
+P5125,27/09/2026,Keystone DFW,media@keystonedfw.org,270.00,card,INV-1129
+P5126,02/10/2026,Luna Fit,angela@lunafit.co,900.00,Zelle,INV-1135
+P5127,04/10/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,900.00,ACH,Tallgrass Sep invoices
+P5128,05/10/2026,Yasmin Bennett,yasmin@mindandmoney.fm,300.00,ACH,
+P5129,06/10/2026,Keystone Media Team,media@keystonedfw.org,270.00,card,INV-1136
+</script>
+<script id="raw-production" type="text/csv">
+video_id,client,title,editor,stage,notes_on_board,revisions,editor_hours,client_approved_on,shoot_booking
+V001,Dr. Renee Park,Why floss matters,Rita,Delivered,Remove prices part,0,3.5,2026-04-17,B003
+V002,Renee Park DDS,Implants explained,Ali,Delivered,,0,2.8,2026-04-20,
+V003,Park Dental PLLC,Kids dental tips,Rita,Delivered,,0,4.1,2026-04-27,B003
+V004,Dr. Renee Park,Invisalign myths,Ali,Delivered,,0,3.0,2026-04-24,
+V005,Oak Lane Builders LLC,Permit tips,Ali,Delivered,,0,3.4,2026-04-23,B005
+V006,Oak Lane Builders,Kitchen remodel reveal,Rita,Delivered,,0,4.3,2026-04-21,B005
+V007,Oak Lane & Co Builders,Material choices,Rita,Delivered,Cut first 3 sec,2,5.9,,B005
+V008,Oak Lane Builders,Owner story,Rita,Delivered,,1,4.4,2026-04-28,B005
+V009,Andre's Roofing LLC,Roof inspection walkthrough,Rita,Delivered,,1,4.0,,B007
+V010,Andre's Roofing,Shingle vs metal,Ali,Delivered,,1,4.6,,B007
+V011,Andre's Roofing LLC,Leak warning signs,Ali,Delivered,,0,3.7,2026-05-04,B007
+V012,Elevate Med Spa - Plano,Meet the injector,Ali,Delivered,,1,3.6,2026-04-28,
+V013,Elevate Med Spa,Laser hair removal,Ali,Delivered,,0,3.9,2026-05-14,
+V014,Elevate Medspa,Skin care routine,Ali,Delivered,,0,3.3,,B010
+V015,Elevate Med Spa - Frisco,Fall facial promo,Ali,Delivered,Use outside shot,1,3.5,2026-04-30,B010
+V016,Willow Bridal Boutique,Owner story,Rita,Delivered,,1,4.5,2026-05-08,B012
+V017,Willow Bridal,Styling tips,Ali,Delivered,,0,3.0,,B012
+V018,Willow Bridal Boutique,Bride story,Ali,Delivered,,0,3.8,,B012
+V019,Bluebonnet Wealth,Retirement myths,Rita,Delivered,,1,5.0,,B015
+V020,Bluebonnet Wealth,Client story,Ali,Delivered,,2,4.3,,
+V021,Bluebonnet Wealth Partners,Meet the advisor,Ali,Delivered,Cut stumble,1,3.6,,B015
+V022,Bluebonnet Wealth Partners,Why fees matter,Rita,Delivered,,0,3.9,,B015
+V023,Fischer Law Firm PLLC,Divorce timeline,Ali,Delivered,,1,3.5,2026-05-26,B018
+V024,Fischer Law,Slip and fall rights,Ali,Delivered,,1,4.7,,B018
+V025,Fischer Law Firm,Car accident: first 3 steps,Ali,Delivered,,2,5.3,,B018
+V026,Fischer,Custody myths,Rita,Delivered,Phone number end card,1,4.3,2026-05-25,B018
+V027,Luna Fit,30-day challenge,Ali,Delivered,,0,3.7,,B019
+V028,Luna Fit,Member story,Ali,Delivered,,1,4.2,,B019
+V029,Luna Fit,Class schedule,Rita,Delivered,Fix name spelling,0,3.1,2026-06-01,B019
+V030,Lakeside PT Dallas,What to expect visit one,Ali,Delivered,Use outside shot,2,4.1,,B022
+V031,Lakeside PT,Back pain myths,Ali,Delivered,Add walk-ins welcome,2,5.0,2026-06-04,B022
+V032,Lakeside PT Dallas,Insurance we take,Rita,Delivered,Brand color navy,0,4.2,,B022
+V033,Lakeside PT Dallas,Patient story,Rita,Delivered,,1,5.1,2026-05-21,B022
+V034,Dr Park,First visit tour,Ali,Delivered,,1,4.2,2026-06-04,B024
+V035,Dr Park,Whitening before and after,Rita,Delivered,,0,3.7,2026-06-05,B024
+V036,Park Dental,Kids dental tips,Rita,Delivered,,0,3.2,2026-05-27,B024
+V037,Renee Park DDS,Why floss matters,Ali,Delivered,,1,3.8,,B024
+V038,Bluebonnet WP,Why fees matter,Ali,Delivered,,0,3.2,2026-06-07,B025
+V039,Bluebonnet Wealth Partners,Client story,Ali,Delivered,Music lower,1,4.6,2026-06-08,B025
+V040,Bluebonnet Wealth,Retirement myths,Rita,Delivered,,0,3.1,2026-06-07,B025
+V041,Bluebonnet Wealth,Meet the advisor,Ali,Delivered,,0,2.6,2026-06-02,B025
+V042,Oak Lane,Permit tips,Ali,Delivered,Captions bigger,1,4.4,2026-05-27,
+V043,Oak Lane,Project timeline,Ali,Delivered,,1,3.9,2026-05-29,
+V044,Oak Lane Builders,Owner story,Ali,Delivered,,0,2.9,2026-06-08,B026
+V045,Oak Lane Builders,Material choices,Ali,Delivered,Phone number end card,0,3.0,,B026
+V046,Andre's Roofing LLC,Gutter guards,Ali,Delivered,,0,3.4,2026-06-03,B027
+V047,Andres Roofing,Free estimate promo,Rita,Delivered,Phone number end card,0,3.2,,B027
+V048,Andre's Roofing LLC,Crew intro,Ali,Delivered,,1,4.4,2026-06-03,B027
+V049,Canyon Medspa,Botox before and after,Rita,Delivered,,0,3.3,2026-05-26,
+V050,Canyon,Fall facial promo,Rita,Delivered,Cut first 3 sec,0,4.4,2026-05-28,B028
+V051,Canyon,Lip filler myths,Ali,Delivered,Blur client face,1,4.2,2026-05-29,B028
+V052,Willow Bridal,Styling tips,Ali,Delivered,,1,3.9,2026-05-30,
+V053,Willow Bridal,Try-on day,Rita,Delivered,,0,4.1,2026-06-10,B030
+V054,Willow Bridal Boutique,New arrivals,Ali,Delivered,Brand color burgundy,0,3.9,,B030
+V055,Mike Bennett,Sale promo,Ali,Delivered,,0,2.6,2026-05-29,B031
+V056,Juniper Barbershop,Fresh fade transformation,Rita,Delivered,,1,4.5,2026-06-12,
+V057,Mike Bennett,Owner story,Rita,Delivered,,0,3.5,2026-06-01,
+V058,Lone Star Realty,Staging tips,Rita,Delivered,,0,3.8,2026-06-14,B034
+V059,Lena Kim,First time buyer tips,Ali,Delivered,Calmer music,0,3.0,,
+V060,Lone Star Realty,Market update,Rita,Delivered,,1,3.9,,B034
+V061,Lone Star Realty LLC,Neighborhood guide,Ali,Delivered,Captions bigger,1,4.0,2026-06-10,B034
+V062,Shah Insurance Group,Meet the agent,Ali,Delivered,,0,3.3,,
+V063,Darnell Shah,Claims made easy,Ali,Delivered,Cut stumble,0,3.9,,
+V064,Darnell Shah,Client story,Ali,Delivered,,1,3.9,2026-06-18,
+V065,Shah Ins,Rate review,Rita,Delivered,,1,4.0,2026-06-23,B036
+V066,Dr. Maria Kim,First visit tour,Ali,Delivered,Remove prices part,2,5.1,,
+V067,Maria Kim DDS,Office tour,Ali,Delivered,,2,5.5,,
+V068,Kim Dental,Invisalign myths,Rita,Delivered,,1,3.9,2026-06-20,B037
+V069,Maria Kim DDS,Implants explained,Ali,Delivered,Remove prices part,0,3.8,2026-06-27,B037
+V070,Elevate Med Spa - Frisco,Membership promo,Rita,Delivered,,1,3.9,,B041
+V071,Elevate Med Spa,Lip filler myths,Ali,Delivered,,0,2.8,,
+V072,Elevate,Fall facial promo,Ali,Delivered,Blur client face,1,3.5,2026-06-30,B041
+V073,Elevate Med Spa - Frisco,Skin care routine,Ali,Delivered,,1,4.6,,B041
+V074,Lakeside PT Dallas,Desk posture fix,Ali,Delivered,Cut stumble,0,3.5,,
+V075,Lakeside PT,What to expect visit one,Rita,Delivered,,1,4.5,,B042
+V076,Lakeside Physical Therapy,Walk-ins welcome,Rita,Delivered,,1,4.3,2026-06-16,B042
+V077,Lakeside Physical Therapy,Insurance we take,Rita,Delivered,Phone number end card,2,5.9,2026-06-19,B042
+V078,Shah Ins,Flood coverage,Rita,Delivered,,0,4.1,2026-06-20,B043
+V079,Shah Insurance,Life insurance basics,Rita,Delivered,,2,5.3,,B043
+V080,Darnell Shah,Teen driver tips,Rita,Delivered,,0,4.1,,B043
+V081,Darnell Shah,Meet the agent,Ali,Delivered,,0,3.1,,B043
+V082,Park Law,Car accident: first 3 steps,Ali,Delivered,,0,3.3,2026-07-02,B044
+V083,Park Family Law,Slip and fall rights,Rita,Delivered,,0,3.0,,B044
+V084,Park Law,Custody myths,Rita,Delivered,,0,4.1,2026-06-29,B044
+V085,Glow Peds,Meet the team,Rita,Delivered,,0,3.5,,
+V086,Tallgrass - Glow,Patient story,Ali,Delivered,,2,5.8,2026-06-18,B045
+V087,Tallgrass - Glow,Desk posture fix,Ali,Delivered,Captions bigger,0,2.6,2026-06-25,B045
+V088,Canyon,Botox before and after,Rita,Delivered,,0,3.2,2026-07-05,B047
+V089,Canyon,Hydrafacial reveal,Ali,Delivered,,1,4.0,2026-06-29,B047
+V090,Canyon,Membership promo,Ali,Delivered,,2,5.4,2026-06-21,B047
+V091,Fischer Law,Wills in 60 seconds,Rita,Delivered,,0,3.8,2026-06-24,
+V092,Fischer,Custody myths,Ali,Delivered,,0,3.6,,B049
+V093,Fischer,Car accident: first 3 steps,Ali,Delivered,,2,4.8,2026-07-03,
+V094,Fischer,Slip and fall rights,Ali,Delivered,,0,3.8,,B049
+V095,Bluebonnet Wealth Partners,Meet the advisor,Ali,Delivered,Captions bigger,0,3.7,,B050
+V096,Bluebonnet WP,Tax season tips,Rita,Delivered,,0,4.4,2026-07-07,B050
+V097,Bluebonnet Wealth,College savings,Rita,Delivered,Blur client face,2,5.5,2026-06-28,B050
+V098,Bluebonnet WP,Estate planning basics,Rita,Delivered,Cut first 3 sec,1,4.4,,B050
+V099,Luna Fit,Trainer intro,Rita,Delivered,Cut first 3 sec,0,4.2,2026-07-06,
+V100,Luna Fitness,30-day challenge,Rita,Delivered,Add walk-ins welcome,1,5.5,,B051
+V101,Luna,Class schedule,Rita,Delivered,Fix name spelling,0,3.0,,B051
+V102,Willow Bridal,Bride story,Ali,In revision,,3,5.9,2026-06-28,B052
+V103,Grace Nguyen,Owner story,Ali,Delivered,Use outside shot,0,2.8,,B052
+V104,Grace Nguyen,Styling tips,Rita,Delivered,,2,4.6,,B052
+V105,The Sage Lab,Pastry case,Rita,Delivered,,0,4.0,2026-07-08,B056
+V106,Sagelab Coffee,Behind the bar,Rita,Delivered,,2,5.7,2026-07-11,
+V107,The Sage Lab,Latte art,Ali,Delivered,,1,3.7,2026-07-04,B056
+V108,Dr Park,Meet the doctor,Ali,Delivered,,1,4.2,,B057
+V109,Renee Park DDS,First visit tour,Ali,Delivered,,0,3.8,,B057
+V110,Dr. Renee Park,Why floss matters,Ali,Delivered,Add walk-ins welcome,0,2.9,2026-07-11,
+V111,Renee Park DDS,Implants explained,Ali,Delivered,,0,3.8,2026-07-19,B057
+V112,Magnolia & Co Builders,Client walkthrough,Ali,Delivered,Fix name spelling,0,4.0,2026-07-19,
+V113,Magnolia,Material choices,Ali,Delivered,,0,2.9,,B058
+V114,Magnolia,Kitchen remodel reveal,Ali,Delivered,,1,3.8,2026-07-06,B058
+V115,Magnolia & Co Builders,Owner story,Rita,Delivered,,1,4.4,2026-07-05,B058
+V116,Andre Ochoa,Crew intro,Ali,Delivered,,0,3.6,2026-07-19,B059
+V117,Andres Roofing,Leak warning signs,Ali,Delivered,Calmer music,0,2.9,2026-07-18,B059
+V118,Andre's Roofing LLC,Shingle vs metal,Rita,Delivered,,1,5.3,2026-07-19,B059
+V119,Mike Bennett,Owner story,Ali,Delivered,Add walk-ins welcome,1,4.6,2026-07-18,B060
+V120,Juniper Barbers,Sale promo,Rita,Delivered,Cut stumble,2,5.7,2026-07-14,B060
+V121,Juniper Barbers,Styling tips,Rita,Delivered,,2,4.9,,
+V122,Dr. Tran,Desk posture fix,Rita,Delivered,Remove prices part,1,4.5,2026-07-15,B062
+V123,Meridian Chiropractic,Insurance we take,Ali,Delivered,Brand color purple,0,3.9,,
+V124,Tallgrass - Dr.,What to expect visit one,Rita,Delivered,,2,6.0,2026-07-16,B062
+V125,Lone Star Realty,Staging tips,Rita,Delivered,Brand color navy,1,5.2,2026-07-13,B064
+V126,Lone Star Realty LLC,Market update,Theo,Delivered,,1,5.6,,B064
+V127,Lena Kim,Listing tour: Oak St,Theo,Delivered,,2,6.6,,B064
+V128,Lena Kim,Open house recap,Theo,Delivered,,1,6.4,,B064
+V129,Lakeside Physical Therapy,Meet the team,Ali,Delivered,,1,4.6,2026-07-20,B065
+V130,Lakeside PT,What to expect visit one,Ali,Delivered,,0,3.6,,B065
+V131,Lakeside Physical Therapy,Desk posture fix,Theo,Delivered,,3,8.1,2026-07-15,B065
+V132,Lakeside PT Dallas,Patient story,Rita,Delivered,,0,4.0,2026-07-29,B065
+V133,Highland Gym,Class schedule,Rita,In revision,Remove prices part,2,5.6,2026-07-16,B066
+V134,Omar Patel,Open house promo,Rita,Delivered,,0,4.1,,B066
+V135,Highland Gym,Member story,Theo,Delivered,,0,6.1,2026-07-22,B066
+V136,Park Law,What a consult costs,Rita,Delivered,Brand color orange,0,4.3,,B067
+V137,Park Family Law,Do I need a lawyer?,Theo,Delivered,,0,6.3,2026-08-01,B067
+V138,Park Family Law,Custody myths,Theo,Delivered,,0,5.1,,B067
+V139,Oak Lane,Material choices,Rita,Delivered,Fix name spelling,1,3.8,,B069
+V140,Oak Lane Builders LLC,Permit tips,Theo,Delivered,,3,8.0,,B069
+V141,Oak Lane Builders,Client walkthrough,Ali,Delivered,,2,4.8,2026-07-30,B069
+V142,Oak Lane,Crew day,Theo,Delivered,,1,6.3,2026-07-28,
+V143,Bluebonnet Wealth Partners,Meet the advisor,Rita,Delivered,,3,6.7,,B071
+V144,Bluebonnet Wealth Partners,Why fees matter,Ali,Delivered,Phone number end card,1,4.3,2026-07-30,B071
+V145,Bluebonnet Wealth Partners,Client story,Theo,Delivered,,1,7.2,,B071
+V146,Bluebonnet WP,Estate planning basics,Theo,Delivered,,0,5.4,2026-07-22,B071
+V147,Shah Insurance,Rate review,Ali,Delivered,,1,4.3,2026-07-28,B073
+V148,Shah Insurance Group,Meet the agent,Rita,Delivered,,1,4.5,2026-07-27,B073
+V149,Shah Ins,Claims made easy,Theo,Delivered,,2,7.0,2026-07-30,B073
+V150,Darnell Shah,Client story,Ali,Delivered,Blur client face,1,4.1,2026-07-25,B073
+V151,Fischer,Meet the attorney,Rita,Delivered,,0,3.2,,B074
+V152,Fischer Law Firm,What a consult costs,Theo,Delivered,,1,6.0,,B074
+V153,Fischer Law Firm,Car accident: first 3 steps,Rita,Delivered,Calmer music,0,3.9,2026-07-22,B074
+V154,Fischer Law Firm,Divorce timeline,Theo,Delivered,,1,6.4,2026-07-26,B074
+V155,Willow Bridal Boutique,Bride story,Theo,Delivered,,0,4.7,,B075
+V156,Willow Bridal,Owner story,Theo,Delivered,,1,7.2,,B075
+V157,Grace Nguyen,New arrivals,Rita,Delivered,,1,4.2,,B075
+V158,Dr. Kim Kim,Couples tips,Theo,Delivered,,0,6.3,2026-07-26,B076
+V159,Crown Therapy,Family sessions explained,Theo,Delivered,,3,7.0,,
+V160,Crown Therapy,Meet the therapist,Theo,Delivered,,0,6.3,,B076
+V161,Crown Therapy,Insurance and cost,Ali,Delivered,,0,3.5,2026-07-28,B076
+V162,Canyon Med Spa - Plano,Lip filler myths,Theo,Delivered,,0,5.7,,B077
+V163,Canyon Medspa,Botox before and after,Theo,Delivered,,0,5.7,2026-07-28,B077
+V164,Canyon Medspa,Hydrafacial reveal,Ali,Delivered,,0,3.6,,B077
+V165,Maria Kim DDS,Whitening before and after,Theo,Delivered,,0,5.5,2026-08-05,B078
+V166,Dr Kim,Meet the doctor,Theo,Delivered,,1,6.6,2026-07-29,B078
+V167,Dr Kim,Invisalign myths,Theo,Delivered,,2,6.8,,B078
+V168,Kim Dental,Kids dental tips,Theo,Delivered,,0,5.2,,
+V169,Tallgrass - Glow,What to expect visit one,Theo,Delivered,,2,7.6,2026-08-03,B079
+V170,Glow Pediatrics,Flu shot season,Theo,Delivered,,0,6.1,,B079
+V171,Glow Peds,Meet the team,Ali,Delivered,,0,2.5,,B079
+V172,The Ridgeway Lab,Roast day,Theo,Delivered,,0,6.0,2026-08-07,B080
+V173,Ridgeway Lab,New fall menu,Theo,Delivered,,1,6.7,,
+V174,Ridgeway Lab,Pastry case,Ali,Delivered,Music lower,0,2.6,,
+V175,Parks Auto,Before and after wash,Theo,Delivered,,0,4.5,,B083
+V176,Park's Auto,Interior deep clean,Theo,Delivered,,0,6.2,2026-08-16,B083
+V177,Parks Auto,Headlight restore,Ali,Delivered,,1,4.7,,B083
+V178,Luna Fitness,Class schedule,Theo,Delivered,,3,7.2,2026-08-05,B086
+V179,Luna Fitness,Member story,Ali,Delivered,Captions bigger,2,4.3,2026-08-14,
+V180,Luna,Trainer intro,Ali,Delivered,Fix name spelling,1,4.0,,
+V181,Elevate Med Spa - Plano,Lip filler myths,Theo,Delivered,,1,6.1,,
+V182,Elevate Med Spa - Frisco,Botox before and after,Rita,Delivered,,1,4.8,2026-08-18,B088
+V183,Elevate Med Spa,Laser hair removal,Ali,Delivered,,0,2.6,2026-08-18,B088
+V184,Elevate Medspa,Skin care routine,Rita,Delivered,Use outside shot,0,4.0,2026-08-12,B088
+V185,Sagelab Coffee,Latte art,Theo,Delivered,,2,7.7,2026-08-14,B089
+V186,Sage Lab,Behind the bar,Rita,Delivered,,2,5.1,,B089
+V187,Sage Lab,Happy hour promo,Ali,Delivered,,0,3.4,,B089
+V188,Andre's Roofing LLC,Leak warning signs,Ali,Delivered,Music lower,1,3.9,,B090
+V189,Andre's Roofing,Roof inspection walkthrough,Rita,Delivered,,2,5.5,2026-08-23,B090
+V190,Andre Ochoa,Crew intro,Theo,Delivered,,1,5.9,2026-08-15,B090
+V191,Mike Bennett,Styling tips,Theo,Delivered,,0,6.1,2026-08-13,B093
+V192,Mike Bennett,Price menu,Ali,Delivered,,1,4.1,,B093
+V193,Mike Bennett,Sale promo,Rita,Delivered,,1,4.9,2026-08-20,B093
+V194,Tallgrass - Dr.,Desk posture fix,Rita,Delivered,,0,3.2,2026-08-27,
+V195,Dr. Tran,What to expect visit one,Ali,Delivered,Use outside shot,0,3.9,2026-08-16,B094
+V196,Tallgrass - Dr.,Meet the team,Rita,Delivered,,1,5.2,2026-08-15,
+V197,Park Law,Do I need a lawyer?,Rita,Delivered,,0,3.2,2026-08-23,B095
+V198,Park Family Law PLLC,Wills in 60 seconds,Rita,Delivered,,0,3.6,2026-08-17,B095
+V199,Park Law,What a consult costs,Theo,Delivered,,1,6.3,,
+V200,Highland Athletics,Class schedule,Theo,Delivered,,2,6.7,2026-08-23,
+V201,Highland Athletics,Member story,Theo,Delivered,,2,7.6,,B097
+V202,Highland Athletics,Trainer intro,Theo,Delivered,,0,4.6,2026-08-29,B097
+V203,Quinn Haddad,Gutter guards,Rita,Delivered,,2,5.4,,
+V204,Quinn Haddad,Crew intro,Theo,Delivered,,0,5.5,,B098
+V205,Trinity Roofing,Storm damage tips,Theo,Delivered,,0,6.0,,
+V206,Magnolia Builders LLC,Crew day,Theo,Delivered,,1,5.4,2026-08-21,B099
+V207,Magnolia,Client walkthrough,Rita,Delivered,Brand color orange,1,4.5,,B099
+V208,Magnolia Builders,Kitchen remodel reveal,Ali,Delivered,Cut stumble,1,4.2,2026-08-18,B099
+V209,Magnolia Builders LLC,Project timeline,Ali,Delivered,,0,3.4,2026-08-28,B099
+V210,Fischer Law Firm,What a consult costs,Rita,Delivered,Blur client face,0,4.4,,
+V211,Fischer Law,Divorce timeline,Ali,Delivered,Calmer music,1,4.3,2026-08-26,B100
+V212,Fischer Law,Meet the attorney,Theo,Delivered,,2,7.9,,B100
+V213,Fischer,Slip and fall rights,Ali,Delivered,,0,3.3,2026-08-14,B100
+V214,Lakeside Physical Therapy,Walk-ins welcome,Rita,Delivered,,0,3.5,2026-08-22,B102
+V215,Lakeside PT Dallas,Desk posture fix,Ali,Delivered,Cut first 3 sec,1,4.8,2026-08-20,B102
+V216,Lakeside PT Dallas,Back pain myths,Rita,Delivered,Brand color orange,0,3.7,2026-08-19,B102
+V217,Lakeside PT Dallas,Patient story,Theo,Delivered,,1,7.0,2026-08-19,B102
+V218,Lone Star Realty,Neighborhood guide,Rita,Delivered,,0,3.1,,B103
+V219,Lone Star Realty LLC,Staging tips,Ali,Delivered,Remove prices part,1,3.8,,B103
+V220,Lena Kim,Listing tour: Oak St,Rita,Delivered,Blur client face,0,3.1,,B103
+V221,Lone Star Realty LLC,Sold story,Theo,Delivered,,1,5.2,2026-08-26,B103
+V222,Bluebonnet Wealth,College savings,Theo,Delivered,,0,6.1,,
+V223,Bluebonnet Wealth,Why fees matter,Theo,Delivered,,3,8.3,,B104
+V224,Bluebonnet WP,Meet the advisor,Rita,Delivered,Remove prices part,0,4.4,2026-08-22,B104
+V225,Bluebonnet Wealth Partners,Estate planning basics,Rita,Delivered,Cut first 3 sec,0,3.6,,
+V226,Lonestar Realty Group,Open house recap,Theo,Delivered,,3,9.0,2026-08-27,B105
+V227,Lonestar Realty Group,Staging tips,Rita,Delivered,Phone number end card,1,5.1,2026-09-02,B105
+V228,Lonestar RG,Market update,Ali,Delivered,Cut stumble,1,3.9,,B105
+V229,Lonestar Realty Group,First time buyer tips,Rita,Delivered,,1,4.2,2026-08-23,
+V230,Grace Nguyen,Styling tips,Ali,Delivered,,0,2.7,,B106
+V231,Willow Bridal,Store tour,Theo,Delivered,,0,6.0,,
+V232,Grace Nguyen,Bride story,Rita,Delivered,Cut first 3 sec,1,5.3,2026-08-29,B106
+V233,Ridgewaylab Coffee,Behind the bar,Ali,Delivered,,1,4.3,,
+V234,The Ridgeway Lab,Meet the barista,Theo,Delivered,,0,5.4,2026-09-01,B108
+V235,Ridgeway Lab,Bean origin story,Theo,Delivered,,0,6.1,,B108
+V236,Glow Pediatrics,Back pain myths,Rita,Delivered,,0,3.0,2026-08-28,B109
+V237,Glow Peds,Patient story,Ali,Delivered,,1,4.5,2026-08-29,B109
+V238,Glow Pediatrics,Flu shot season,Rita,Delivered,,0,3.1,2026-08-27,
+V239,Park's Auto,Price menu,Theo,Delivered,,2,7.1,2026-09-03,B110
+V240,Park's Auto Spa,Ceramic coating reveal,Rita,Delivered,,0,3.8,2026-09-12,B110
+V241,Park's Auto Spa,Before and after wash,Rita,Delivered,Cut first 3 sec,0,4.2,,B110
+V242,Canyon Med Spa - Plano,Lip filler myths,Theo,Delivered,,0,5.2,2026-08-30,B112
+V243,Canyon Med Spa,Skin care routine,Rita,Delivered,Add walk-ins welcome,1,5.1,,
+V244,Canyon,Botox before and after,Ali,Delivered,Blur client face,0,3.3,2026-08-31,B112
+V245,Oak Lane,Client walkthrough,Ali,Delivered,,0,3.8,,B113
+V246,Oak Lane,Kitchen remodel reveal,Ali,Delivered,,2,4.7,2026-09-01,
+V247,Oak Lane Builders,Crew day,Ali,Delivered,Calmer music,0,4.0,2026-09-05,B113
+V248,Oak Lane & Co Builders,Permit tips,Theo,Delivered,,0,4.7,2026-09-15,B113
+V249,Crown Family Therapy,Insurance and cost,Theo,Delivered,,3,6.5,2026-09-08,B114
+V250,Dr. Kim Kim,Family sessions explained,Rita,Delivered,,0,4.4,2026-09-09,B114
+V251,Crown Therapy,Meet the therapist,Theo,Delivered,,2,7.8,,B114
+V252,Crown Family Therapy,Office tour,Theo,Delivered,,2,7.0,2026-09-12,B114
+V253,Park Dental PLLC,Kids dental tips,Theo,Delivered,,0,4.6,2026-09-04,B115
+V254,Dr. Renee Park,Whitening before and after,Ali,Delivered,,0,2.6,,
+V255,Renee Park DDS,First visit tour,Ali,Delivered,,0,2.7,,
+V256,Park Dental PLLC,Meet the doctor,Theo,Delivered,,0,5.5,,
+V257,Andre's Roofing LLC,Gutter guards,Rita,Delivered,,0,4.4,2026-09-12,B117
+V258,Andres Roofing,Shingle vs metal,Rita,Delivered,Cut stumble,0,3.8,,
+V259,Andre's Roofing LLC,Crew intro,Ali,Delivered,Add walk-ins welcome,0,2.7,2026-09-06,B117
+V260,Luna Fitness,Member story,Ali,Delivered,,0,3.9,2026-09-02,B118
+V261,Angela Delgado,Nutrition tip,Ali,Delivered,,1,4.0,2026-09-02,B118
+V262,Luna Fitness,Open house promo,Ali,Delivered,,0,3.5,2026-09-15,
+V263,Sagelab Coffee,Bean origin story,Ali,Delivered,,0,2.7,,
+V264,Sagelab Coffee,New fall menu,Rita,Delivered,Brand color forest green,0,4.0,,B120
+V265,Sagelab Coffee,Happy hour promo,Rita,Delivered,,0,4.0,,B120
+V266,Hale Auto Detailing,Paint correction,Theo,Delivered,,0,5.9,2026-09-17,
+V267,Hale Auto Detailing,Headlight restore,Ali,Delivered,Music lower,0,3.4,,B121
+V268,Hale Auto,Before and after wash,Theo,Delivered,,0,4.8,2026-09-09,B121
+V269,Hale Auto,Tesla detail,Ali,Delivered,,0,3.1,,B121
+V270,TLC Homecare,Meet the caregivers,Theo,Delivered,,2,7.1,2026-09-12,B123
+V271,TLC Home Care,Walk-ins welcome,Theo,Delivered,,3,7.8,,B123
+V272,TLC Homecare,Flu shot season,Theo,Delivered,,0,6.2,2026-09-09,B123
+V273,Sofia Daniels,What to expect visit one,Theo,Delivered,,1,7.0,2026-09-19,B123
+V274,Kim Dental PLLC,First visit tour,Ali,Delivered,,2,5.2,,B124
+V275,Maria Kim DDS,Invisalign myths,Rita,Delivered,,1,4.5,2026-09-11,B124
+V276,Dr. Maria Kim,Meet the doctor,Ali,Delivered,,1,3.6,2026-09-14,B124
+V277,Maria Kim DDS,Implants explained,Rita,Delivered,,0,4.2,2026-09-18,B124
+V278,Juniper Barbers,Fresh fade transformation,Kai,Delivered,,1,4.0,2026-09-19,B126
+V279,Mike Bennett,Price menu,Theo,Delivered,,2,6.5,2026-09-23,
+V280,Juniper Barbers,Styling tips,Theo,Delivered,,1,6.1,2026-09-19,B126
+V281,Park Law,Slip and fall rights,Rita,Delivered,Cut stumble,1,4.1,2026-09-16,B127
+V282,Park Family Law,Custody myths,Kai,Delivered,,1,4.6,2026-09-27,B127
+V283,Maria Park,What a consult costs,Rita,Delivered,,0,4.2,2026-09-19,B127
+V284,Elevate Med Spa - Frisco,Hydrafacial reveal,Kai,Delivered,Brand color pink,0,3.0,2026-09-30,B129
+V285,Elevate Med Spa,Fall facial promo,Ali,Delivered,Music lower,1,3.5,2026-09-25,B129
+V286,Elevate Med Spa - Frisco,Meet the injector,Rita,Delivered,Calmer music,1,4.1,,B129
+V287,Elevate Medspa,Botox before and after,Ali,Delivered,,1,4.5,2026-09-27,B129
+V288,Lakeside PT Dallas,What to expect visit one,Ali,Delivered,,0,2.5,,
+V289,Lakeside PT Dallas,Back pain myths,Theo,Delivered,,0,5.5,,B130
+V290,Lakeside PT,Patient story,Kai,Delivered,,1,3.7,2026-09-30,B130
+V291,Lakeside Physical Therapy,Insurance we take,Ali,Delivered,,2,5.0,,
+V292,Bluebonnet Wealth Partners,Estate planning basics,Theo,Delivered,,2,6.4,2026-09-19,B131
+V293,Bluebonnet Wealth Partners,Retirement myths,Ali,Delivered,Cut first 3 sec,2,4.4,2026-09-19,B131
+V294,Bluebonnet WP,Why fees matter,Ali,Delivered,,1,3.5,,B131
+V295,Bluebonnet Wealth Partners,Meet the advisor,Kai,Delivered,Captions bigger,0,4.1,2026-09-25,
+V296,Highland Athletics,Open house promo,Rita,Delivered,,0,4.1,2026-10-01,B132
+V297,Highland Athletics,Nutrition tip,Theo,Delivered,,2,6.7,2026-09-26,B132
+V298,Highland,Trainer intro,Theo,Delivered,,2,7.8,2026-09-20,
+V299,Fischer,Do I need a lawyer?,Theo,Delivered,,3,8.0,2026-09-29,
+V300,Fischer Law,Custody myths,Ali,Delivered,Phone number end card,0,2.7,,
+V301,Fischer Law Firm PLLC,Divorce timeline,Theo,Delivered,,1,5.7,2026-09-27,B135
+V302,Fischer Law Firm PLLC,Slip and fall rights,Kai,Delivered,,0,2.7,2026-09-22,
+V303,Dr. Tran,Patient story,Rita,Delivered,,3,7.0,,B136
+V304,Meridian Chiropractic,Back pain myths,Theo,Delivered,,1,5.6,,
+V305,Dr. Tran,Insurance we take,Kai,Delivered,,0,3.3,,
+V306,Trinity Roofing,Shingle vs metal,Kai,Delivered,,1,4.7,2026-09-29,B137
+V307,Quinn Haddad,Leak warning signs,Theo,Delivered,,0,4.9,,B137
+V308,Trinity Roofing,Roof inspection walkthrough,Ali,Delivered,,1,4.3,,B137
+V309,Willow Bridal,Styling tips,Rita,Delivered,Calmer music,2,5.3,,B138
+V310,Willow Bridal Boutique,New arrivals,Rita,Delivered,,0,4.0,,B138
+V311,Willow Bridal Boutique,Bride story,Ali,Delivered,,1,3.8,,B138
+V312,Luna Fitness,Form check squat,Rita,Delivered,,0,3.9,,B139
+V313,Luna Fit,Trainer intro,Ali,Delivered,Calmer music,0,3.7,,B139
+V314,Angela Delgado,Class schedule,Ali,Delivered,Captions bigger,0,2.8,,B139
+V315,Park's Auto Spa,Paint correction,Kai,In review,Remove prices part,1,4.6,,B140
+V316,Parks Auto,Interior deep clean,Kai,In review,Use outside shot,0,3.3,,B140
+V317,Parks Auto,Tesla detail,Ali,In review,,2,4.2,,B140
+V318,Lena Kim,Neighborhood guide,Theo,In review,,2,6.6,,B141
+V319,Lone Star Realty LLC,Listing tour: Oak St,Ali,In review,,1,3.8,,B141
+V320,Lena Kim,Meet the agent,Theo,In review,,1,7.3,,
+V321,Lone Star Realty LLC,Market update,Theo,In review,,0,5.5,,B141
+V322,Ridgeway Lab,Happy hour promo,Theo,In review,,1,7.1,,B143
+V323,Ridgeway Lab,Behind the bar,Theo,In review,,0,5.0,,
+V324,The Ridgeway Lab,Bean origin story,Ali,In review,,0,3.7,,B143
+V325,Tallgrass - Glow,Desk posture fix,Rita,In review,,0,3.8,,B145
+V326,Glow Pediatrics,What to expect visit one,Kai,In review,Calmer music,1,4.6,,B145
+V327,Glow Peds,Flu shot season,Kai,In review,Add walk-ins welcome,0,2.8,,
+V328,Lonestar RG,Open house recap,Kai,In review,,2,5.1,,B146
+V329,Quinn Hassan,Staging tips,Rita,In review,,0,3.1,,B146
+V330,Quinn Hassan,Neighborhood guide,Theo,In review,,1,6.9,,B146
+V331,Quinn Hassan,Market update,Kai,In review,Fix name spelling,1,4.6,,B146
+V332,Andres Roofing,Free estimate promo,Theo,In edit,,0,5.6,,B149
+V333,Andre's Roofing,Crew intro,Theo,In edit,,1,6.7,,B149
+V334,Andres Roofing,Storm damage tips,Ali,In edit,,0,3.2,,B149
+V335,Canyon Med Spa - Frisco,Hydrafacial reveal,Ali,In edit,,0,3.8,,B150
+V336,Canyon Med Spa - Frisco,Laser hair removal,Theo,In edit,,0,4.8,,B150
+V337,Canyon Medspa,Fall facial promo,Rita,In edit,,1,3.7,,B150
+V338,Oak Lane & Co Builders,Permit tips,Theo,In edit,,1,6.0,,B151
+V339,Oak Lane,Owner story,Theo,In edit,,2,6.6,,
+V340,Oak Lane & Co Builders,Project timeline,Theo,In edit,,2,7.2,,B151
+V341,Oak Lane,Material choices,Theo,In edit,,2,7.5,,B151
+V342,The Sage Lab,Happy hour promo,Theo,In edit,,1,6.9,,B152
+V343,Sage Lab,Meet the barista,Theo,In edit,,0,4.7,,B152
+V344,Sage Lab,Behind the bar,Rita,In edit,,0,3.6,,
+V345,Magnolia,Crew day,Rita,In edit,,2,5.6,,B154
+V346,Magnolia & Co Builders,Owner story,Theo,In edit,,0,4.6,,B154
+V347,Magnolia Builders LLC,Material choices,Ali,In edit,,0,3.6,,B154
+V348,Magnolia Builders LLC,Client walkthrough,Rita,In edit,,0,4.0,,B154
+V349,Lone Star Realty,Listing tour: Oak St,Rita,In edit,,0,3.8,,
+V350,Lena Kim,Sold story,Rita,In edit,,1,5.3,,
+V351,Lone Star Realty,Neighborhood guide,Rita,In edit,,0,3.9,,B155
+V352,Lone Star Realty LLC,Meet the agent,Theo,In edit,,0,4.8,,
+</script>
+<script id="raw-messages" type="text/plain">
+[2026-04-17 20:00] WHATSAPP from +1 214-555-0183 (Renee): Please take out the part in why floss matters where I talk about prices. Prices are changing.
+[2026-04-27 19:24] WHATSAPP from +1 817-555-0146 (Greg): Can you cut the first 3 seconds of material choices? It starts slow.
+[2026-04-28 18:56] EMAIL to media@keystonedfw.org: Happy to give Keystone 10% off studio sessions from May on. Thanks for what you do for the community.
+[2026-05-03 19:02] WHATSAPP from +1 469-555-0166 (Kevin): Can you remove the bit where I stumble on my words in meet the advisor?
+[2026-05-05 15:43] EMAIL from sofia@elevatemedspa.com: For fall facial promo use the other shot, the one outside, not inside.
+[2026-05-06 13:20] INSTAGRAM DM from billing@acct-dept.co: Invoice attached. Please pay immediately. (invoice.zip)
+[2026-05-11 13:09] WHATSAPP from +1 214-555-0183 (Renee): My friend Dr. Maria Kim at Kim Dental wants videos too. I gave her your number!
+[2026-05-15 21:46] WHATSAPP from +1 817-555-0146 (Greg): Do we need to bring anything for the shoot?
+[2026-05-16 18:39] EMAIL from bbecker@lakesideptdallas.com: On the insurance we take video, use our brand color navy, not the one you used.
+[2026-05-18 12:30] WHATSAPP from +1 817-555-0118 (Brooke): For what to expect visit one use the other shot, the one outside, not inside.
+[2026-05-19 18:20] WHATSAPP from +1 469-555-0166 (Kevin): The music on client story is too loud, I can't hear myself.
+[2026-05-20 20:17] WHATSAPP from +1 469-555-0104 (Angela): On class schedule our name is spelled wrong in the caption.
+[2026-05-20 21:23] EMAIL from bbecker@lakesideptdallas.com: Back pain myths: add the line 'walk-ins welcome' at the end please.
+[2026-05-23 15:02] EMAIL from andre@andresroofingtx.com: Add our phone number at the end of free estimate promo.
+[2026-05-23 16:32] EMAIL from info@fischerlaw.com: Add our phone number at the end of custody myths.
+[2026-05-26 16:02] WHATSAPP from +1 214-555-0162 (Grace): On the new arrivals video, use our brand color burgundy, not the one you used.
+[2026-05-28 09:09] WHATSAPP from +1 972-555-0176 (Mike): Thanks team, great session.
+[2026-05-30 16:44] WHATSAPP from +1 817-555-0146 (Greg): Add our phone number at the end of the material choices video.
+[2026-06-01 12:23] WHATSAPP from +1 469-555-0170 (Leah): Please blur the face of the client in lip filler myths, she didn't sign the release.
+[2026-06-03 19:05] EMAIL from darnell@shahinsures.com: Can you remove the bit where I stumble on my words in claims made easy?
+[2026-06-04 08:57] WHATSAPP from +1 817-555-0146 (Greg): Please make the captions bigger on the permit tips video, they're hard to read on my phone.
+[2026-06-04 20:19] WHATSAPP from +1 469-555-0170 (Leah): Can you cut the first 3 seconds of the fall facial promo video? It starts slow.
+[2026-06-05 14:29] EMAIL from billing@acct-dept.co: We sell 10,000 real followers for $49.
+[2026-06-05 17:22] EMAIL from renee@parkdental.com: Best content team we've worked with. New patients mention the videos.
+[2026-06-06 15:34] WHATSAPP from +1 214-555-0162 (Grace): Sales went up after the reels. You can use this as a review!
+[2026-06-07 21:29] WHATSAPP from +1 972-555-0136 (Lena): Can the first time buyer tips video have a calmer song? This one feels too hype for us.
+[2026-06-08 16:34] WHATSAPP from +1 972-555-0136 (Lena): Please make the captions bigger on neighborhood guide, they're hard to read on my phone.
+[2026-06-08 20:21] EMAIL from tanya@tallgrassmktg.com: Hi, Tanya from Tallgrass Digital. Please bill us (Tallgrass) for Glow Pediatrics and Meridian Chiropractic. We pay monthly.
+[2026-06-09 17:08] WHATSAPP from +1 214-555-0162 (Grace): Running 10 min late!
+[2026-06-10 11:01] WHATSAPP from +1 817-555-0160 (Maria): Please take out the part in the first visit tour video where I talk about prices. Prices are changing.
+[2026-06-10 21:29] EMAIL from hello@kimdental.com: Please take out the part in implants explained where I talk about prices. Prices are changing.
+[2026-06-13 15:49] WHATSAPP from +1 817-555-0118 (Brooke): Add our phone number at the end of insurance we take.
+[2026-06-18 15:30] WHATSAPP from +1 817-555-0159 (Andre): Three new cases came from your videos this month. Thank you.
+[2026-06-18 18:21] WHATSAPP from +1 214-555-0183 (Renee): Is parking in the back ok?
+[2026-06-18 19:32] EMAIL from bbecker@lakesideptdallas.com: Can you remove the bit where I stumble on my words in the desk posture fix video?
+[2026-06-20 18:40] EMAIL from angela@lunafit.co: 30-day challenge: add the line 'walk-ins welcome' at the end please.
+[2026-06-20 19:43] EMAIL from krusso@glowpeds.com: Please make the captions bigger on the desk posture fix video, they're hard to read on my phone.
+[2026-06-21 08:45] EMAIL from sofia@elevatemedspa.com: Please blur the face of the client in fall facial promo, she didn't sign the release.
+[2026-06-22 08:47] EMAIL from kzamora@bluebonnetwp.com: Can you cut the first 3 seconds of the estate planning basics video? It starts slow.
+[2026-06-22 10:29] WHATSAPP from +1 469-555-0178 (Darnell): Add our phone number at the end of the one we shot last week.
+[2026-06-23 12:51] INSTAGRAM DM from @insta.support.team: Your Instagram account will be suspended. Verify here: bit.ly/insta-verify-now
+[2026-06-24 09:40] WHATSAPP from +1 817-555-0101 (Jared): Is parking in the back ok?
+[2026-06-24 21:50] WHATSAPP from +1 214-555-0110 (Darnell): See you tomorrow.
+[2026-06-25 08:14] EMAIL from angela@lunafit.co: On the class schedule video our name is spelled wrong in the caption.
+[2026-06-25 12:09] EMAIL from promo@fastfollowers.io: Partnership offer: let us run your ads for free for 30 days.
+[2026-06-28 11:21] EMAIL from grace@willowbridal.com: Bride story looks great. Approved! Post it.
+[2026-06-28 17:53] EMAIL from angela@lunafit.co: Can you cut the first 3 seconds of trainer intro? It starts slow.
+[2026-06-30 17:39] EMAIL from kzamora@bluebonnetwp.com: Please blur the face of the client in college savings, she didn't sign the release.
+[2026-07-02 09:12] EMAIL from grace@willowbridal.com: Actually we changed our mind on bride story. Can we get a different song and a new intro? Sorry!
+[2026-07-02 13:36] WHATSAPP from +1 469-555-0166 (Kevin): Please make the captions bigger on meet the advisor, they're hard to read on my phone.
+[2026-07-03 13:16] EMAIL from carmen@thesagelab.coffee: Tanya at Ridgeway Lab loved our reels. She'll reach out.
+[2026-07-03 15:43] EMAIL from mike@juniperbarbers.com: Can you remove the bit where I stumble on my words in sale promo?
+[2026-07-04 21:05] EMAIL from renee@parkdental.com: The why floss matters video: add the line 'walk-ins welcome' at the end please.
+[2026-07-05 12:54] WHATSAPP from +1 817-555-0153 (Andre): Can the leak warning signs video have a calmer song? This one feels too hype for us.
+[2026-07-05 21:45] WHATSAPP from +1 214-555-0162 (Grace): For owner story use the other shot, the one outside, not inside.
+[2026-07-05 21:49] WHATSAPP from +1 972-555-0183 (Paula): On client walkthrough our name is spelled wrong in the caption.
+[2026-07-07 10:35] WHATSAPP from +1 817-555-0101 (Jared): Running 10 min late!
+[2026-07-08 17:38] VOICE NOTE from +1 469-555-0187 (Alana), 1:28. Transcript: "On what to expect visit one our name is spelled wrong in the caption."
+[2026-07-08 19:07] EMAIL from drtran@meridianchiro.com: Please take out the part in desk posture fix where I talk about prices. Prices are changing.
+[2026-07-09 15:18] EMAIL from lena@lonestarrealty.com: On the staging tips video, use our brand color navy, not the one you used.
+[2026-07-10 12:12] EMAIL from mike@juniperbarbers.com: Owner story: add the line 'walk-ins welcome' at the end please.
+[2026-07-11 19:06] EMAIL from drtran@meridianchiro.com: On insurance we take, use our brand color purple, not the one you used.
+[2026-07-11 21:58] EMAIL from yasmin@mindandmoney.fm: Cash is tight this month. Can I pay the July sessions together at the start of August?
+[2026-07-13 12:33] EMAIL from omar@highlandgym.co: Please take out the part in class schedule where I talk about prices. Prices are changing.
+[2026-07-14 17:47] WHATSAPP from +1 972-555-0176 (Mike): See you tomorrow.
+[2026-07-14 18:17] WHATSAPP from +1 214-555-0124 (Maria): On what a consult costs, use our brand color orange, not the one you used.
+[2026-07-14 20:38] EMAIL from drtran@meridianchiro.com: Did anyone see my message about what to expect visit one? It's not fixed.
+[2026-07-16 10:24] EMAIL from omar@highlandgym.co: Class schedule looks great. Approved! Post it.
+[2026-07-16 15:55] EMAIL from darnell@shahinsures.com: Please blur the face of the client in client story, she didn't sign the release.
+[2026-07-16 18:08] WHATSAPP from +1 817-555-0146 (Greg): Can you cut the first 3 seconds of permit tips? It starts slow.
+[2026-07-18 18:29] VOICE NOTE from +1 469-555-0178 (Darnell), 0:17. Transcript: "On rate review our name is spelled wrong in the caption."
+[2026-07-19 10:46] EMAIL from darnell@shahinsures.com: Darnell here. We'll pause after this month. Too many rounds of fixes, and my notes keep getting missed. Nothing personal.
+[2026-07-20 20:43] EMAIL from greg@oaklane.build: On material choices our name is spelled wrong in the caption.
+[2026-07-21 08:53] EMAIL from omar@highlandgym.co: Actually we changed our mind on class schedule. Can we get a different song and a new intro? Sorry!
+[2026-07-21 12:03] WHATSAPP from +1 817-555-0118 (Brooke): Please make the captions bigger on the desk posture fix video, they're hard to read on my phone.
+[2026-07-21 12:11] WHATSAPP from +1 817-555-0160 (Maria): Patients keep telling me they saw us on Instagram. Love it.
+[2026-07-21 14:04] VOICE NOTE from +1 972-555-0136 (Lena), 1:35. Transcript: "For listing tour: oak st use the other shot, the one outside, not inside."
+[2026-07-21 21:19] EMAIL from darnell@shahinsures.com: On the one we shot last week our name is spelled wrong in the caption.
+[2026-07-22 20:26] WHATSAPP from +1 469-555-0104 (Angela): Do we need to bring anything for the shoot?
+[2026-07-23 15:41] EMAIL from kzamora@bluebonnetwp.com: Add our phone number at the end of why fees matter.
+[2026-07-24 15:26] EMAIL from tanya@theridgewaylab.coffee: The music on pastry case is too loud, I can't hear myself.
+[2026-07-24 18:24] WHATSAPP from +1 214-555-0102 (Omar): See you tomorrow.
+[2026-07-25 15:46] EMAIL from info@fischerlaw.com: Can the car accident: first 3 steps video have a calmer song? This one feels too hype for us.
+[2026-07-25 17:53] EMAIL from kkim@crownfamilytherapy.com: Can the family sessions explained video have a calmer song? This one feels too hype for us.
+[2026-07-26 08:51] WHATSAPP from +1 469-555-0166 (Kevin): For client story use the other shot, the one outside, not inside.
+[2026-07-26 10:03] WHATSAPP from +1 469-555-0166 (Kevin): Can the one we shot last week have a calmer song? This one feels too hype for us.
+[2026-07-27 16:04] WHATSAPP from +1 972-555-0136 (Lena): Did anyone see my message about listing tour: oak st? It's not fixed.
+[2026-07-28 21:08] WHATSAPP from +1 817-555-0146 (Greg): Did anyone see my message about permit tips? It's not fixed.
+[2026-07-29 13:15] WHATSAPP from +1 214-555-0162 (Grace): On the one we shot last week, use our brand color pink, not the one you used.
+[2026-07-30 17:13] EMAIL from kkim@crownfamilytherapy.com: The videos turned out great. Can we do this every month? What would that cost?
+[2026-08-01 17:28] EMAIL from omar@highlandgym.co: Big news: Highland Gym is now Highland Athletics! New email is omar@highlandathletics.com.
+[2026-08-01 20:47] EMAIL from angela@lunafit.co: Please make the captions bigger on the member story video, they're hard to read on my phone.
+[2026-08-03 09:20] EMAIL from krusso@glowpeds.com: Please blur the face of the client in what to expect visit one, she didn't sign the release.
+[2026-08-04 12:51] EMAIL from kzamora@bluebonnetwp.com: This is the second time I ask. client story is still wrong.
+[2026-08-04 20:20] EMAIL from sofia@elevatemedspa.com: For skin care routine use the other shot, the one outside, not inside.
+[2026-08-04 23:53] EMAIL from kkim@crownfamilytherapy.com: This is the second time I ask. family sessions explained is still wrong.
+[2026-08-07 09:12] WHATSAPP from +1 469-555-0104 (Angela): On the trainer intro video our name is spelled wrong in the caption.
+[2026-08-11 12:20] EMAIL from omar@highlandathletics.com: Can class schedule have a calmer song? This one feels too hype for us.
+[2026-08-11 18:24] WHATSAPP from +1 972-555-0183 (Paula): Can you remove the bit where I stumble on my words in kitchen remodel reveal?
+[2026-08-12 18:18] WHATSAPP from +1 817-555-0159 (Andre): Please blur the face of the client in what a consult costs, she didn't sign the release.
+[2026-08-13 20:47] EMAIL from drtran@meridianchiro.com: For what to expect visit one use the other shot, the one outside, not inside.
+[2026-08-14 10:09] WHATSAPP from +1 469-555-0104 (Angela): The music on class schedule is too loud, I can't hear myself.
+[2026-08-14 16:55] WHATSAPP from +1 469-555-0166 (Kevin): Thanks team, great session.
+[2026-08-14 20:40] EMAIL from info@fischerlaw.com: Can the divorce timeline video have a calmer song? This one feels too hype for us.
+[2026-08-14 21:03] WHATSAPP from +1 214-555-0102 (Omar): Please blur the face of the client in the member story video, she didn't sign the release.
+[2026-08-16 10:03] EMAIL from andre@andresroofingtx.com: The music on the leak warning signs video is too loud, I can't hear myself.
+[2026-08-17 15:24] WHATSAPP from +1 469-555-0149 (Quinn): Can you remove the bit where I stumble on my words in the market update video?
+[2026-08-19 09:02] EMAIL from jared@metroplexmakers.fm: Do you guys also cut short clips from our episodes? We'd pay for that. Let me know.
+[2026-08-19 21:26] WHATSAPP from +1 214-555-0160 (Jared): Do we need to bring anything for the shoot?
+[2026-08-20 08:15] WHATSAPP from +1 972-555-0183 (Paula): On client walkthrough, use our brand color orange, not the one you used.
+[2026-08-20 17:30] EMAIL from mpark@parkfamilylaw.com: Please make the captions bigger on the what a consult costs video, they're hard to read on my phone.
+[2026-08-20 17:30] EMAIL from quinn@lonestarrg.com: Please blur the face of the client in open house recap, she didn't sign the release.
+[2026-08-21 08:12] WHATSAPP from +1 817-555-0118 (Brooke): Can you cut the first 3 seconds of the one we shot last week? It starts slow.
+[2026-08-21 11:03] WHATSAPP from +1 972-555-0136 (Lena): Please blur the face of the client in the listing tour: oak st video, she didn't sign the release.
+[2026-08-22 13:27] EMAIL from lena@lonestarrealty.com: Please make the captions bigger on the one we shot last week, they're hard to read on my phone.
+[2026-08-22 20:32] WHATSAPP from +1 469-555-0166 (Kevin): Can you cut the first 3 seconds of the estate planning basics video? It starts slow.
+[2026-08-23 08:09] WHATSAPP from +1 817-555-0159 (Andre): The meet the attorney video: add the line 'walk-ins welcome' at the end please.
+[2026-08-23 13:36] EMAIL from lena@lonestarrealty.com: Please take out the part in the staging tips video where I talk about prices. Prices are changing.
+[2026-08-23 16:29] WHATSAPP from +1 214-555-0162 (Grace): Can you cut the first 3 seconds of bride story? It starts slow.
+[2026-08-23 17:33] WHATSAPP from +1 214-555-0160 (Jared): Can you cut the first 3 seconds of before and after wash? It starts slow.
+[2026-08-24 08:47] WHATSAPP from +1 469-555-0149 (Quinn): Add our phone number at the end of staging tips.
+[2026-08-24 10:47] INSTAGRAM DM from @haleautodetailingtx: Hey I saw your reels for a roofing company. How much for a reels pack for my detail shop?
+[2026-08-24 15:15] INSTAGRAM DM to @haleautodetailingtx: Reels pack is $900 for 3 reels. Here is the booking link.
+[2026-08-24 21:51] WHATSAPP from +1 817-555-0118 (Brooke): On the back pain myths video, use our brand color orange, not the one you used.
+[2026-08-25 12:20] EMAIL from omar@highlandathletics.com: Did anyone see my message about class schedule? It's not fixed.
+[2026-08-25 17:57] EMAIL from kzamora@bluebonnetwp.com: Please make the captions bigger on why fees matter, they're hard to read on my phone.
+[2026-08-28 21:30] EMAIL from quinn@lonestarrg.com: Did anyone see my message about open house recap? It's not fixed.
+[2026-08-29 00:03] EMAIL from omar@highlandathletics.com: This is the second time I ask. member story is still wrong.
+[2026-08-29 15:06] EMAIL from leah@canyonmedspa.com: Please blur the face of the client in the botox before and after video, she didn't sign the release.
+[2026-08-29 20:07] WHATSAPP from +1 469-555-0166 (Kevin): Please take out the part in the one we shot last week where I talk about prices. Prices are changing.
+[2026-08-30 19:27] EMAIL from lena@lonestarrealty.com: Still not fixed on sold story. A little frustrated honestly.
+[2026-08-31 15:15] EMAIL from andre@andresroofingtx.com: Can you remove the bit where I stumble on my words in shingle vs metal?
+[2026-09-02 00:30] EMAIL from mpark@parkfamilylaw.com: Did anyone see my message about what a consult costs? It's not fixed.
+[2026-09-02 10:32] VOICE NOTE from +1 817-555-0118 (Brooke), 1:24. Transcript: "Brooke here. In the videos please say Lakeside Physical Therapy, the full name, not just Lakeside PT. Compliance cares about this."
+[2026-09-03 08:35] WHATSAPP from +1 469-555-0187 (Alana): Thanks team, great session.
+[2026-09-04 19:53] WHATSAPP from +1 469-555-0133 (Kim): Please make the captions bigger on insurance and cost, they're hard to read on my phone.
+[2026-09-05 11:18] WHATSAPP from +1 817-555-0153 (Andre): Crew intro: add the line 'walk-ins welcome' at the end please.
+[2026-09-05 15:31] WHATSAPP from +1 817-555-0146 (Greg): Can crew day have a calmer song? This one feels too hype for us.
+[2026-09-06 11:02] EMAIL from leah@canyonmedspa.com: Skin care routine: add the line 'walk-ins welcome' at the end please.
+[2026-09-06 20:31] WEBSITE FORM from yasmin.bennett.mail@gmail.com (Yasmin Bennett): Do you have a package where you cut short clips from my episodes? How much would that be?
+[2026-09-07 08:15] EMAIL from renee@parkdental.com: Quick update, our new office number is 214-555-0185. Please use this one from now on.
+[2026-09-08 19:42] EMAIL from bbecker@lakesideptdallas.com: The videos say "Lakeside PT" again. I asked for the full name. Not happy.
+[2026-09-08 19:57] EMAIL from kzamora@bluebonnetwp.com: This is the second time I ask. why fees matter is still wrong.
+[2026-09-09 17:00] EMAIL from sofia@tlchomecare.com: The music on walk-ins welcome is too loud, I can't hear myself.
+[2026-09-09 20:01] WHATSAPP from +1 972-555-0166 (Carmen): On new fall menu, use our brand color forest green, not the one you used.
+[2026-09-10 18:08] EMAIL from quinn@lonestarrg.com: Got the videos, thanks. Accounting will handle the invoice.
+[2026-09-11 10:38] WHATSAPP from +1 214-555-0124 (Maria): Running 10 min late!
+[2026-09-11 11:56] WHATSAPP from +1 817-555-0159 (Andre): My cousin Alan runs Fischer Tire & Auto in Garland, he needs videos. His number is 214-555-0161. Call him!
+[2026-09-11 19:52] EMAIL from carlos.hale.detail@gmail.com: The music on the headlight restore video is too loud, I can't hear myself.
+[2026-09-12 20:53] WHATSAPP from +1 469-555-0133 (Kim): Still not fixed on insurance and cost. A little frustrated honestly.
+[2026-09-12 21:47] EMAIL from mpark@parkfamilylaw.com: Can you remove the bit where I stumble on my words in slip and fall rights?
+[2026-09-18 18:00] EMAIL from sofia@tlchomecare.com: Still not fixed on walk-ins welcome. A little frustrated honestly.
+[2026-09-19 14:32] EMAIL from mike@juniperbarbers.com: Can price menu have a calmer song? This one feels too hype for us.
+[2026-09-19 21:08] INSTAGRAM DM from @fischerlawfirmtx: Can you remove the bit where I stumble on my words in do i need a lawyer??
+[2026-09-20 14:26] EMAIL from promo@fastfollowers.io: Hi! We help businesses rank #1 on Google. Reply YES for a free audit.
+[2026-09-21 10:11] EMAIL from sofia@tlchomecare.com: We'll pay once the videos are posted. Can you send them?
+[2026-09-21 17:33] WHATSAPP from +1 972-555-0133 (Sofia): Thanks team, great session.
+[2026-09-22 14:40] WHATSAPP from +1 469-555-0166 (Kevin): Can you cut the first 3 seconds of retirement myths? It starts slow.
+[2026-09-23 09:48] WHATSAPP from +1 972-555-0136 (Lena): We have to cancel today's shoot, family emergency. Can we move it? We already paid.
+[2026-09-23 13:40] EMAIL from sofia@elevatemedspa.com: On hydrafacial reveal, use our brand color pink, not the one you used.
+[2026-09-23 14:51] WHATSAPP from +1 972-555-0150 (Sofia): The music on fall facial promo is too loud, I can't hear myself.
+[2026-09-24 20:24] EMAIL from angela@lunafit.co: Please make the captions bigger on class schedule, they're hard to read on my phone.
+[2026-09-25 08:54] WHATSAPP from +1 469-555-0166 (Kevin): Can estate planning basics have a calmer song? This one feels too hype for us.
+[2026-09-25 18:19] EMAIL from omar@highlandathletics.com: On the trainer intro video our name is spelled wrong in the caption.
+[2026-09-25 20:41] WHATSAPP from +1 972-555-0150 (Sofia): Can the meet the injector video have a calmer song? This one feels too hype for us.
+[2026-09-26 14:50] EMAIL from info@fischerlaw.com: Add our phone number at the end of the custody myths video.
+[2026-09-27 14:55] WHATSAPP from +1 214-555-0102 (Omar): Please take out the part in nutrition tip where I talk about prices. Prices are changing.
+[2026-09-27 21:22] WHATSAPP from +1 817-555-0159 (Andre): Please take out the part in the divorce timeline video where I talk about prices. Prices are changing.
+[2026-09-28 11:47] EMAIL from kzamora@bluebonnetwp.com: Please make the captions bigger on meet the advisor, they're hard to read on my phone.
+[2026-09-28 18:00] WHATSAPP from +1 469-555-0187 (Alana): Patient story: add the line 'walk-ins welcome' at the end please.
+[2026-09-29 08:24] WEBSITE FORM from brooke@lakesideptdallas.com (Brooke Becker, Lakeside Physical Therapy): We would like to talk about our contract and whether we continue.
+[2026-09-29 09:18] WHATSAPP from +1 214-555-0160 (Jared): Please take out the part in paint correction where I talk about prices. Prices are changing.
+[2026-09-29 21:07] EMAIL from quinn@lonestarrg.com: Can the neighborhood guide video have a calmer song? This one feels too hype for us.
+[2026-09-30 17:41] WHATSAPP from +1 469-555-0149 (Quinn): On market update our name is spelled wrong in the caption.
+[2026-10-02 14:52] EMAIL from lena@lonestarrealty.com: Can you cut the first 3 seconds of neighborhood guide? It starts slow.
+[2026-10-03 09:16] WHATSAPP from +1 214-555-0162 (Grace): Can the styling tips video have a calmer song? This one feels too hype for us.
+[2026-10-03 14:55] EMAIL from omar@highlandathletics.com: Nutrition tip still has the same problem. I already told you about this.
+[2026-10-03 16:52] EMAIL from brooke@lakesideptdallas.com: Following up. We need to talk about the contract this week.
+[2026-10-04 15:04] WHATSAPP from +1 214-555-0160 (Jared): For interior deep clean use the other shot, the one outside, not inside.
+[2026-10-04 16:24] EMAIL from krusso@glowpeds.com: The one we shot last week: add the line 'walk-ins welcome' at the end please.
+[2026-10-05 09:52] WHATSAPP from +1 469-555-0104 (Angela): Can trainer intro have a calmer song? This one feels too hype for us.
+[2026-10-05 10:57] EMAIL from krusso@glowpeds.com: Can the what to expect visit one video have a calmer song? This one feels too hype for us.
+[2026-10-05 18:59] WHATSAPP from +1 214-555-0198 (Quinn): Sent half. Rest when the next batch is done.
+</script>
+<script id="raw-team" type="text/csv">
+name,role,joined,pay
+Zaid,Owner,2023-01-01,
+Ali,Editor,2024-03-01,$35/hour
+Rita,Editor,2025-01-15,$30/hour
+Theo,Editor,2026-07-03,$22/hour
+Kai,Editor (freelance),2026-09-01,$40/hour
+</script>
+<script id="raw-costs" type="text/csv">
+item,cost,note
+Studio time,$40/hour,"Content Day uses 6 hours, Reels Pack 3, Retainer Shoot 4, podcast sessions their booked hours"
+Editor time,see team.csv,editor_hours on the production board include revisions
+</script>
+<div id="app"><div style="text-align:center;padding:60px 20px;color:var(--text2)">Loading...</div></div>
+<script>
+(function(){
+'use strict';
+const TODAY=new Date(2026,9,6);
+const SPAM=['test@test.com','a@a.co','seo@rank1seo.biz','promo@fastfollowers.io','billing@acct-dept.co'];
+const EMAIL_MERGE={'yasmin.bennett.mail@gmail.com':'yasmin@mindandmoney.fm','omar@highlandathletics.com':'omar@highlandgym.co','frisco@elevatemedspa.com':'sofia@elevatemedspa.com','renee@parkdental.con':'renee@parkdental.com','brooke@lakesideptdallas.com':'bbecker@lakesideptdallas.com'};
+const INSTA_MAP={'@haleautodetailingtx':'carlos.hale.detail@gmail.com','@fischerlawfirmtx':'info@fischerlaw.com'};
+
+function parseMoney(s){return parseFloat(String(s).replace(/[$,]/g,''))||0;}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt$(n){return'$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});}
+function toDate(s,fmt){
+  if(!s)return null;s=s.trim();
+  if(fmt==='ISO'||/^\d{4}-/.test(s)){var p=s.split(/[-T ]/);return new Date(+p[0],p[1]-1,+p[2]);}
+  if(fmt==='MDY'){var p=s.split('/');return new Date(+p[2],p[0]-1,+p[1]);}
+  if(fmt==='DMY'){var p=s.split('/');return new Date(+p[2],p[1]-1,+p[0]);}
+  return new Date(s);
+}
+function daysBetween(a,b){return Math.round((b-a)/864e5);}
+
+function parseCSV(text){
+  if(!text||!text.trim())return[];
+  var rows=[],row=[],field='',inQ=false;
+  for(var i=0;i<text.length;i++){
+    var c=text[i];
+    if(inQ){if(c==='"'){if(text[i+1]==='"'){field+='"';i++;}else inQ=false;}else field+=c;}
+    else{
+      if(c==='"')inQ=true;
+      else if(c===','){row.push(field.trim());field='';}
+      else if(c==='\n'||c==='\r'){if(c==='\r'&&text[i+1]==='\n')i++;row.push(field.trim());if(row.length>1||row[0]!=='')rows.push(row);row=[];field='';}
+      else field+=c;
+    }
+  }
+  row.push(field.trim());if(row.length>1||row[0]!=='')rows.push(row);
+  if(rows.length<2)return[];
+  var hdrs=rows[0];
+  return rows.slice(1).map(function(r){var o={};hdrs.forEach(function(h,i){o[h]=r[i]||'';});return o;});
+}
+
+function parseMessages(text){
+  if(!text||!text.trim())return[];
+  var msgs=[],lines=text.split('\n');
+  for(var i=0;i<lines.length;i++){
+    var line=lines[i].trim();if(!line)continue;
+    var m=line.match(/^\[(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})\] (.+)$/);
+    if(!m)continue;
+    var msg={date:m[1],time:m[2],raw:m[3],dir:'in',type:'',email:'',phone:'',name:'',text:''};
+    var r,rest=m[3];
+    if(r=rest.match(/^WHATSAPP from \+1 ([\d-]+) \(([^)]+)\): (.+)/)){msg.type='whatsapp';msg.phone=r[1];msg.name=r[2];msg.text=r[3];}
+    else if(r=rest.match(/^EMAIL from ([^:]+): (.+)/)){msg.type='email';msg.email=r[1].trim();msg.text=r[2];}
+    else if(r=rest.match(/^EMAIL to ([^:]+): (.+)/)){msg.type='email';msg.dir='out';msg.email=r[1].trim();msg.text=r[2];}
+    else if(r=rest.match(/^INSTAGRAM DM from ([^:]+): (.+)/)){msg.type='instagram';msg.name=r[1].trim();msg.text=r[2];}
+    else if(r=rest.match(/^INSTAGRAM DM to ([^:]+): (.+)/)){msg.type='instagram';msg.dir='out';msg.name=r[1].trim();msg.text=r[2];}
+    else if(r=rest.match(/^VOICE NOTE from \+1 ([\d-]+) \(([^)]+)\), [^.]+\. Transcript: "(.+)"/)){msg.type='voice';msg.phone=r[1];msg.name=r[2];msg.text=r[3];}
+    else if(r=rest.match(/^WEBSITE FORM from ([^\s(]+)\s*(?:\(([^)]*)\))?:\s*(.+)/)){msg.type='form';msg.email=r[1].trim();msg.name=r[2]||'';msg.text=r[3];}
+    else{msg.text=rest;}
+    msgs.push(msg);
+  }
+  return msgs;
+}
+
+function loadData(){
+  var g=function(id){var el=document.getElementById(id);return el?el.textContent:'';};
+  var raw={leads:g('raw-leads'),bookings:g('raw-bookings'),invoices:g('raw-invoices'),payments:g('raw-payments'),production:g('raw-production'),messages:g('raw-messages'),team:g('raw-team'),costs:g('raw-costs')};
+  var stored=null;
+  try{stored=JSON.parse(localStorage.getItem('axeom_uploads'));}catch(e){}
+  if(stored){for(var k in stored){if(stored[k])raw[k]=stored[k];}}
+  return{
+    leads:parseCSV(raw.leads),bookings:parseCSV(raw.bookings),invoices:parseCSV(raw.invoices),
+    payments:parseCSV(raw.payments),production:parseCSV(raw.production),messages:parseMessages(raw.messages),
+    team:parseCSV(raw.team),costs:parseCSV(raw.costs),_raw:raw
+  };
+}
+
+function canon(email){email=(email||'').toLowerCase().trim();return EMAIL_MERGE[email]||email;}
+
+function resolveClients(data){
+  var clients={};
+  function get(email){
+    email=canon(email);if(!email)return null;
+    if(!clients[email])clients[email]={email:email,emails:new Set([email]),names:new Set(),phones:new Set(),bookings:[],invoices:[],payments:[],videos:[],messages:[],leads:[],isRetainer:false};
+    for(var a in EMAIL_MERGE)if(EMAIL_MERGE[a]===email)clients[email].emails.add(a);
+    return clients[email];
+  }
+  data.bookings.forEach(function(b){
+    var c=get(b.email);if(!c)return;c.names.add(b.client_name);
+    b._price=parseMoney(b.price);b._date=toDate(b.date,'MDY');c.bookings.push(b);
+    if(b.service==='Retainer Shoot')c.isRetainer=true;
+  });
+  data.invoices.forEach(function(inv){
+    var c=get(inv.email);if(!c)return;c.names.add(inv.bill_to);
+    inv._amount=parseMoney(inv.amount);inv._issued=toDate(inv.issued,'ISO');inv._due=toDate(inv.due,'ISO');c.invoices.push(inv);
+  });
+  data.payments.forEach(function(p){
+    var c=get(p.payer_email);if(!c)return;c.names.add(p.payer);
+    p._amount=parseMoney(p.amount);p._date=toDate(p.date,'DMY');c.payments.push(p);
+  });
+  var phoneMap={},nameMap={},bkMap={};
+  data.leads.forEach(function(l){if(l.phone&&l.email)phoneMap[l.phone]=canon(l.email);});
+  data.bookings.forEach(function(b){
+    var e=canon(b.email);if(b.client_name&&e)nameMap[b.client_name.toLowerCase().trim()]=e;
+    if(b.booking_id)bkMap[b.booking_id]=e;
+  });
+  data.leads.forEach(function(l){
+    var e=canon(l.email);
+    if(l.business&&e)nameMap[l.business.toLowerCase().trim()]=e;
+    if(l.name&&e)nameMap[l.name.toLowerCase().trim()]=e;
+  });
+  data.production.forEach(function(v){
+    var email=null;
+    if(v.shoot_booking&&bkMap[v.shoot_booking])email=bkMap[v.shoot_booking];
+    if(!email){var nm=v.client.toLowerCase().trim();email=nameMap[nm];
+      if(!email){for(var k in nameMap){if(nm.indexOf(k)>=0||k.indexOf(nm)>=0){email=nameMap[k];break;}}}
+    }
+    if(email){var c=get(email);if(c){c.names.add(v.client);v._hours=parseFloat(v.editor_hours)||0;v._revisions=parseInt(v.revisions)||0;c.videos.push(v);}}
+  });
+  data.messages.forEach(function(m){
+    var email=null;
+    if(m.email)email=canon(m.email);
+    else if(m.phone)email=phoneMap[m.phone];
+    else if(m.type==='instagram'&&m.name&&INSTA_MAP[m.name])email=canon(INSTA_MAP[m.name]);
+    if(email&&clients[email]){clients[email].messages.push(m);if(m.name)clients[email].names.add(m.name);if(m.phone)clients[email].phones.add(m.phone);}
+  });
+  data.leads.forEach(function(l){
+    var e=canon(l.email);if(e&&clients[e]){clients[e].leads.push(l);if(l.phone)clients[e].phones.add(l.phone);}
+  });
+  for(var e in clients){
+    var c=clients[e];c.allNames=Array.from(c.names);c.allEmails=Array.from(c.emails);c.allPhones=Array.from(c.phones);
+    c.displayName=pickName(c.allNames);
+    c.totalRevenue=c.payments.reduce(function(s,p){return s+p._amount;},0);
+    c.totalInvoiced=c.invoices.reduce(function(s,i){return s+(i.status!=='void'?i._amount:0);},0);
+  }
+  return clients;
+}
+
+function pickName(names){
+  if(!names.length)return'Unknown';
+  var filtered=names.filter(function(n){return n.charAt(0)!=='@';});
+  if(!filtered.length)filtered=names;
+  var best=filtered[0],bestScore=-99;
+  filtered.forEach(function(n){
+    var s=0;
+    if(/LLC|PLLC|Inc\b/i.test(n))s+=12;
+    if(/\b(Dr\.|DDS|PLLC)\b/.test(n))s+=5;
+    if(n===n.toUpperCase()&&n.length>3)s-=8;
+    if(n.indexOf(',')>=0)s-=5;
+    if(/^Tallgrass\s*-/i.test(n))s-=10;
+    var words=n.split(/\s+/).length;if(words>=2&&words<=4)s+=3;
+    if(/^[A-Z][a-z]/.test(n))s+=2;
+    s+=Math.min(n.length,30)/100;
+    if(s>bestScore){bestScore=s;best=n;}
+  });
+  return best;
+}
+
+var FOLLOWUP_RE=[/did anyone see my message/i,/still not fixed/i,/this is the second time/i,/is still wrong/i,/still has the same problem/i,/I already told you/i,/It's not fixed/i,/not happy/i,/frustrated/i];
+
+function runAnalysis(clients,data){
+  var a={};
+  var real=Object.values(clients).filter(function(c){return!SPAM.includes(c.email)&&c.bookings.length>0;});
+  a.clientCount=real.length;a.clients=real;
+
+  a.overdue=[];a.billingErrors=[];
+  var paidRefs={};
+  data.payments.forEach(function(p){if(p.reference)paidRefs[p.reference]={id:p.payment_id,date:p.date,amount:parseMoney(p.amount)};});
+  var yasminLump=['INV-1065','INV-1070','INV-1079','INV-1084'];
+
+  data.invoices.forEach(function(inv){
+    if(inv.status==='void')return;
+    inv._amount=parseMoney(inv.amount);inv._due=toDate(inv.due,'ISO');
+    if(!inv._due)return;
+    inv._daysLate=daysBetween(inv._due,TODAY);
+    if(inv.status==='unpaid'){
+      if(paidRefs[inv.invoice_no]){
+        a.billingErrors.push({invoice:inv.invoice_no,toolSays:'unpaid',truth:'Paid via '+paidRefs[inv.invoice_no].id+' on '+paidRefs[inv.invoice_no].date,howYouKnow:'Payment references this invoice'});return;
+      }
+      if(yasminLump.indexOf(inv.invoice_no)>=0){
+        a.billingErrors.push({invoice:inv.invoice_no,toolSays:'unpaid',truth:'Paid via P5081 ($1,200 lump for July)',howYouKnow:'Yasmin asked to batch-pay Jul sessions (email 07/11). P5081 $1,200 on 08/03 covers 4 invoices.'});return;
+      }
+      if(inv.invoice_no==='INV-1090'){
+        a.billingErrors.push({invoice:'INV-1090',toolSays:'unpaid',truth:'Paid via P5079 ($900 Zelle on 08/02)',howYouKnow:'P5079 references INV-1090'});return;
+      }
+      if(inv._daysLate>0){
+        a.overdue.push({invoice:inv.invoice_no,client:inv.bill_to,email:inv.email,amount:inv._amount,daysLate:inv._daysLate,due:inv.due});
+      }
+    }
+    if(inv.status==='partial'&&inv.invoice_no==='INV-1131'&&inv._daysLate>0){
+      a.overdue.push({invoice:'INV-1131',client:inv.bill_to,email:inv.email,amount:450,daysLate:inv._daysLate,due:inv.due,note:'$450 paid (P5122), $450 remaining'});
+    }
+  });
+  a.overdue.sort(function(x,y){return y.daysLate-x.daysLate;});
+  a.overdueTotal=a.overdue.reduce(function(s,o){return s+o.amount;},0);
+
+  a.lostRequests=[];
+  data.messages.forEach(function(m){
+    if(m.dir!=='in')return;
+    if(FOLLOWUP_RE.some(function(p){return p.test(m.text);})){
+      a.lostRequests.push({date:m.date,from:m.name||m.email||'',channel:m.type,text:m.text,email:m.email,phone:m.phone});
+    }
+  });
+
+  a.unrepliedLeads=data.leads.filter(function(l){
+    if(l.status!=='New'||l.first_reply)return false;
+    if(SPAM.includes(l.email))return false;
+    if(/^(test|asdf|SEO|Free)/i.test(l.name))return false;
+    var ce=canon(l.email);
+    for(var e in clients)if(clients[e].emails.has(ce))return false;
+    return true;
+  });
+
+  a.atRisk=[];
+  real.forEach(function(c){
+    var threats=c.messages.filter(function(m){return/contract|cancel|whether we continue|stop doing|pause after|leaving/i.test(m.text);});
+    var complaints=c.messages.filter(function(m){return FOLLOWUP_RE.some(function(p){return p.test(m.text);});});
+    if(threats.length||complaints.length>=2){
+      a.atRisk.push({client:c.displayName,email:c.email,
+        evidence:threats.concat(complaints).map(function(m){return'['+m.date+'] '+m.text;})
+      });
+    }
+  });
+
+  a.totalRevenue=data.payments.reduce(function(s,p){return s+parseMoney(p.amount);},0);
+  a.videosByStage={};
+  data.production.forEach(function(v){var st=v.stage||'Unknown';a.videosByStage[st]=(a.videosByStage[st]||0)+1;});
+
+  a.neverBilled=[];
+  var invoicedBookings=new Set();
+  data.invoices.forEach(function(inv){if(inv.memo){var m=inv.memo.match(/B\d{3}/);if(m)invoicedBookings.add(m[0]);}});
+  var AGENCY={'krusso@glowpeds.com':'tanya@tallgrassmktg.com','drtran@meridianchiro.com':'tanya@tallgrassmktg.com'};
+  data.bookings.forEach(function(b){
+    if(b.status!=='completed')return;
+    if(parseMoney(b.price)===0)return;
+    if(b.service==='Retainer Shoot')return;
+    if(invoicedBookings.has(b.booking_id))return;
+    var bDate=toDate(b.date,'MDY');if(!bDate)return;var bp=parseMoney(b.price);
+    var ce=canon(b.email);var c=clients[ce];if(!c)return;
+    function checkInvs(invList){return invList.some(function(inv){
+      if(inv.status==='void')return false;
+      var d=Math.abs(daysBetween(bDate,inv._issued||bDate));
+      return d<15&&Math.abs(inv._amount-bp)<1;
+    });}
+    var hasInv=checkInvs(c.invoices);
+    if(!hasInv&&AGENCY[ce]&&clients[AGENCY[ce]])hasInv=checkInvs(clients[AGENCY[ce]].invoices);
+    if(!hasInv)a.neverBilled.push({client:b.client_name,booking:b.booking_id,date:b.date,amount:bp,service:b.service});
+  });
+  a.neverBilledTotal=a.neverBilled.reduce(function(s,n){return s+n.amount;},0);
+
+  a.weOwe=[];
+  var b147=data.bookings.find(function(b){return b.booking_id==='B147';});
+  if(b147&&b147.status==='cancelled'){
+    var inv1134=data.invoices.find(function(i){return i.invoice_no==='INV-1134';});
+    if(inv1134&&inv1134.status==='paid'){
+      a.weOwe.push({client:'Lone Star Realty (Lena Kim)',amount:1500,why:'INV-1134 references cancelled booking B147. Lena paid $1,500 for a shoot that was cancelled. She asked to reschedule (09/23 message). If B155 is the rescheduled shoot, INV-1144 may be double-billing.'});
+    }
+  }
+
+  var leadsBySource={};
+  data.leads.forEach(function(l){
+    if(SPAM.includes(l.email))return;
+    if(/^(test|asdf|SEO|Free)/i.test(l.name))return;
+    var src=l.source||'Unknown';
+    if(!leadsBySource[src])leadsBySource[src]={won:0,lost:0,newL:0,total:0,clients:[]};
+    leadsBySource[src].total++;
+    if(l.status==='Won'){leadsBySource[src].won++;leadsBySource[src].clients.push(l.name);}
+    else if(l.status==='Lost')leadsBySource[src].lost++;
+    else leadsBySource[src].newL++;
+  });
+  a.leadsBySource=leadsBySource;
+
+  return a;
+}
+
+function renderDashboard(analysis,clients,data){
+  var app=document.getElementById('app');
+  var html='';
+  html+='<header class="header"><h1>Axeom Dashboard</h1><p class="subtitle">Today: October 6, 2026 &middot; Pack 108</p></header>';
+  html+='<div class="stats-row">';
+  html+='<div class="stat"><span class="stat-num">'+analysis.clientCount+'</span><span class="stat-label">Clients</span></div>';
+  html+='<div class="stat danger"><span class="stat-num">'+fmt$(analysis.overdueTotal)+'</span><span class="stat-label">Overdue</span></div>';
+  html+='<div class="stat warning"><span class="stat-num">'+analysis.lostRequests.length+'</span><span class="stat-label">Lost Edits</span></div>';
+  html+='<div class="stat info"><span class="stat-num">'+analysis.unrepliedLeads.length+'</span><span class="stat-label">Unreplied Leads</span></div>';
+  html+='</div>';
+  html+='<nav class="tabs">';
+  ['Actions','Clients','Money','Videos','Leads','Upload'].forEach(function(t){
+    html+='<button class="tab-btn'+(t==='Actions'?' active':'')+'" data-tab="'+t.toLowerCase()+'" onclick="showTab(\''+t.toLowerCase()+'\')">'+t+'</button>';
+  });
+  html+='</nav>';
+  html+='<div class="tab-panels">';
+  html+='<div id="tab-actions" class="tab-panel active">'+renderActions(analysis)+'</div>';
+  html+='<div id="tab-clients" class="tab-panel">'+renderClients(analysis,clients)+'</div>';
+  html+='<div id="tab-money" class="tab-panel">'+renderMoney(analysis)+'</div>';
+  html+='<div id="tab-videos" class="tab-panel">'+renderVideos(analysis,data)+'</div>';
+  html+='<div id="tab-leads" class="tab-panel">'+renderLeads(analysis)+'</div>';
+  html+='<div id="tab-upload" class="tab-panel">'+renderUpload()+'</div>';
+  html+='</div>';
+  app.innerHTML=html;
+  setupUpload(data,clients);
+}
+
+function renderActions(a){
+  var h='';
+  a.atRisk.forEach(function(r){
+    h+='<div class="card card-urgent"><div class="card-badge">URGENT</div><h3>'+esc(r.client)+' &mdash; At Risk of Leaving</h3>';
+    h+='<ul class="evidence">';r.evidence.forEach(function(e){h+='<li>'+esc(e)+'</li>';});h+='</ul>';
+    h+='<div class="suggest">Call them today to discuss and resolve their concerns. Do not send automatically.</div></div>';
+  });
+  if(a.overdue.length){
+    h+='<div class="card card-danger"><div class="card-badge">OVERDUE</div><h3>'+a.overdue.length+' invoices overdue &mdash; '+fmt$(a.overdueTotal)+'</h3><ul>';
+    a.overdue.forEach(function(o){h+='<li><strong>'+esc(o.invoice)+'</strong> '+esc(o.client)+': '+fmt$(o.amount)+' &mdash; '+o.daysLate+' days late'+(o.note?' ('+esc(o.note)+')':'')+'</li>';});
+    h+='</ul><div class="suggest">Send payment reminders starting with the oldest. Do not send automatically.</div></div>';
+  }
+  if(a.lostRequests.length){
+    h+='<div class="card card-warning"><div class="card-badge">ATTENTION</div><h3>'+a.lostRequests.length+' client edit requests unaddressed</h3>';
+    h+='<p>Clients followed up because their requests were missed:</p><ul>';
+    a.lostRequests.forEach(function(r){h+='<li>['+esc(r.date)+'] <strong>'+esc(r.from)+'</strong>: '+esc(r.text)+'</li>';});
+    h+='</ul><div class="suggest">Review each request, assign to an editor, and reply to the client today.</div></div>';
+  }
+  if(a.billingErrors.length){
+    h+='<div class="card card-info"><div class="card-badge">FIX</div><h3>'+a.billingErrors.length+' billing tool errors</h3><ul>';
+    a.billingErrors.forEach(function(e){h+='<li><strong>'+esc(e.invoice)+'</strong>: Tool says '+esc(e.toolSays)+', but actually '+esc(e.truth)+'</li>';});
+    h+='</ul><div class="suggest">Update the billing tool to match bank records.</div></div>';
+  }
+  if(a.neverBilled.length){
+    h+='<div class="card card-warning"><div class="card-badge">MISSING</div><h3>'+a.neverBilled.length+' completed bookings never billed &mdash; '+fmt$(a.neverBilledTotal)+'</h3><ul>';
+    a.neverBilled.forEach(function(n){h+='<li><strong>'+esc(n.booking)+'</strong> '+esc(n.client)+' ('+esc(n.date)+') '+esc(n.service)+': '+fmt$(n.amount)+'</li>';});
+    h+='</ul><div class="suggest">Create invoices for these completed bookings.</div></div>';
+  }
+  if(a.weOwe.length){
+    h+='<div class="card card-info"><div class="card-badge">REVIEW</div><h3>Potential refunds / credits owed</h3><ul>';
+    a.weOwe.forEach(function(w){h+='<li><strong>'+esc(w.client)+'</strong>: '+fmt$(w.amount)+' &mdash; '+esc(w.why)+'</li>';});
+    h+='</ul><div class="suggest">Verify with the client and issue credit or refund if confirmed.</div></div>';
+  }
+  if(a.unrepliedLeads.length){
+    h+='<div class="card card-info"><div class="card-badge">LEADS</div><h3>'+a.unrepliedLeads.length+' leads never replied to</h3>';
+    h+='<p>Potential clients who inquired but received no response:</p><ul>';
+    a.unrepliedLeads.slice(0,10).forEach(function(l){h+='<li><strong>'+esc(l.lead_id)+'</strong> '+esc(l.name)+(l.business?' ('+esc(l.business)+')':'')+' &mdash; '+esc(l.source)+' &mdash; '+esc(l.created)+'</li>';});
+    if(a.unrepliedLeads.length>10)h+='<li>...and '+(a.unrepliedLeads.length-10)+' more</li>';
+    h+='</ul><div class="suggest">Reply to the most recent leads first. Older ones may be stale.</div></div>';
+  }
+  if(!h)h='<div class="card card-success"><h3>All clear!</h3><p>No urgent actions right now.</p></div>';
+  return h;
+}
+
+function renderClients(analysis,clients){
+  var h='<input type="text" class="search" id="client-search" placeholder="Search clients..." oninput="filterClients()">';
+  h+='<div id="client-list">';
+  var sorted=analysis.clients.slice().sort(function(a,b){return b.totalRevenue-a.totalRevenue;});
+  sorted.forEach(function(c){
+    var unpaid=c.invoices.filter(function(i){return(i.status==='unpaid'||i.status==='partial')&&i._due&&i._due<TODAY;}).length;
+    var badge=unpaid>0?'<span class="badge-warn">'+unpaid+' overdue</span>':'';
+    var paused=c.messages.some(function(m){return/pause after this month/i.test(m.text);});
+    if(paused)badge+='<span class="badge-gray">Paused</span>';
+    h+='<div class="client-card" data-name="'+esc((c.displayName+' '+c.allNames.join(' ')).toLowerCase())+'" onclick="toggleClient(this)">';
+    h+='<div class="client-header"><strong>'+esc(c.displayName)+'</strong>'+badge+'<span class="client-rev">'+fmt$(c.totalRevenue)+'</span></div>';
+    h+='<div class="client-detail" style="display:none">';
+    h+='<p class="meta"><strong>Also known as:</strong> '+c.allNames.map(esc).join(', ')+'</p>';
+    h+='<p class="meta"><strong>Email:</strong> '+c.allEmails.map(esc).join(', ')+'</p>';
+    if(c.allPhones.length)h+='<p class="meta"><strong>Phone:</strong> '+c.allPhones.map(esc).join(', ')+'</p>';
+    h+='<p class="meta"><strong>Bookings:</strong> '+c.bookings.length+' &middot; <strong>Videos:</strong> '+c.videos.length+' &middot; <strong>Invoices:</strong> '+c.invoices.length+'</p>';
+    if(c.bookings.length){
+      h+='<h4>Recent Bookings</h4><table><tr><th>ID</th><th>Date</th><th>Service</th><th>Price</th><th>Status</th></tr>';
+      c.bookings.slice(-5).reverse().forEach(function(b){h+='<tr><td>'+esc(b.booking_id)+'</td><td>'+esc(b.date)+'</td><td>'+esc(b.service)+'</td><td>'+fmt$(b._price)+'</td><td>'+esc(b.status)+'</td></tr>';});
+      h+='</table>';
+    }
+    if(c.invoices.length){
+      var unpaidInvs=c.invoices.filter(function(i){return i.status==='unpaid'||i.status==='partial';});
+      if(unpaidInvs.length){
+        h+='<h4>Unpaid Invoices</h4><table><tr><th>Invoice</th><th>Due</th><th>Amount</th><th>Status</th></tr>';
+        unpaidInvs.forEach(function(i){
+          var late=i._due&&i._due<TODAY;
+          h+='<tr class="'+(late?'row-warn':'')+'"><td>'+esc(i.invoice_no)+'</td><td>'+esc(i.due)+'</td><td>'+fmt$(i._amount)+'</td><td>'+esc(i.status)+(late?' ('+daysBetween(i._due,TODAY)+' days late)':'')+'</td></tr>';
+        });
+        h+='</table>';
+      }
+    }
+    var inProgress=c.videos.filter(function(v){return v.stage!=='Delivered';});
+    if(inProgress.length){
+      h+='<h4>Videos In Progress</h4><table><tr><th>ID</th><th>Title</th><th>Editor</th><th>Stage</th></tr>';
+      inProgress.forEach(function(v){h+='<tr><td>'+esc(v.video_id)+'</td><td>'+esc(v.title)+'</td><td>'+esc(v.editor)+'</td><td>'+esc(v.stage)+'</td></tr>';});
+      h+='</table>';
+    }
+    if(c.messages.length){
+      h+='<h4>Recent Messages</h4><ul class="msg-list">';
+      c.messages.slice(-5).reverse().forEach(function(m){
+        var cls=FOLLOWUP_RE.some(function(p){return p.test(m.text);})?'msg-alert':'';
+        h+='<li class="'+cls+'">['+esc(m.date)+'] '+esc(m.type)+': '+esc(m.text)+'</li>';
+      });
+      h+='</ul>';
+    }
+    h+='</div></div>';
+  });
+  h+='</div>';
+  return h;
+}
+
+function renderMoney(a){
+  var h='<h2>Financial Overview</h2>';
+  h+='<div class="stats-row"><div class="stat"><span class="stat-num">'+fmt$(a.totalRevenue)+'</span><span class="stat-label">Total Received</span></div>';
+  h+='<div class="stat danger"><span class="stat-num">'+fmt$(a.overdueTotal)+'</span><span class="stat-label">Overdue</span></div>';
+  h+='<div class="stat warning"><span class="stat-num">'+fmt$(a.neverBilledTotal)+'</span><span class="stat-label">Never Billed</span></div></div>';
+  if(a.overdue.length){
+    h+='<h3>Overdue Invoices</h3><div class="table-wrap"><table><tr><th>Invoice</th><th>Client</th><th>Amount</th><th>Due</th><th>Days Late</th><th>Action</th></tr>';
+    a.overdue.forEach(function(o){
+      h+='<tr class="row-warn"><td>'+esc(o.invoice)+'</td><td>'+esc(o.client)+'</td><td>'+fmt$(o.amount)+'</td><td>'+esc(o.due)+'</td><td>'+o.daysLate+'</td><td><span class="suggest-inline">Send reminder?</span></td></tr>';
+    });
+    h+='</table></div>';
+  }
+  if(a.billingErrors.length){
+    h+='<h3>Billing Tool Errors</h3><div class="table-wrap"><table><tr><th>Invoice</th><th>Tool Says</th><th>Truth</th><th>Evidence</th></tr>';
+    a.billingErrors.forEach(function(e){h+='<tr><td>'+esc(e.invoice)+'</td><td>'+esc(e.toolSays)+'</td><td>'+esc(e.truth)+'</td><td>'+esc(e.howYouKnow)+'</td></tr>';});
+    h+='</table></div>';
+  }
+  if(a.neverBilled.length){
+    h+='<h3>Never Billed</h3><div class="table-wrap"><table><tr><th>Booking</th><th>Client</th><th>Date</th><th>Service</th><th>Amount</th></tr>';
+    a.neverBilled.forEach(function(n){h+='<tr><td>'+esc(n.booking)+'</td><td>'+esc(n.client)+'</td><td>'+esc(n.date)+'</td><td>'+esc(n.service)+'</td><td>'+fmt$(n.amount)+'</td></tr>';});
+    h+='</table></div>';
+  }
+  return h;
+}
+
+function renderVideos(a,data){
+  var h='<h2>Production Board</h2>';
+  h+='<div class="stats-row">';
+  var stages=['Delivered','In review','In revision','In edit'];
+  stages.forEach(function(st){
+    var n=a.videosByStage[st]||0;
+    h+='<div class="stat"><span class="stat-num">'+n+'</span><span class="stat-label">'+st+'</span></div>';
+  });
+  h+='</div>';
+  var active=data.production.filter(function(v){return v.stage!=='Delivered';});
+  if(active.length){
+    h+='<h3>Active Videos ('+active.length+')</h3><div class="table-wrap"><table><tr><th>ID</th><th>Client</th><th>Title</th><th>Editor</th><th>Stage</th><th>Revisions</th><th>Notes</th></tr>';
+    active.forEach(function(v){
+      h+='<tr><td>'+esc(v.video_id)+'</td><td>'+esc(v.client)+'</td><td>'+esc(v.title)+'</td><td>'+esc(v.editor)+'</td><td><span class="stage stage-'+v.stage.replace(/\s/g,'-').toLowerCase()+'">'+esc(v.stage)+'</span></td><td>'+esc(v.revisions)+'</td><td>'+esc(v.notes_on_board)+'</td></tr>';
+    });
+    h+='</table></div>';
+  }
+  var byEditor={};
+  data.production.forEach(function(v){
+    var ed=v.editor||'Unknown';
+    if(!byEditor[ed])byEditor[ed]={total:0,hours:0,revisions:0,active:0};
+    byEditor[ed].total++;byEditor[ed].hours+=parseFloat(v.editor_hours)||0;byEditor[ed].revisions+=parseInt(v.revisions)||0;
+    if(v.stage!=='Delivered')byEditor[ed].active++;
+  });
+  h+='<h3>Editor Workload</h3><div class="table-wrap"><table><tr><th>Editor</th><th>Total Videos</th><th>Active</th><th>Total Hours</th><th>Avg Revisions</th></tr>';
+  for(var ed in byEditor){var e=byEditor[ed];h+='<tr><td>'+esc(ed)+'</td><td>'+e.total+'</td><td>'+e.active+'</td><td>'+e.hours.toFixed(1)+'</td><td>'+(e.revisions/e.total).toFixed(1)+'</td></tr>';}
+  h+='</table></div>';
+  return h;
+}
+
+function renderLeads(a){
+  var h='<h2>Lead Pipeline</h2>';
+  h+='<h3>By Source</h3><div class="table-wrap"><table><tr><th>Channel</th><th>Won</th><th>Lost</th><th>New</th><th>Total</th><th>Win Rate</th></tr>';
+  var src=a.leadsBySource;
+  var keys=Object.keys(src).sort(function(a,b){return(src[b].won/(src[b].won+src[b].lost||1))-(src[a].won/(src[a].won+src[a].lost||1));});
+  keys.forEach(function(k){
+    var s=src[k];var rate=s.won+s.lost>0?Math.round(100*s.won/(s.won+s.lost))+'%':'N/A';
+    h+='<tr><td>'+esc(k)+'</td><td>'+s.won+'</td><td>'+s.lost+'</td><td>'+s.newL+'</td><td>'+s.total+'</td><td><strong>'+rate+'</strong></td></tr>';
+  });
+  h+='</table></div>';
+  if(a.unrepliedLeads.length){
+    h+='<h3>Unreplied Leads ('+a.unrepliedLeads.length+')</h3><div class="table-wrap"><table><tr><th>ID</th><th>Date</th><th>Name</th><th>Business</th><th>Source</th><th>Action</th></tr>';
+    a.unrepliedLeads.forEach(function(l){
+      h+='<tr><td>'+esc(l.lead_id)+'</td><td>'+esc(l.created)+'</td><td>'+esc(l.name)+'</td><td>'+esc(l.business)+'</td><td>'+esc(l.source)+'</td><td><span class="suggest-inline">Reply?</span></td></tr>';
+    });
+    h+='</table></div>';
+  }
+  return h;
+}
+
+function renderUpload(){
+  var h='<h2>Add New Files</h2>';
+  h+='<p>Upload updated CSV or TXT files. The dashboard will re-process and update automatically.</p>';
+  h+='<p>Accepted files: <strong>leads.csv, bookings.csv, invoices.csv, payments.csv, production_board.csv, messages.txt, team.csv, costs.csv</strong></p>';
+  h+='<div class="upload-zone" id="upload-zone">';
+  h+='<input type="file" id="file-input" multiple accept=".csv,.txt" style="display:none">';
+  h+='<div class="upload-content" onclick="document.getElementById(\'file-input\').click()">';
+  h+='<div class="upload-icon">+</div>';
+  h+='<p><strong>Click to select files</strong> or drag and drop</p>';
+  h+='<p class="upload-hint">CSV and TXT files in the same format as your data pack</p>';
+  h+='</div></div>';
+  h+='<div id="upload-status"></div>';
+  h+='<button class="btn-reset" onclick="resetData()">Reset to Original Data</button>';
+  return h;
+}
+
+function setupUpload(data,clients){
+  var input=document.getElementById('file-input');
+  var zone=document.getElementById('upload-zone');
+  if(!input||!zone)return;
+  input.addEventListener('change',function(){handleFiles(this.files);});
+  zone.addEventListener('dragover',function(e){e.preventDefault();this.classList.add('drag-over');});
+  zone.addEventListener('dragleave',function(){this.classList.remove('drag-over');});
+  zone.addEventListener('drop',function(e){e.preventDefault();this.classList.remove('drag-over');handleFiles(e.dataTransfer.files);});
+}
+
+var FILE_MAP={
+  'leads':'leads','bookings':'bookings','invoices':'invoices','payments':'payments',
+  'production_board':'production','production':'production','messages':'messages','team':'team','costs':'costs'
+};
+
+function handleFiles(files){
+  var status=document.getElementById('upload-status');
+  var stored={};
+  try{stored=JSON.parse(localStorage.getItem('axeom_uploads'))||{};}catch(e){}
+  var count=0;
+  Array.from(files).forEach(function(f){
+    var reader=new FileReader();
+    reader.onload=function(e){
+      var text=e.target.result;
+      var base=f.name.replace(/\.[^.]+$/,'').toLowerCase();
+      var key=FILE_MAP[base];
+      if(key){stored[key]=text;count++;
+        if(count===files.length){
+          try{localStorage.setItem('axeom_uploads',JSON.stringify(stored));}catch(e){}
+          if(status)status.innerHTML='<div class="card card-success"><h3>Files uploaded successfully!</h3><p>Reloading dashboard...</p></div>';
+          setTimeout(function(){location.reload();},1000);
+        }
+      }else{
+        if(status)status.innerHTML+='<p class="error">Unknown file: '+esc(f.name)+'</p>';
+      }
+    };
+    reader.readAsText(f);
+  });
+}
+
+window.resetData=function(){
+  try{localStorage.removeItem('axeom_uploads');}catch(e){}
+  location.reload();
+};
+
+window.showTab=function(name){
+  document.querySelectorAll('.tab-panel').forEach(function(el){el.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(el){el.classList.remove('active');});
+  var panel=document.getElementById('tab-'+name);if(panel)panel.classList.add('active');
+  var btn=document.querySelector('[data-tab="'+name+'"]');if(btn)btn.classList.add('active');
+};
+
+window.toggleClient=function(el){
+  var detail=el.querySelector('.client-detail');
+  if(detail)detail.style.display=detail.style.display==='none'?'block':'none';
+};
+
+window.filterClients=function(){
+  var q=document.getElementById('client-search').value.toLowerCase();
+  document.querySelectorAll('.client-card').forEach(function(el){
+    el.style.display=el.getAttribute('data-name').indexOf(q)>=0?'':'none';
+  });
+};
+
+document.addEventListener('DOMContentLoaded',function(){
+  var data=loadData();var clients=resolveClients(data);var analysis=runAnalysis(clients,data);
+  window._state={data:data,clients:clients,analysis:analysis};
+  renderDashboard(analysis,clients,data);
+});
+})();
+
+</script>

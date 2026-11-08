@@ -1,0 +1,176 @@
+booking_id,date,client_name,email,service,status,price
+B001,04/02/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B002,04/06/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B003,04/07/2026,Park Dental PLLC,renee@parkdental.com,Content Day,completed,"$1,500"
+B004,04/10/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B005,04/10/2026,Oak Lane,greg@oaklane.build,Content Day,completed,1500
+B006,04/13/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B007,04/14/2026,Andre Ochoa,andre@andresroofingtx.com,Reels Pack,completed,$900
+B008,04/17/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B009,04/17/2026,Mind and Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B010,04/20/2026,Elevate Medspa,sofia@elevatemedspa.com,Content Day,completed,1500
+B011,04/23/2026,Mind and Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B012,04/24/2026,Willow Bridal Boutique,grace@willowbridal.com,Reels Pack,completed,$900
+B013,04/27/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,300
+B014,04/27/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B015,04/27/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,completed,0
+B016,05/04/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B017,05/04/2026,Mind and Money,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,$300
+B018,05/07/2026,Fischer Law,info@fischerlaw.com,Retainer Shoot,completed,$0
+B019,05/08/2026,Luna Fit,angela@lunafit.co,Reels Pack,completed,$900
+B020,05/11/2026,Yasmin Bennett,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,300
+B021,05/11/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B022,05/11/2026,Lakeside PT,bbecker@lakesideptdallas.com,Retainer Shoot,completed,$0
+B023,05/12/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B024,05/14/2026,Park Dental,renee@parkdental.con,Content Day,completed,1500
+B025,05/14/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,completed,$0
+B026,05/18/2026,Oak Lane & Co Builders,greg@oaklane.build,Content Day,completed,1500
+B027,05/18/2026,Andre Ochoa,andre@andresroofingtx.com,Reels Pack,completed,900
+B028,05/18/2026,Canyon Medspa,leah@canyonmedspa.com,Reels Pack,completed,900
+B029,05/19/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B030,05/19/2026,Willow Bridal,grace@willowbridal.com,Reels Pack,completed,$900
+B031,05/20/2026,Juniper Barbers,mike@juniperbarbers.com,Reels Pack,completed,900
+B032,05/25/2026,Yasmin Bennett,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,$300
+B033,05/26/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B034,05/28/2026,Lone Star Realty LLC,lena@lonestarrealty.com,Content Day,completed,"$1,500"
+B035,05/29/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B036,05/29/2026,Shah Insurance,darnell@shahinsures.com,Retainer Shoot,completed,$0
+B037,06/03/2026,Kim Dental,hello@kimdental.com,Content Day,completed,"$1,500"
+B038,06/05/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B039,06/08/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B040,06/08/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B041,06/08/2026,Elevate Med Spa - Plano,sofia@elevatemedspa.com,Content Day,completed,1500
+B042,06/08/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,completed,0
+B043,06/08/2026,Shah Insurance Group,darnell@shahinsures.com,Retainer Shoot,completed,$0
+B044,06/09/2026,Park Family Law,mpark@parkfamilylaw.com,Reels Pack,completed,$900
+B045,06/09/2026,Glow Peds,tanya@tallgrassmktg.com,Reels Pack,completed,900
+B046,06/11/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B047,06/12/2026,Canyon Med Spa - Frisco,leah@canyonmedspa.com,Reels Pack,completed,900
+B048,06/15/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B049,06/15/2026,Fischer Law,info@fischerlaw.com,Retainer Shoot,completed,0
+B050,06/15/2026,Bluebonnet WP,kzamora@bluebonnetwp.com,Retainer Shoot,completed,0
+B051,06/15/2026,Luna Fitness,angela@lunafit.co,Reels Pack,completed,900
+B052,06/17/2026,Grace Nguyen,grace@willowbridal.com,Reels Pack,completed,$900
+B053,06/22/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B054,06/22/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B055,06/22/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B056,06/22/2026,Sagelab Coffee,carmen@thesagelab.coffee,Reels Pack,completed,900
+B057,06/24/2026,Renee Park DDS,renee@parkdental.com,Content Day,completed,"$1,500"
+B058,06/24/2026,Magnolia Builders LLC,paula@magnolia.build,Content Day,completed,1500
+B059,06/25/2026,Andre Ochoa,andre@andresroofingtx.com,Reels Pack,completed,$900
+B060,06/26/2026,Mike Bennett,mike@juniperbarbers.com,Reels Pack,completed,$900
+B061,07/01/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B062,07/01/2026,Meridian Chiro,drtran@meridianchiro.com,Reels Pack,completed,900
+B063,07/02/2026,Mind and Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B064,07/03/2026,Lena Kim,lena@lonestarrealty.com,Content Day,completed,"$1,500"
+B065,07/06/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,completed,0
+B066,07/06/2026,Highland Gym,omar@highlandgym.co,Reels Pack,completed,$900
+B067,07/07/2026,Maria Park,mpark@parkfamilylaw.com,Reels Pack,completed,900
+B068,07/08/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B069,07/08/2026,Oak Lane Builders,greg@oaklane.build,Content Day,completed,1500
+B070,07/09/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B071,07/09/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,completed,$0
+B072,07/10/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B073,07/10/2026,Shah Insurance,darnell@shahinsures.com,Retainer Shoot,completed,$0
+B074,07/13/2026,Fischer Law Firm PLLC,info@fischerlaw.com,Retainer Shoot,completed,0
+B075,07/13/2026,Grace Nguyen,grace@willowbridal.com,Reels Pack,completed,$900
+B076,07/14/2026,Crown Family Therapy,kkim@crownfamilytherapy.com,Content Day,completed,"$1,500"
+B077,07/15/2026,Canyon,leah@canyonmedspa.com,Reels Pack,completed,900
+B078,07/16/2026,Dr. Maria Kim,hello@kimdental.com,Content Day,completed,1500
+B079,07/16/2026,Glow Pediatrics,krusso@glowpeds.com,Reels Pack,completed,900
+B080,07/17/2026,The Ridgeway Lab,tanya@theridgewaylab.coffee,Reels Pack,completed,900
+B081,07/20/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B082,07/20/2026,M&M Podcast,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B083,07/22/2026,Parks Auto,jared@parksautospa.com,Reels Pack,completed,$900
+B084,07/22/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B085,07/27/2026,Mind & Money Podcast,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,300
+B086,07/27/2026,Luna Fit,angela@lunafit.co,Reels Pack,completed,900
+B087,07/29/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B088,07/29/2026,Elevate Med Spa - Frisco,sofia@elevatemedspa.com,Content Day,completed,"$1,500"
+B089,07/29/2026,Sage Lab,carmen@thesagelab.coffee,Reels Pack,completed,900
+B090,07/30/2026,Andres Roofing,andre@andresroofingtx.com,Reels Pack,completed,900
+B091,08/03/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B092,08/03/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B093,08/03/2026,Juniper Barbers,mike@juniperbarbers.com,Reels Pack,completed,900
+B094,08/03/2026,Meridian Chiropractic,drtran@meridianchiro.com,Reels Pack,completed,900
+B095,08/04/2026,Park Family Law,mpark@parkfamilylaw.com,Reels Pack,completed,900
+B096,08/05/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B097,08/05/2026,Highland,omar@highlandathletics.com,Reels Pack,completed,900
+B098,08/05/2026,Trinity Roofing Co,quinn@trinityroofingco.com,Reels Pack,completed,900
+B099,08/05/2026,Magnolia,paula@magnolia.build,Content Day,completed,1500
+B100,08/06/2026,Fischer Law,info@fischerlaw.com,Retainer Shoot,completed,0
+B101,08/10/2026,Mind & Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B102,08/10/2026,Lakeside PT,bbecker@lakesideptdallas.com,Retainer Shoot,completed,$0
+B103,08/11/2026,Lena Kim,lena@lonestarrealty.com,Content Day,completed,1500
+B104,08/11/2026,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,Retainer Shoot,completed,0
+B105,08/12/2026,Lonestar Realty Group,quinn@lonestarrg.com,Content Day,completed,"$1,500"
+B106,08/12/2026,Willow Bridal,grace@willowbridal.com,Reels Pack,completed,$900
+B107,08/17/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B108,08/17/2026,Ridgeway Lab,tanya@theridgewaylab.coffee,Reels Pack,completed,$900
+B109,08/17/2026,Glow Pediatrics,tanya@tallgrassmktg.com,Reels Pack,completed,$900
+B110,08/18/2026,Parks Auto,jared@parksautospa.com,Reels Pack,completed,900
+B111,08/19/2026,Metroplex Makers,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,550
+B112,08/20/2026,Canyon Med Spa - Frisco,leah@canyonmedspa.com,Reels Pack,completed,900
+B113,08/21/2026,Oak Lane Builders,greg@oaklane.build,Content Day,completed,1500
+B114,08/21/2026,Crown Therapy,kkim@crownfamilytherapy.com,Content Day,completed,1500
+B115,08/24/2026,Dr. Renee Park,renee@parkdental.com,Content Day,completed,"$1,500"
+B116,08/24/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B117,08/24/2026,Andre's Roofing LLC,andre@andresroofingtx.com,Reels Pack,completed,$900
+B118,08/24/2026,Luna Fitness,angela@lunafit.co,Reels Pack,completed,900
+B119,08/25/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B120,08/31/2026,Sage Lab,carmen@thesagelab.coffee,Reels Pack,completed,$900
+B121,08/31/2026,Hale Detailing,carlos.hale.detail@gmail.com,Content Day,completed,1500
+B122,09/01/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B123,09/01/2026,TLC Homecare,sofia@tlchomecare.com,Content Day,completed,1500
+B124,09/02/2026,Dr. Maria Kim,hello@kimdental.com,Content Day,completed,"$1,500"
+B125,09/04/2026,Mind and Money,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,completed,300
+B126,09/04/2026,Mike Bennett,mike@juniperbarbers.com,Reels Pack,completed,900
+B127,09/07/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,Reels Pack,completed,$900
+B128,09/07/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B129,09/07/2026,Elevate Medspa,sofia@elevatemedspa.com,Content Day,completed,"$1,500"
+B130,09/07/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,completed,$0
+B131,09/10/2026,Bluebonnet WP,kzamora@bluebonnetwp.com,Retainer Shoot,completed,$0
+B132,09/10/2026,Highland Athletics,omar@highlandathletics.com,Reels Pack,completed,900
+B133,09/11/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B134,09/11/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,$300
+B135,09/11/2026,Fischer Law Firm PLLC,info@fischerlaw.com,Retainer Shoot,completed,$0
+B136,09/11/2026,Meridian Chiro,tanya@tallgrassmktg.com,Reels Pack,completed,$900
+B137,09/14/2026,Trinity Roofing Co,quinn@trinityroofingco.com,Reels Pack,completed,$900
+B138,09/17/2026,Willow Bridal Boutique,grace@willowbridal.com,Reels Pack,completed,$900
+B139,09/18/2026,Luna,angela@lunafit.co,Reels Pack,completed,$900
+B140,09/21/2026,Park's Auto,jared@parksautospa.com,Reels Pack,completed,900
+B141,09/21/2026,Lena Kim,lena@lonestarrealty.com,Content Day,completed,1500
+B142,09/21/2026,Keystone DFW,media@keystonedfw.org,Podcast Studio 2hr,completed,$270
+B143,09/21/2026,Ridgeway Lab,tanya@theridgewaylab.coffee,Reels Pack,completed,900
+B144,09/22/2026,Jared Ibarra,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B145,09/22/2026,Glow Pediatrics,tanya@tallgrassmktg.com,Reels Pack,completed,900
+B146,09/23/2026,Lonestar RG,quinn@lonestarrg.com,Content Day,completed,1500
+B147,09/23/2026,Lena Kim,lena@lonestarrealty.com,Content Day,cancelled,1500
+B148,09/24/2026,Mind & Money,yasmin@mindandmoney.fm,Podcast Studio 2hr,completed,300
+B149,09/28/2026,Andre's Roofing,andre@andresroofingtx.com,Reels Pack,completed,$900
+B150,09/28/2026,Canyon Med Spa,leah@canyonmedspa.com,Reels Pack,completed,$900
+B151,09/29/2026,Oak Lane,greg@oaklane.build,Content Day,completed,1500
+B152,09/29/2026,Sage Lab,carmen@thesagelab.coffee,Reels Pack,completed,900
+B153,09/30/2026,Keystone Media Team,media@keystonedfw.org,Podcast Studio 2hr,completed,270
+B154,09/30/2026,Magnolia Builders LLC,paula@magnolia.build,Content Day,completed,"$1,500"
+B155,10/01/2026,Lone Star Realty,lena@lonestarrealty.com,Content Day,completed,1500
+B156,10/05/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,completed,$550
+B157,10/06/2026,Yasmin Bennett,yasmin.bennett.mail@gmail.com,Podcast Studio 2hr,upcoming,300
+B158,10/07/2026,Bluebonnet Wealth,kzamora@bluebonnetwp.com,Retainer Shoot,upcoming,0
+B159,10/08/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,Retainer Shoot,upcoming,$0
+B160,10/09/2026,Renee Park DDS,renee@parkdental.com,Content Day,upcoming,"$1,500"
+B161,10/12/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,Reels Pack,upcoming,$900
+B162,10/12/2026,Keystone Church,media@keystonedfw.org,Podcast Studio 2hr,upcoming,270
+B163,10/12/2026,Mike Bennett,mike@juniperbarbers.com,Reels Pack,upcoming,900
+B164,10/12/2026,Hale Detailing,carlos.hale.detail@gmail.com,Content Day,upcoming,1500
+B165,10/12/2026,Dr. Tran,tanya@tallgrassmktg.com,Reels Pack,upcoming,900
+B166,10/13/2026,Elevate Med Spa,sofia@elevatemedspa.com,Content Day,upcoming,1500
+B167,10/14/2026,Fischer,info@fischerlaw.com,Retainer Shoot,upcoming,$0
+B168,10/15/2026,Highland,omar@highlandathletics.com,Reels Pack,upcoming,$900
+B169,10/16/2026,Yasmin Bennett,yasmin@mindandmoney.fm,Podcast Studio 2hr,upcoming,$300
+B170,10/16/2026,Angela Delgado,angela@lunafit.co,Reels Pack,upcoming,$900
+B171,10/16/2026,Ridgewaylab Coffee,tanya@theridgewaylab.coffee,Reels Pack,upcoming,900
+B172,10/19/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,Podcast Studio 4hr,upcoming,$550
+B173,10/19/2026,Willow Bridal,grace@willowbridal.com,Reels Pack,upcoming,900
+B174,10/19/2026,Dr. Kim Kim,kkim@crownfamilytherapy.com,Content Day,upcoming,1500
+B175,10/19/2026,Trinity Roofing,quinn@trinityroofingco.com,Reels Pack,upcoming,$900

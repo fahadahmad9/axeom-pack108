@@ -1,0 +1,164 @@
+{
+  "pack_id": 108,
+  "your_name": "Fahad",
+  "your_email": "tahafaisal999999@gmail.com",
+
+  "live_link": "https://snazzy-haupia-9e3a84.netlify.app",
+  "video_link": "",
+  "code_or_files_link": "",
+
+  "client_count": 30,
+  "clients": [
+    { "name": "Andre's Roofing LLC", "other_names_used_in_the_data": ["Andres Roofing","Andre Ochoa","Andre's Roofing"], "emails": ["andre@andresroofingtx.com"], "phones": ["469-555-0188"] },
+    { "name": "Bluebonnet Wealth Partners", "other_names_used_in_the_data": ["Bluebonnet Wealth","Bluebonnet WP","Kevin Zamora"], "emails": ["kzamora@bluebonnetwp.com"], "phones": ["469-555-0166"] },
+    { "name": "Canyon Med Spa", "other_names_used_in_the_data": ["Canyon Medspa","Canyon Med Spa - Frisco","Canyon Med Spa - Plano","Leah Hassan"], "emails": ["leah@canyonmedspa.com"], "phones": [] },
+    { "name": "Crown Family Therapy", "other_names_used_in_the_data": ["Crown Therapy","Dr. Kim Kim","Kim Kim"], "emails": ["kkim@crownfamilytherapy.com"], "phones": [] },
+    { "name": "Elevate Med Spa", "other_names_used_in_the_data": ["Elevate Medspa","Elevate Med Spa - Plano","Elevate Med Spa - Frisco","Sofia Cole"], "emails": ["sofia@elevatemedspa.com","frisco@elevatemedspa.com"], "phones": [] },
+    { "name": "Fischer Law Firm PLLC", "other_names_used_in_the_data": ["Fischer Law","Andre Fischer","@fischerlawfirmtx"], "emails": ["info@fischerlaw.com"], "phones": [] },
+    { "name": "Glow Pediatrics", "other_names_used_in_the_data": ["Glow Peds","Tallgrass - Glow","Kim Russo"], "emails": ["krusso@glowpeds.com"], "phones": [] },
+    { "name": "Hale Auto Detailing", "other_names_used_in_the_data": ["Hale Detailing","Hale Auto","Carlos Hale","@haleautodetailingtx"], "emails": ["carlos.hale.detail@gmail.com"], "phones": [] },
+    { "name": "Highland Athletics", "other_names_used_in_the_data": ["Highland Gym","Highland","Omar Patel"], "emails": ["omar@highlandgym.co","omar@highlandathletics.com"], "phones": [] },
+    { "name": "Juniper Barbershop", "other_names_used_in_the_data": ["Juniper Barbers","Mike Bennett"], "emails": ["mike@juniperbarbers.com"], "phones": [] },
+    { "name": "Keystone Church DFW", "other_names_used_in_the_data": ["Keystone Media Team","Keystone DFW","Pastor Darnell Jackson"], "emails": ["media@keystonedfw.org"], "phones": [] },
+    { "name": "Kim Dental PLLC", "other_names_used_in_the_data": ["Kim Dental","Dr. Maria Kim","Maria Kim DDS"], "emails": ["hello@kimdental.com"], "phones": [] },
+    { "name": "Lakeside Physical Therapy", "other_names_used_in_the_data": ["Lakeside PT","Lakeside PT Dallas","Brooke Becker"], "emails": ["bbecker@lakesideptdallas.com","brooke@lakesideptdallas.com"], "phones": [] },
+    { "name": "Lone Star Realty LLC", "other_names_used_in_the_data": ["Lone Star Realty","Lena Kim"], "emails": ["lena@lonestarrealty.com"], "phones": ["214-555-0120"] },
+    { "name": "Lonestar Realty Group", "other_names_used_in_the_data": ["Lonestar RG","Quinn Hassan"], "emails": ["quinn@lonestarrg.com"], "phones": [] },
+    { "name": "Luna Fitness", "other_names_used_in_the_data": ["Luna Fit","Luna","Angela Delgado"], "emails": ["angela@lunafit.co"], "phones": [] },
+    { "name": "Magnolia Builders LLC", "other_names_used_in_the_data": ["Magnolia","Magnolia Builders","Magnolia & Co Builders","Paula Fischer"], "emails": ["paula@magnolia.build"], "phones": [] },
+    { "name": "Meridian Chiropractic", "other_names_used_in_the_data": ["Meridian Chiro","Dr. Tran","Alana Tran","Tallgrass - Dr."], "emails": ["drtran@meridianchiro.com"], "phones": [] },
+    { "name": "Metroplex Makers Podcast", "other_names_used_in_the_data": ["Metroplex Makers","Jared Ibarra"], "emails": ["jared@metroplexmakers.fm"], "phones": ["817-555-0150"] },
+    { "name": "Mind & Money Podcast", "other_names_used_in_the_data": ["M&M Podcast","Mind and Money","Yasmin Bennett"], "emails": ["yasmin@mindandmoney.fm","yasmin.bennett.mail@gmail.com"], "phones": ["214-555-0155"] },
+    { "name": "Oak Lane Builders LLC", "other_names_used_in_the_data": ["Oak Lane","Oak Lane & Co Builders","Greg Green"], "emails": ["greg@oaklane.build"], "phones": ["817-555-0146"] },
+    { "name": "Park Dental PLLC", "other_names_used_in_the_data": ["Park Dental","Dr. Renee Park","Renee Park DDS"], "emails": ["renee@parkdental.com"], "phones": ["214-555-0183"] },
+    { "name": "Park Family Law PLLC", "other_names_used_in_the_data": ["Park Family Law","Park Law","Maria Park"], "emails": ["mpark@parkfamilylaw.com"], "phones": [] },
+    { "name": "Park's Auto Spa", "other_names_used_in_the_data": ["Parks Auto","Jared Park"], "emails": ["jared@parksautospa.com"], "phones": [] },
+    { "name": "Ridgeway Lab Coffee", "other_names_used_in_the_data": ["The Ridgeway Lab","Ridgewaylab Coffee","Tanya Russo"], "emails": ["tanya@theridgewaylab.coffee"], "phones": [] },
+    { "name": "Sage Lab Coffee", "other_names_used_in_the_data": ["Sagelab Coffee","Sage Lab","The Sage Lab","Carmen Park"], "emails": ["carmen@thesagelab.coffee"], "phones": [] },
+    { "name": "Shah Insurance Group", "other_names_used_in_the_data": ["Shah Insurance","Shah Ins","Darnell Shah"], "emails": ["darnell@shahinsures.com"], "phones": [] },
+    { "name": "TLC Home Care", "other_names_used_in_the_data": ["TLC Homecare","Sofia Daniels"], "emails": ["sofia@tlchomecare.com"], "phones": [] },
+    { "name": "Trinity Roofing Co", "other_names_used_in_the_data": ["Trinity Roofing","Quinn Haddad"], "emails": ["quinn@trinityroofingco.com"], "phones": [] },
+    { "name": "Willow Bridal Boutique", "other_names_used_in_the_data": ["Willow Bridal","Grace Nguyen"], "emails": ["grace@willowbridal.com"], "phones": [] }
+  ],
+  "payers_who_are_not_clients": [
+    { "name": "Tallgrass Digital LLC", "pays_for": ["Glow Pediatrics", "Meridian Chiropractic"] }
+  ],
+
+  "overdue": [
+    { "client": "Lonestar Realty Group", "invoice": "INV-1101", "amount_owed": 1500, "days_late": 41 },
+    { "client": "Ridgeway Lab Coffee", "invoice": "INV-1106", "amount_owed": 900, "days_late": 35 },
+    { "client": "Metroplex Makers Podcast", "invoice": "INV-1108", "amount_owed": 550, "days_late": 33 },
+    { "client": "Lakeside Physical Therapy", "invoice": "INV-1116", "amount_owed": 2500, "days_late": 21 },
+    { "client": "TLC Home Care", "invoice": "INV-1121", "amount_owed": 1500, "days_late": 20 },
+    { "client": "Trinity Roofing Co", "invoice": "INV-1131", "amount_owed": 450, "days_late": 8 }
+  ],
+  "overdue_total": 7400,
+
+  "we_owe": [
+    { "client": "Lone Star Realty LLC (Lena Kim)", "amount": 1500, "why": "INV-1134 was paid for booking B147 which was cancelled. Lena asked to reschedule (09/23). If B155 is the rescheduled shoot and INV-1144 covers it, then INV-1134 is a double charge. Confirm with Lena and refund or apply as credit." }
+  ],
+
+  "never_billed": [
+    { "client": "Highland Athletics", "booking_id_or_month": "B097", "amount": 900 },
+    { "client": "Oak Lane Builders LLC", "booking_id_or_month": "B113", "amount": 1500 }
+  ],
+  "never_billed_total": 2400,
+
+  "billing_tool_is_wrong": [
+    { "invoice": "INV-1065", "tool_says": "unpaid", "truth": "Paid via P5081 ($1,200 lump sum)", "how_you_know": "Yasmin emailed 07/11 asking to batch-pay July. P5081 ($1,200 on 08/03, reference 'july sessions') covers 4 podcast invoices (INV-1065, 1070, 1079, 1084) at $300 each." },
+    { "invoice": "INV-1070", "tool_says": "unpaid", "truth": "Paid via P5081 ($1,200 lump sum)", "how_you_know": "Same as INV-1065. Part of $1,200 batch payment P5081." },
+    { "invoice": "INV-1079", "tool_says": "unpaid", "truth": "Paid via P5081 ($1,200 lump sum)", "how_you_know": "Same as INV-1065. Part of $1,200 batch payment P5081." },
+    { "invoice": "INV-1084", "tool_says": "unpaid", "truth": "Paid via P5081 ($1,200 lump sum)", "how_you_know": "Same as INV-1065. Part of $1,200 batch payment P5081." },
+    { "invoice": "INV-1090", "tool_says": "unpaid", "truth": "Paid via P5079 ($900 Zelle on 02/08/2026)", "how_you_know": "P5079 reference field contains 'INV-1090'." },
+    { "invoice": "INV-1098", "tool_says": "unpaid", "truth": "Paid via P5087 ($900 on 13/08/2026)", "how_you_know": "P5087 reference field contains 'INV-1098'." },
+    { "invoice": "INV-1155", "tool_says": "void", "truth": "Correctly voided — duplicate of INV-1055", "how_you_know": "INV-1155 memo says 'duplicate of INV-1055'. Same client (Keystone), same amount ($270), similar date. Tool is correct here but worth flagging that duplicates were created." }
+  ],
+
+  "lost_requests": [
+    { "video_id": "V030", "request_date": "2026-07-14", "came_by": "email", "why_it_was_lost": "Dr. Tran (Meridian Chiro) emailed edit for 'what to expect visit one'. Request not tracked to board. Confirmed lost by follow-up: 'Did anyone see my message?'" },
+    { "video_id": "V127", "request_date": "2026-07-27", "came_by": "whatsapp", "why_it_was_lost": "Lena (Lone Star Realty) sent WhatsApp edit for 'listing tour: oak st'. Not tracked to board. Follow-up: 'It's not fixed.'" },
+    { "video_id": "V005", "request_date": "2026-07-28", "came_by": "whatsapp", "why_it_was_lost": "Greg (Oak Lane) sent WhatsApp edit for 'permit tips'. Not tracked to board. Follow-up: 'It's not fixed.'" },
+    { "video_id": "V020", "request_date": "2026-08-04", "came_by": "email", "why_it_was_lost": "Kevin (Bluebonnet WP) emailed about 'client story' still being wrong. This is the second request — first was missed entirely." },
+    { "video_id": "V159", "request_date": "2026-08-04", "came_by": "email", "why_it_was_lost": "Dr. Kim Kim (Crown Family Therapy) emailed about 'family sessions explained' still wrong. Second request — first missed." },
+    { "video_id": "V029", "request_date": "2026-08-25", "came_by": "email", "why_it_was_lost": "Omar (Highland Athletics) emailed about 'class schedule' not fixed. Follow-up after original request was lost." },
+    { "video_id": "V128", "request_date": "2026-08-28", "came_by": "email", "why_it_was_lost": "Quinn (Lonestar RG) emailed about 'open house recap' not fixed. Follow-up after WhatsApp request was missed." },
+    { "video_id": "V028", "request_date": "2026-08-29", "came_by": "email", "why_it_was_lost": "Omar (Highland) emailed about 'member story' still wrong. Second request — first missed." },
+    { "video_id": "V221", "request_date": "2026-08-30", "came_by": "email", "why_it_was_lost": "Lena (Lone Star Realty) frustrated about 'sold story'. Edit requested earlier, never applied." },
+    { "video_id": "V136", "request_date": "2026-09-02", "came_by": "email", "why_it_was_lost": "Maria (Park Family Law) emailed about 'what a consult costs' not fixed. Follow-up after original WhatsApp request was missed." },
+    { "video_id": "V022", "request_date": "2026-09-08", "came_by": "email", "why_it_was_lost": "Kevin (Bluebonnet WP) emailed about 'why fees matter' still wrong. Second request — first missed." },
+    { "video_id": "V161", "request_date": "2026-09-12", "came_by": "whatsapp", "why_it_was_lost": "Dr. Kim Kim (Crown Family Therapy) WhatsApp about 'insurance and cost' not fixed. Frustrated." },
+    { "video_id": "V076", "request_date": "2026-09-18", "came_by": "email", "why_it_was_lost": "Sofia (TLC Home Care) emailed about 'walk-ins welcome' not fixed. Frustrated." },
+    { "video_id": "V261", "request_date": "2026-10-03", "came_by": "email", "why_it_was_lost": "Omar (Highland) emailed about 'nutrition tip' having same problem he already reported. Third lost request for this client." }
+  ],
+  "lost_requests_root_causes": [
+    "No centralized request intake — edits arrive via 5+ channels (WhatsApp, email, voice notes, Instagram DM, website forms) with no single system to capture them.",
+    "No handoff process from client communication to production board — requests stay in chat threads and never become tasks.",
+    "Team grew from 2 editors to 4 (Theo joined July, Kai joined September) but intake process was never formalized. Volume increased, requests fell through cracks.",
+    "Owner (Zaid) is the bottleneck — most client messages go to him, but he doesn't always relay edits to editors."
+  ],
+  "lost_requests_started_getting_worse_in": "2026-07",
+
+  "never_replied_leads": ["L003","L009","L010","L014","L017","L027","L031","L038","L044","L061","L067","L076","L077","L079","L082","L086","L087","L091","L094"],
+
+  "most_likely_to_leave": {
+    "client": "Lakeside Physical Therapy (Brooke Becker)",
+    "evidence": [
+      "2026-09-29: Website form — 'We would like to talk about our contract and whether we continue.'",
+      "2026-10-03: Email — 'Following up. We need to talk about the contract this week.'",
+      "2026-09-08: Email — 'The videos say Lakeside PT again. I asked for the full name. Not happy.'",
+      "2026-09-02: Voice note — asked for full name 'Lakeside Physical Therapy', was ignored.",
+      "September retainer invoice INV-1116 ($2,500) is 21 days overdue — she's withholding payment.",
+      "$2,500/month retainer client — $30,000/year at risk."
+    ],
+    "what_to_do_this_week": "Call Brooke Monday morning. Acknowledge the name error. Fix all her videos immediately. Discuss September invoice. Offer a concession (e.g., one free Content Day) to rebuild trust. Do NOT let this go to email — it needs a phone call."
+  },
+
+  "best_marketing_channel": {
+    "channel": "Referral",
+    "why": "71% win rate (10 won out of 14 decided), highest of any channel. Brings highest-value clients including retainer clients (Lakeside PT, Fischer Law). Zero new/stale leads — every referral either converts or closes cleanly. Second best is Instagram at 43%. Referrals also require zero ad spend."
+  },
+
+  "what_this_data_cannot_tell_us": [
+    "Client satisfaction — we only see complaints, not whether silent clients are happy or quietly disengaging.",
+    "Actual profit margins — we have studio cost ($40/hr) and editor rates, but not overhead (rent, software, insurance, Zaid's time).",
+    "Why leads were lost — we know 19 leads were never replied to, but not whether they were disqualified internally or simply missed.",
+    "Whether Tallgrass relationship is sustainable — Tanya books and pays for two clients, but we don't know the agency's financial health or contract terms.",
+    "Video quality and client outcomes — data tracks production volume and revisions, but not whether videos drive results for clients (views, engagement, leads)."
+  ],
+
+  "monday_top_3": [
+    "Call Brooke Becker at Lakeside Physical Therapy — she wants to discuss cancelling her $2,500/month retainer. Fix the name issue on all her videos before the call.",
+    "Triage all 15 lost edit requests — assign each to an editor, reply to the client with an ETA, and set up a shared intake form or Slack channel so requests stop falling through cracks.",
+    "Send payment reminders for $7,400 in overdue invoices, starting with the oldest (INV-1101, 41 days). Mark the 6 billing-tool errors as paid so the AR report is accurate."
+  ],
+
+  "jev_integration": {
+    "script": "jev_integration.py",
+    "model": "jev-latest",
+    "jobs": [
+      {
+        "name": "Spam lead detection",
+        "primitive": "Noul",
+        "what_it_does": "Binary yes/no classification of each lead as spam or real. Criteria distinguish gibberish names and bulk-mail domains from real business leads.",
+        "ground_truth": "4 known spam leads (L046, L066, L078, L084) out of 101 total.",
+        "expected_accuracy": "High — spam signals are unambiguous (test@test.com, seo@rank1seo.biz, asdf/a@a.co, promo@fastfollowers.io)."
+      },
+      {
+        "name": "Lead quality scoring",
+        "primitive": "Score",
+        "what_it_does": "3-level rubric (low/medium/high) rating each lead's fit for a Dallas video production studio based on business name, email professionalism, phone provided, and engagement signals.",
+        "ground_truth": "Actual Won/Lost/New outcomes — 32 won, 42 lost, 27 new.",
+        "expected_accuracy": "Moderate — Jev sees the lead form data but not the follow-up conversation, so some cold Lost leads that looked good on paper will score higher."
+      },
+      {
+        "name": "Message urgency triage",
+        "primitives": ["Score", "Noul"],
+        "what_it_does": "Scores each inbound message on urgency (0-2 rubric: routine/normal/urgent) and uses two Noul questions to flag churn signals and lost-request follow-ups.",
+        "ground_truth": "8 known high-urgency patterns (privacy/legal, contract cancellation, repeated requests).",
+        "expected_accuracy": "High for urgency and churn detection; medium for lost-request detection since the follow-up language is subtler."
+      }
+    ],
+    "why_lead_triage": "Lead triage has the clearest measurable ground truth (known spam, actual win/loss outcomes, identified urgent messages). Entity resolution was considered but harder to measure — the manual alias map was built from contextual clues that don't reduce to a simple accuracy metric.",
+    "how_to_run": "pip install typesafe-sdk && export TYPESAFE_API_KEY=your-key && python jev_integration.py"
+  }
+}

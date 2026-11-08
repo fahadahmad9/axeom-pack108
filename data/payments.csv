@@ -1,0 +1,129 @@
+payment_id,date,payer,payer_email,amount,method,reference
+P5001,10/04/2026,Keystone Media Team,media@keystonedfw.org,300.00,Zelle,
+P5002,15/04/2026,Park Dental PLLC,renee@parkdental.com,1500.00,ACH,
+P5003,16/04/2026,Oak Lane Builders,greg@oaklane.build,1500.00,ACH,INV-1004
+P5004,17/04/2026,METROPLEX MAKERS,jared@metroplexmakers.fm,550.00,card,INV-1006
+P5005,19/04/2026,Keystone DFW,media@keystonedfw.org,300.00,card,INV-1008
+P5006,21/04/2026,ANDRES ROOFING,andre@andresroofingtx.com,900.00,card,
+P5007,23/04/2026,Mind and Money,yasmin@mindandmoney.fm,300.00,card,INV-1010
+P5008,25/04/2026,PASTOR DARNELL JACKSON,media@keystonedfw.org,300.00,Zelle,
+P5009,29/04/2026,YASMIN BENNETT,yasmin@mindandmoney.fm,300.00,card,INV-1002
+P5010,03/05/2026,Lakeside PT Dallas,bbecker@lakesideptdallas.com,2500.00,card,INV-1016
+P5011,03/05/2026,Shah Insurance,darnell@shahinsures.com,2500.00,card,INV-1015
+P5012,05/05/2026,Elevate,sofia@elevatemedspa.com,1500.00,card,INV-1009
+P5013,05/05/2026,Mind and Money,yasmin@mindandmoney.fm,300.00,Zelle,INV-1018
+P5014,08/05/2026,Keystone DFW,media@keystonedfw.org,270.00,card,
+P5015,10/05/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,ACH,
+P5016,10/05/2026,Keystone Church,media@keystonedfw.org,300.00,Zelle,
+P5017,11/05/2026,Luna Fit,angela@lunafit.co,900.00,ACH,INV-1020
+P5018,14/05/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,card,INV-1021
+P5019,15/05/2026,WILLOW BRIDAL,grace@willowbridal.com,900.00,card,INV-1012
+P5020,18/05/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,ACH,
+P5021,21/05/2026,Canyon,leah@canyonmedspa.com,900.00,card,INV-1027
+P5022,23/05/2026,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,2500.00,card,INV-1017
+P5023,25/05/2026,Keystone Church,media@keystonedfw.org,270.00,Zelle,INV-1022
+P5024,27/05/2026,Oak Lane,greg@oaklane.build,1500.00,Zelle,INV-1025
+P5025,28/05/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,ACH,INV-1031
+P5026,31/05/2026,Mike Bennett,mike@juniperbarbers.com,900.00,ACH,
+P5027,31/05/2026,Lena Kim,lena@lonestarrealty.com,1500.00,Zelle,INV-1033
+P5028,01/06/2026,Park Dental PLLC,renee@parkdental.com,1500.00,ACH,INV-1023
+P5029,04/06/2026,Grace Nguyen,grace@willowbridal.com,900.00,card,INV-1028
+P5030,05/06/2026,Jared Ibarra,jared@metroplexmakers.fm,550.00,ACH,
+P5031,05/06/2026,Keystone Media Team,media@keystonedfw.org,270.00,Zelle,INV-1029
+P5032,06/06/2026,Shah Ins,darnell@shahinsures.com,2500.00,Zelle,
+P5033,07/06/2026,Metroplex Makers,jared@metroplexmakers.fm,550.00,card,
+P5034,09/06/2026,Andre Ochoa,andre@andresroofingtx.com,900.00,Zelle,INV-1026
+P5035,10/06/2026,Kim Dental PLLC,hello@kimdental.com,1500.00,card,INV-1039
+P5036,10/06/2026,Fischer Law Firm PLLC,info@fischerlaw.com,2500.00,card,
+P5037,10/06/2026,Elevate Medspa,sofia@elevatemedspa.com,1500.00,card,INV-1044
+P5038,10/06/2026,Keystone Church,media@keystonedfw.org,270.00,ACH,INV-1034
+P5039,11/06/2026,YASMIN BENNETT,yasmin@mindandmoney.fm,300.00,card,INV-1041
+P5040,13/06/2026,PASTOR DARNELL JACKSON,media@keystonedfw.org,270.00,card,INV-1040
+P5041,16/06/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,900.00,ACH,INV-1043
+P5042,16/06/2026,Lakeside PT,bbecker@lakesideptdallas.com,2500.00,card,INV-1038
+P5043,17/06/2026,CANYON MED SPA,leah@canyonmedspa.com,900.00,card,INV-1048
+P5044,17/06/2026,Keystone Media Team,media@keystonedfw.org,270.00,ACH,INV-1046
+P5045,19/06/2026,Angela Delgado,angela@lunafit.co,900.00,card,
+P5046,19/06/2026,BLUEBONNET WEALTH PARTNERS,kzamora@bluebonnetwp.com,2500.00,card,
+P5047,20/06/2026,JARED IBARRA,jared@metroplexmakers.fm,550.00,card,
+P5048,22/06/2026,M&M Podcast,yasmin@mindandmoney.fm,300.00,card,INV-1047
+P5049,25/06/2026,THE SAGE LAB,carmen@thesagelab.coffee,900.00,ACH,INV-1052
+P5050,26/06/2026,PARK DENTAL,renee@parkdental.com,1500.00,ACH,
+P5051,26/06/2026,Willow Bridal Boutique,grace@willowbridal.com,900.00,Zelle,
+P5052,29/06/2026,JUNIPER BARBERS,mike@juniperbarbers.com,900.00,card,
+P5053,05/07/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,card,INV-1051
+P5054,05/07/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,900.00,ACH,Tallgrass Jun invoices
+P5055,06/07/2026,Keystone Media Team,media@keystonedfw.org,270.00,ACH,
+P5056,08/07/2026,KEVIN ZAMORA,kzamora@bluebonnetwp.com,2500.00,Zelle,INV-1062
+P5057,09/07/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,900.00,card,INV-1069
+P5058,11/07/2026,Lone Star Realty,lena@lonestarrealty.com,1500.00,card,INV-1066
+P5059,11/07/2026,OAK LANE BUILDERS,greg@oaklane.build,1500.00,card,INV-1068
+P5060,13/07/2026,Lakeside Physical Therapy,bbecker@lakesideptdallas.com,2500.00,ACH,INV-1060
+P5061,14/07/2026,Andre's Roofing LLC,andre@andresroofingtx.com,900.00,ACH,INV-1057
+P5062,15/07/2026,Keystone DFW,media@keystonedfw.org,270.00,Zelle,INV-1053
+P5063,16/07/2026,Mind & Money Podcast,yasmin@mindandmoney.fm,300.00,card,INV-1054
+P5064,16/07/2026,Shah Insurance,darnell@shahinsures.com,2500.00,Zelle,
+P5065,16/07/2026,HIGHLAND GYM,omar@highlandgym.co,900.00,card,
+P5066,17/07/2026,Magnolia Builders,paula@magnolia.build,1500.00,ACH,INV-1056
+P5067,19/07/2026,Fischer,info@fischerlaw.com,2500.00,ACH,
+P5068,20/07/2026,MARIA KIM,hello@kimdental.com,1500.00,card,INV-1078
+P5069,21/07/2026,Canyon,leah@canyonmedspa.com,900.00,Zelle,INV-1075
+P5070,23/07/2026,Keystone DFW,media@keystonedfw.org,270.00,card,
+P5071,23/07/2026,JARED IBARRA,jared@metroplexmakers.fm,550.00,Zelle,INV-1081
+P5072,24/07/2026,KEYSTONE CHURCH,media@keystonedfw.org,270.00,card,INV-1080
+P5073,30/07/2026,The Ridgeway Lab,tanya@theridgewaylab.coffee,900.00,ACH,INV-1076
+P5074,30/07/2026,Metroplex Makers,jared@metroplexmakers.fm,550.00,card,INV-1072
+P5075,31/07/2026,GRACE NGUYEN,grace@willowbridal.com,900.00,card,INV-1074
+P5076,31/07/2026,Crown Family Therapy,kkim@crownfamilytherapy.com,1500.00,card,INV-1073
+P5077,01/08/2026,THE SAGE LAB,carmen@thesagelab.coffee,900.00,card,
+P5078,02/08/2026,Elevate Medspa,sofia@elevatemedspa.com,1500.00,ACH,INV-1087
+P5079,02/08/2026,Andre's Roofing,andre@andresroofingtx.com,900.00,Zelle,INV-1090
+P5080,03/08/2026,Keystone DFW,media@keystonedfw.org,270.00,ACH,INV-1083
+P5081,03/08/2026,YASMIN BENNETT,,1200.00,Zelle,july sessions
+P5082,04/08/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,1800.00,ACH,Tallgrass Jul invoices
+P5083,04/08/2026,KEVIN ZAMORA,kzamora@bluebonnetwp.com,2500.00,Zelle,INV-1089
+P5084,05/08/2026,SAGE LAB,carmen@thesagelab.coffee,900.00,card,INV-1086
+P5086,12/08/2026,TRINITY ROOFING CO,quinn@trinityroofingco.com,900.00,card,INV-1096
+P5087,13/08/2026,Park Family Law PLLC,mpark@parkfamilylaw.com,900.00,card,INV-1098
+P5088,13/08/2026,DARNELL JACKSON,media@keystonedfw.org,270.00,Zelle,INV-1099
+P5089,13/08/2026,PARKS AUTO,jared@parksautospa.com,900.00,Zelle,INV-1082
+P5090,13/08/2026,ANDRE FISCHER,info@fischerlaw.com,2250.00,Zelle,INV-1088
+P5091,15/08/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,card,
+P5092,16/08/2026,Willow Bridal Boutique,grace@willowbridal.com,900.00,card,INV-1103
+P5093,16/08/2026,ANGELA DELGADO,angela@lunafit.co,900.00,Zelle,INV-1085
+P5094,17/08/2026,Magnolia & Co Builders,paula@magnolia.build,1500.00,card,INV-1094
+P5095,19/08/2026,MIND & MONEY PODCAST,yasmin@mindandmoney.fm,300.00,ACH,
+P5096,19/08/2026,BROOKE BECKER,bbecker@lakesideptdallas.com,2500.00,card,INV-1091
+P5097,20/08/2026,Keystone Media Team,media@keystonedfw.org,270.00,Zelle,INV-1107
+P5098,21/08/2026,LENA KIM,lena@lonestarrealty.com,1500.00,Zelle,INV-1102
+P5099,23/08/2026,YASMIN BENNETT,yasmin@mindandmoney.fm,300.00,ACH,INV-1100
+P5100,25/08/2026,Mind & Money Podcast,yasmin@mindandmoney.fm,300.00,card,INV-1110
+P5101,25/08/2026,Andre Ochoa,andre@andresroofingtx.com,900.00,card,INV-1111
+P5102,26/08/2026,Dr Park,renee@parkdental.com,1500.00,card,INV-1112
+P5103,26/08/2026,LEAH HASSAN,leah@canyonmedspa.com,900.00,ACH,
+P5104,31/08/2026,Crown Therapy,kkim@crownfamilytherapy.com,1500.00,card,INV-1113
+P5105,02/09/2026,Park's Auto,jared@parksautospa.com,900.00,card,
+P5106,04/09/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,1800.00,ACH,Tallgrass Aug invoices
+P5107,04/09/2026,KEYSTONE CHURCH,media@keystonedfw.org,270.00,card,INV-1120
+P5108,08/09/2026,Bluebonnet Wealth Partners,kzamora@bluebonnetwp.com,2500.00,card,INV-1118
+P5109,10/09/2026,JUNIPER BARBERS,mike@juniperbarbers.com,900.00,card,INV-1124
+P5110,12/09/2026,Dr Kim,hello@kimdental.com,1500.00,ACH,
+P5111,13/09/2026,PARK FAMILY LAW,mpark@parkfamilylaw.com,900.00,ACH,
+P5112,16/09/2026,Angela Delgado,angela@lunafit.co,900.00,card,
+P5113,16/09/2026,M&M PODCAST,yasmin@mindandmoney.fm,300.00,ACH,INV-1122
+P5114,18/09/2026,CARLOS HALE,carlos.hale.detail@gmail.com,1500.00,Zelle,INV-1115
+P5115,19/09/2026,FISCHER LAW FIRM,info@fischerlaw.com,2500.00,ACH,
+P5116,19/09/2026,WILLOW BRIDAL BOUTIQUE,grace@willowbridal.com,900.00,card,INV-1133
+P5117,19/09/2026,Elevate Med Spa,sofia@elevatemedspa.com,1500.00,ACH,INV-1127
+P5118,19/09/2026,Metroplex Makers Podcast,jared@metroplexmakers.fm,550.00,card,INV-1128
+P5119,19/09/2026,HIGHLAND,omar@highlandathletics.com,900.00,ACH,INV-1125
+P5120,23/09/2026,CARMEN PARK,carmen@thesagelab.coffee,900.00,card,INV-1119
+P5121,24/09/2026,Metroplex Makers,jared@metroplexmakers.fm,550.00,card,
+P5122,25/09/2026,QUINN HADDAD,,450.00,Zelle,half now half later
+P5123,26/09/2026,Yasmin Bennett,yasmin@mindandmoney.fm,300.00,ACH,INV-1139
+P5124,27/09/2026,Lena Kim,lena@lonestarrealty.com,1500.00,Zelle,INV-1134
+P5125,27/09/2026,Keystone DFW,media@keystonedfw.org,270.00,card,INV-1129
+P5126,02/10/2026,Luna Fit,angela@lunafit.co,900.00,Zelle,INV-1135
+P5127,04/10/2026,TALLGRASS DIGITAL LLC,tanya@tallgrassmktg.com,900.00,ACH,Tallgrass Sep invoices
+P5128,05/10/2026,Yasmin Bennett,yasmin@mindandmoney.fm,300.00,ACH,
+P5129,06/10/2026,Keystone Media Team,media@keystonedfw.org,270.00,card,INV-1136
